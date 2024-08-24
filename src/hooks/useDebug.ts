@@ -33,9 +33,5 @@ export default function useDebug(): TReturn {
         [router, createQueryString]
     );
 
-    useEffect(() => {
-        console.log(`Debug mode: ${debug ? "on" : "off"}`);
-    }, [debug]);
-
     return [debug, setDebug];
 }

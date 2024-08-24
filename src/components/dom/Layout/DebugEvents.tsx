@@ -1,12 +1,11 @@
 import useDebug from "@/hooks/useDebug";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 export default function DebugEvents() {
     const [debug, setDebug] = useDebug();
 
     const onHotkey = useCallback(() => {
-        console.log("hotkey triggered");
         if (debug) {
             setDebug(false);
         } else {
@@ -15,6 +14,10 @@ export default function DebugEvents() {
     }, [debug, setDebug]);
 
     useHotkeys("alt+shift+d", onHotkey);
+
+    useEffect(() => {
+        console.log(`Debug mode: ${debug ? "on" : "off"}`);
+    }, [debug]);
 
     return null;
 }
