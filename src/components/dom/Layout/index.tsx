@@ -4,8 +4,9 @@ import { AppProps } from "next/app";
 import MainScene from "@/components/canvas/MainScene";
 import { TransitionProvider } from "@/context/TransitionContext";
 import Header from "@/components/dom/Layout/Header";
-import TransitionComponent from "@/components/dom/TransitionComponent";
-import DebugEvents from "../DebugEvents";
+import TransitionComponent from "@/components/dom/Layout/TransitionComponent";
+import DebugEvents from "@/components/dom/Layout/DebugEvents";
+import LevaUI from "@/components/dom/Layout/LevaUI";
 
 export default function Layout({ Component, pageProps }: AppProps) {
     return (
@@ -19,6 +20,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                 </TransitionComponent>
             </div>
+            <LevaUI />
             <DebugEvents />
         </TransitionProvider>
     );
