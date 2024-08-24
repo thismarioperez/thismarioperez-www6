@@ -1,5 +1,5 @@
-import Layout from "@/components/Layout";
-import TransitionComponent from "@/components/TransitionComponent";
+import Layout from "@/components/dom/Layout";
+import TransitionComponent from "@/components/dom/TransitionComponent";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 

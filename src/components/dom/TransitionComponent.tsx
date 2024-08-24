@@ -3,7 +3,7 @@ import { SwitchTransition, Transition } from "react-transition-group";
 import { useRouter } from "next/router";
 import { gsap } from "@/lib/gsap";
 
-import TransitionContext from "../context/TransitionContext";
+import TransitionContext from "@/context/TransitionContext";
 import Header from "./Layout/Header";
 
 export type TTransitionComponentProps = {} & React.PropsWithChildren;
