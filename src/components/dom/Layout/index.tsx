@@ -5,6 +5,7 @@ import MainScene from "@/components/canvas/MainScene";
 import { TransitionProvider } from "@/context/TransitionContext";
 import Header from "@/components/dom/Layout/Header";
 import TransitionComponent from "@/components/dom/TransitionComponent";
+import DebugEvents from "../DebugEvents";
 
 export default function Layout({ Component, pageProps }: AppProps) {
     return (
@@ -18,6 +19,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                 </TransitionComponent>
             </div>
+            <DebugEvents />
         </TransitionProvider>
     );
 }
