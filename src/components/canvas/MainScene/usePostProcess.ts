@@ -41,7 +41,7 @@ const usePostProcess = () => {
         uRadius,
     } = useControls({
         FX: folder({
-            enablePostProcessing: { value: true, label: "Enable" },
+            enablePostProcessing: { value: false, label: "Enable" },
             Warble: folder({
                 enableWarblePass: {
                     value: false,

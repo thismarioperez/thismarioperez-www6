@@ -1,7 +1,9 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Mesh } from "three";
 import usePostProcess from "./usePostProcess";
+import { MeshPortalMaterial, Plane } from "@react-three/drei";
+import MediaScene from "@/components/canvas/MediaScene";
 
 const RotatingCube = () => {
     const meshRef = useRef<Mesh>(null);
@@ -22,19 +24,25 @@ const RotatingCube = () => {
 };
 
 const Scene = () => {
+    const { width, height } = useThree((state) => state.size);
+
     usePostProcess();
     return (
         <>
-            <ambientLight />
-            <RotatingCube />
+            <Plane name="media-scene" args={[width, height]}>
+                <MeshPortalMaterial>
+                    <MediaScene />
+                </MeshPortalMaterial>
+            </Plane>
         </>
     );
 };
 
 export default function MainScene() {
     return (
-        <Canvas>
+        <Canvas dpr={[1, 2]}>
             <color attach="background" args={["white"]} />
+            <ambientLight />
             <Suspense fallback={null}>
                 <Scene />
             </Suspense>

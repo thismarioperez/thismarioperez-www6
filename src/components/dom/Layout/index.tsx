@@ -14,7 +14,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
             <div className="absolute top-0 left-0 size-full">
                 <MainScene />
             </div>
-            <div className="relative size-full">
+            <div className="relative size-full pointer-events-none">
                 <Header />
                 <TransitionComponent>
                     <Component {...pageProps} />
