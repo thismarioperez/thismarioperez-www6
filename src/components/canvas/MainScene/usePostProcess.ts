@@ -28,6 +28,7 @@ const usePostProcess = () => {
     const [{ dpr }, size] = useThree<
         [RootState["viewport"], RootState["size"]]
     >((s) => [s.viewport, s.size]);
+    const uProgress = useRef<number>(0);
     const ChromaticAbPass = useRef(new ChromaticAberrationMaterial());
     const CurtainPass = useRef(new CurtainMaterial());
     const GammaCorrectionPass = useRef(new GammaCorrectionMaterial());
@@ -38,9 +39,7 @@ const usePostProcess = () => {
             enablePostProcessing,
             enableGammaCorrectionPass,
             enableCurtainPass,
-            curtainProgress,
             enableChromaticAbPass,
-            chromaticAbProgress,
             uOffset,
             enableWarblePass,
         },
@@ -62,23 +61,11 @@ const usePostProcess = () => {
                     value: true,
                     label: "Enable Curtain",
                 },
-                curtainProgress: {
-                    value: 0.0,
-                    min: 0.0,
-                    max: 1.0,
-                    step: 0.01,
-                },
             }),
             ChromaticAb: folder({
                 enableChromaticAbPass: {
                     value: true,
                     label: "Enable Chromatic Aberration",
-                },
-                chromaticAbProgress: {
-                    value: 0.0,
-                    min: 0.0,
-                    max: 1.0,
-                    step: 0.01,
                 },
                 uOffset: {
                     value: 0.1,
@@ -97,43 +84,28 @@ const usePostProcess = () => {
     }));
 
     const playTransition = () => {
-        const progress = {
-            value: 0,
-        };
-
         gsap.timeline({ paused: true })
             .fromTo(
-                progress,
+                uProgress,
                 {
-                    value: 0,
+                    current: 0,
                 },
                 {
-                    value: 1,
+                    current: 1,
                     duration: 1,
                     ease: "power1.inOut",
-                    onUpdate: () => {
-                        set({
-                            chromaticAbProgress: progress.value,
-                            curtainProgress: progress.value,
-                        });
-                    },
+                    onUpdate: () => {},
                 }
             )
             .fromTo(
-                progress,
+                uProgress,
                 {
-                    value: 1,
+                    current: 1,
                 },
                 {
-                    value: 0,
+                    current: 0,
                     duration: 1,
                     ease: "power1.inOut",
-                    onUpdate: () => {
-                        set({
-                            chromaticAbProgress: progress.value,
-                            curtainProgress: progress.value,
-                        });
-                    },
                 }
             )
             .play();
@@ -207,7 +179,8 @@ const usePostProcess = () => {
             // Curtain Pass
             if (enableCurtainPass) {
                 screen.material = CurtainPass.current;
-                CurtainPass.current.uniforms.uProgress.value = curtainProgress;
+                CurtainPass.current.uniforms.uProgress.value =
+                    uProgress.current;
                 CurtainPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);
@@ -218,7 +191,7 @@ const usePostProcess = () => {
                 screen.material = ChromaticAbPass.current;
                 ChromaticAbPass.current.uniforms.uOffset.value = uOffset;
                 ChromaticAbPass.current.uniforms.uProgress.value =
-                    chromaticAbProgress;
+                    uProgress.current;
                 ChromaticAbPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);
