@@ -3,17 +3,10 @@ import { useFrame, useThree, RootState } from "@react-three/fiber";
 import * as THREE from "three";
 import { folder, useControls } from "leva";
 
-import WarbleShaderMaterial from "../shaders/WarbleShader";
 import ChromaticAberrationMaterial from "../shaders/ChromaticAberrationShader";
+import CurtainMaterial from "../shaders/CurtainShader";
 import GammaCorrectionMaterial from "../shaders/GammaCorrectionShader";
-
-export const LinearEncoding = 3000;
-export const sRGBEncoding = 3001;
-
-/**
- * TextureEncoding was deprecated in r152, and removed in r162.
- */
-export type TextureEncoding = typeof LinearEncoding | typeof sRGBEncoding;
+import WarbleShaderMaterial from "../shaders/WarbleShader";
 
 function getFullscreenTriangle() {
     const geometry = new THREE.BufferGeometry();
@@ -32,13 +25,16 @@ const usePostProcess = () => {
     const [{ dpr }, size] = useThree<
         [RootState["viewport"], RootState["size"]]
     >((s) => [s.viewport, s.size]);
-    const WarblePass = useRef(new WarbleShaderMaterial());
     const ChromaticAbPass = useRef(new ChromaticAberrationMaterial());
+    const CurtainPass = useRef(new CurtainMaterial());
     const GammaCorrectionPass = useRef(new GammaCorrectionMaterial());
+    const WarblePass = useRef(new WarbleShaderMaterial());
 
     const {
         enablePostProcessing,
         enableGammaCorrectionPass,
+        enableCurtainPass,
+        curtainProgress,
         enableChromaticAbPass,
         uRedOffset,
         uGreenOffset,
@@ -53,6 +49,18 @@ const usePostProcess = () => {
                 enableGammaCorrectionPass: {
                     value: false,
                     label: "Enable Gamma Correction",
+                },
+            }),
+            Curtain: folder({
+                enableCurtainPass: {
+                    value: true,
+                    label: "Enable Curtain",
+                },
+                curtainProgress: {
+                    value: 0.0,
+                    min: 0.0,
+                    max: 1.0,
+                    step: 0.01,
                 },
             }),
             ChromaticAb: folder({
@@ -124,6 +132,7 @@ const usePostProcess = () => {
             enablePostProcessing &&
             (enableWarblePass ||
                 enableChromaticAbPass ||
+                enableCurtainPass ||
                 enableGammaCorrectionPass)
     );
 
@@ -151,6 +160,15 @@ const usePostProcess = () => {
             if (enableGammaCorrectionPass) {
                 screen.material = GammaCorrectionPass.current;
                 GammaCorrectionPass.current.uniforms.uDiffuse.value =
+                    renderTarget.texture;
+                gl.render(screenScene, screenCamera);
+            }
+
+            // Curtain Pass
+            if (enableCurtainPass) {
+                screen.material = CurtainPass.current;
+                CurtainPass.current.uniforms.uProgress.value = curtainProgress;
+                CurtainPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);
             }
