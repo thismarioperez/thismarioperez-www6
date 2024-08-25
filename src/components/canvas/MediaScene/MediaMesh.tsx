@@ -1,7 +1,8 @@
+import * as THREE from "three";
 import { Plane, useAspect, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { dampE, damp } from "maath/easing";
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Group } from "three";
 
 type TProps = {
@@ -14,6 +15,14 @@ const PLANE_OFFSET = 0.75;
 
 export default function MediaMesh({ src, ...rest }: TProps) {
     const [uuid] = useState(crypto.randomUUID());
+    const [media] = useState(
+        Array.from({ length: IMAGE_COUNT }).map((_, idx) => {
+            return {
+                uuid: `${uuid}-${idx}`,
+                position: new THREE.Vector3(0, 0, idx * PLANE_OFFSET),
+            };
+        })
+    );
     const group = useRef<Group>(null);
     const ocilator = useRef<number>(0);
     const texture = useTexture(src);
@@ -48,12 +57,12 @@ export default function MediaMesh({ src, ...rest }: TProps) {
 
     return (
         <group ref={group} {...rest}>
-            {Array.from({ length: IMAGE_COUNT }).map((_, idx) => (
+            {media.map(({ uuid, position }, idx) => (
                 <Plane
                     scale={scale}
-                    key={`media-scene-${uuid}-${idx}`}
+                    key={uuid}
                     name="media-plane"
-                    position={[0, 0, idx * PLANE_OFFSET]}
+                    position={position}
                 >
                     <meshBasicMaterial
                         map={texture}
