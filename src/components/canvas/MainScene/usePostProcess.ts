@@ -8,6 +8,14 @@ import WarbleShaderMaterial from "../shaders/WarbleShader";
 import ChromaticAberrationMaterial from "../shaders/ChromaticAberrationShader";
 import GammaCorrectionMaterial from "../shaders/GammaCorrectionShader";
 
+export const LinearEncoding = 3000;
+export const sRGBEncoding = 3001;
+
+/**
+ * TextureEncoding was deprecated in r152, and removed in r162.
+ */
+export type TextureEncoding = typeof LinearEncoding | typeof sRGBEncoding;
+
 function getFullscreenTriangle() {
     const geometry = new THREE.BufferGeometry();
     const vertices = new Float32Array([-1, -1, 3, -1, -1, 3]);
@@ -22,31 +30,35 @@ function getFullscreenTriangle() {
 // Basic shader postprocess based on the template https://gist.github.com/RenaudRohlinger/bd5d15316a04d04380e93f10401c40e7
 // USAGE: Simply call usePostprocess hook in your r3f component to apply the shader to the canvas as a postprocess effect
 const usePostProcess = () => {
-    const [{ dpr }, size, gl] = useThree<
-        [RootState["viewport"], RootState["size"], RootState["gl"]]
-    >((s) => [s.viewport, s.size, s.gl]);
-    const renderTarget = useFBO(512, 512, {
-        samples: 4,
-    });
+    const [{ dpr }, size] = useThree<
+        [RootState["viewport"], RootState["size"]]
+    >((s) => [s.viewport, s.size]);
     const WarblePass = useRef(new WarbleShaderMaterial());
     const ChromaticAbPass = useRef(new ChromaticAberrationMaterial());
     const GammaCorrectionPass = useRef(new GammaCorrectionMaterial());
 
     const {
         enablePostProcessing,
-        enableWarblePass,
+        enableGammaCorrectionPass,
         enableChromaticAbPass,
         uRedOffset,
         uGreenOffset,
         uBlueOffset,
         uIntensity,
         uRadius,
+        enableWarblePass,
     } = useControls({
         FX: folder({
-            enablePostProcessing: { value: false, label: "Enable" },
+            enablePostProcessing: { value: true, label: "Enable" },
+            GammaCorrection: folder({
+                enableGammaCorrectionPass: {
+                    value: false,
+                    label: "Enable Gamma Correction",
+                },
+            }),
             ChromaticAb: folder({
                 enableChromaticAbPass: {
-                    value: true,
+                    value: false,
                     label: "Enable Chromatic Aberration",
                 },
                 uRedOffset: {
@@ -79,7 +91,39 @@ const usePostProcess = () => {
         }),
     });
 
+    const [screenCamera, screenScene, screen, renderTarget] = useMemo(() => {
+        const screenScene = new THREE.Scene();
+        const screenCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const screen = new THREE.Mesh(getFullscreenTriangle());
+        screen.frustumCulled = false;
+        screenScene.add(screen);
+
+        const renderTarget = new THREE.WebGLRenderTarget(512, 512, {
+            samples: 4,
+            type: THREE.HalfFloatType,
+            format: THREE.RGBAFormat,
+            depthBuffer: true,
+            stencilBuffer: false,
+            anisotropy: 1,
+        });
+
+        renderTarget.depthTexture = new THREE.DepthTexture(1, 1); // fix depth issues
+        renderTarget.texture.colorSpace = THREE.SRGBColorSpace;
+
+        return [screenCamera, screenScene, screen, renderTarget];
+    }, []);
+
+    const enabled = Boolean(
+        screen &&
+            renderTarget &&
+            enablePostProcessing &&
+            (enableWarblePass ||
+                enableChromaticAbPass ||
+                enableGammaCorrectionPass)
+    );
+
     useEffect(() => {
+        if (!renderTarget) return;
         const { width, height } = size;
         const { w, h } = {
             w: width * dpr,
@@ -88,34 +132,23 @@ const usePostProcess = () => {
         renderTarget.setSize(w, h);
     }, [dpr, size, renderTarget]);
 
-    const [screenCamera, screenScene, screen] = useMemo(() => {
-        let screenScene = new THREE.Scene();
-        const screenCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        const screen = new THREE.Mesh(getFullscreenTriangle());
-        screen.frustumCulled = false;
-        screenScene.add(screen);
-
-        renderTarget.depthTexture = new THREE.DepthTexture(1, 1); // fix depth issues
-        renderTarget.texture.colorSpace = THREE.SRGBColorSpace;
-
-        return [screenCamera, screenScene, screen];
-    }, [renderTarget]);
-
-    const enabled = Boolean(screen && enablePostProcessing);
-
     useFrame(({ scene, camera, gl }, delta) => {
+        // Initial Render
+        gl.setRenderTarget(null);
         gl.render(scene, camera);
 
         if (enabled) {
-            // Initial Render
+            // Post Processing
             gl.setRenderTarget(renderTarget);
             gl.render(scene, camera);
 
             // Gamma Correction
-            screen.material = GammaCorrectionPass.current;
-            GammaCorrectionPass.current.uniforms.uDiffuse.value =
-                renderTarget.texture;
-            gl.render(screenScene, screenCamera);
+            if (enableGammaCorrectionPass) {
+                screen.material = GammaCorrectionPass.current;
+                GammaCorrectionPass.current.uniforms.uDiffuse.value =
+                    renderTarget.texture;
+                gl.render(screenScene, screenCamera);
+            }
 
             //Chromatic Ab. Pass
             if (enableChromaticAbPass) {
@@ -144,9 +177,6 @@ const usePostProcess = () => {
             // Final Render
             gl.setRenderTarget(null);
             gl.render(screenScene, screenCamera);
-        } else {
-            gl.setRenderTarget(null);
-            gl.render(scene, camera);
         }
     }, 1);
     return null;
