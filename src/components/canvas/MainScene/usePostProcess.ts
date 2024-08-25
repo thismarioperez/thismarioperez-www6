@@ -1,11 +1,12 @@
-import { useFrame, useThree, RootState } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
+import { useFrame, useThree, RootState } from "@react-three/fiber";
+import { useFBO } from "@react-three/drei";
 import * as THREE from "three";
+import { folder, useControls } from "leva";
 
 import WarbleShaderMaterial from "../shaders/WarbleShader";
-import { folder, useControls } from "leva";
-import { useFBO } from "@react-three/drei";
 import ChromaticAberrationMaterial from "../shaders/ChromaticAberrationShader";
+import GammaCorrectionMaterial from "../shaders/GammaCorrectionShader";
 
 function getFullscreenTriangle() {
     const geometry = new THREE.BufferGeometry();
@@ -29,6 +30,7 @@ const usePostProcess = () => {
     });
     const WarblePass = useRef(new WarbleShaderMaterial());
     const ChromaticAbPass = useRef(new ChromaticAberrationMaterial());
+    const GammaCorrectionPass = useRef(new GammaCorrectionMaterial());
 
     const {
         enablePostProcessing,
@@ -111,6 +113,12 @@ const usePostProcess = () => {
             // Initial Render
             gl.setRenderTarget(renderTarget);
             gl.render(scene, camera);
+
+            // Gamma Correction
+            screen.material = GammaCorrectionPass.current;
+            GammaCorrectionPass.current.uniforms.uDiffuse.value =
+                renderTarget.texture;
+            gl.render(screenScene, screenCamera);
 
             // Warble Pass
             if (enableWarblePass) {

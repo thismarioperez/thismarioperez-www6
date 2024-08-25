@@ -6,11 +6,12 @@ import { Group } from "three";
 
 type TProps = {
     src: string;
+    [key: string]: any;
 };
 
 const IMAGE_COUNT = 4;
 
-export default function MediaMesh({ src }: TProps) {
+export default function MediaMesh({ src, ...rest }: TProps) {
     const uuid = crypto.randomUUID();
     const group = useRef<Group>(null);
     const texture = useTexture(src);
@@ -29,7 +30,7 @@ export default function MediaMesh({ src }: TProps) {
     });
 
     return (
-        <group ref={group}>
+        <group ref={group} {...rest}>
             {Array.from({ length: IMAGE_COUNT }).map((_, idx) => (
                 <Plane
                     scale={scale}
