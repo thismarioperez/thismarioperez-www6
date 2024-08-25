@@ -100,11 +100,7 @@ const usePostProcess = () => {
         return [screenCamera, screenScene, screen];
     }, [renderTarget]);
 
-    const enabled = Boolean(
-        screen &&
-            enablePostProcessing &&
-            (enableWarblePass || enableChromaticAbPass)
-    );
+    const enabled = Boolean(screen && enablePostProcessing);
 
     useFrame(({ scene, camera, gl }, delta) => {
         gl.render(scene, camera);

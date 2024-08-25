@@ -3,7 +3,7 @@ uniform sampler2D uDiffuse;
 varying vec2 vUv;
 
 vec3 LinearToSrgb(vec3 color) {
-				// Approximation http://chilliant.blogspot.com/2012/08/srgb-approximations-for-hlsl.html
+    // Approximation http://chilliant.blogspot.com/2012/08/srgb-approximations-for-hlsl.html
     vec3 linearColor = color.rgb;
     vec3 S1 = sqrt(linearColor);
     vec3 S2 = sqrt(S1);
