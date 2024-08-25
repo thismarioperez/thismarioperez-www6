@@ -44,12 +44,6 @@ const usePostProcess = () => {
     } = useControls({
         FX: folder({
             enablePostProcessing: { value: false, label: "Enable" },
-            Warble: folder({
-                enableWarblePass: {
-                    value: false,
-                    label: "Enable",
-                },
-            }),
             ChromaticAb: folder({
                 enableChromaticAbPass: {
                     value: true,
@@ -76,6 +70,12 @@ const usePostProcess = () => {
                 uIntensity: { value: 10, min: 1, max: 50.0, step: 1 },
                 uRadius: { value: 30, min: 1, max: 100, step: 5 },
             }),
+            Warble: folder({
+                enableWarblePass: {
+                    value: false,
+                    label: "Enable",
+                },
+            }),
         }),
     });
 
@@ -96,6 +96,7 @@ const usePostProcess = () => {
         screenScene.add(screen);
 
         renderTarget.depthTexture = new THREE.DepthTexture(1, 1); // fix depth issues
+        renderTarget.texture.colorSpace = THREE.SRGBColorSpace;
 
         return [screenCamera, screenScene, screen];
     }, [renderTarget]);
@@ -116,15 +117,6 @@ const usePostProcess = () => {
                 renderTarget.texture;
             gl.render(screenScene, screenCamera);
 
-            // Warble Pass
-            if (enableWarblePass) {
-                screen.material = WarblePass.current;
-                WarblePass.current.uniforms.diffuse.value =
-                    renderTarget.texture;
-                WarblePass.current.uniforms.time.value += delta;
-                gl.render(screenScene, screenCamera);
-            }
-
             //Chromatic Ab. Pass
             if (enableChromaticAbPass) {
                 screen.material = ChromaticAbPass.current;
@@ -137,6 +129,15 @@ const usePostProcess = () => {
                 ChromaticAbPass.current.uniforms.uRadius.value = uRadius;
                 ChromaticAbPass.current.uniforms.uTexture.value =
                     renderTarget.texture;
+                gl.render(screenScene, screenCamera);
+            }
+
+            // Warble Pass
+            if (enableWarblePass) {
+                screen.material = WarblePass.current;
+                WarblePass.current.uniforms.diffuse.value =
+                    renderTarget.texture;
+                WarblePass.current.uniforms.time.value += delta;
                 gl.render(screenScene, screenCamera);
             }
 
