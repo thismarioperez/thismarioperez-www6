@@ -6,7 +6,10 @@ class ChromaticAberrationMaterial extends THREE.ShaderMaterial {
     constructor() {
         super({
             uniforms: {
-                uTexture: {
+                uProgress: {
+                    value: 0,
+                },
+                uDiffuse: {
                     value: null,
                 },
                 uRedOffset: {

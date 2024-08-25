@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree, RootState } from "@react-three/fiber";
-import { useFBO } from "@react-three/drei";
 import * as THREE from "three";
 import { folder, useControls } from "leva";
 
@@ -60,6 +59,12 @@ const usePostProcess = () => {
                 enableChromaticAbPass: {
                     value: false,
                     label: "Enable Chromatic Aberration",
+                },
+                chromaticAbProggress: {
+                    value: 0.0,
+                    min: 0.0,
+                    max: 1.0,
+                    step: 0.01,
                 },
                 uRedOffset: {
                     value: 16,
@@ -160,7 +165,7 @@ const usePostProcess = () => {
                     uBlueOffset;
                 ChromaticAbPass.current.uniforms.uIntensity.value = uIntensity;
                 ChromaticAbPass.current.uniforms.uRadius.value = uRadius;
-                ChromaticAbPass.current.uniforms.uTexture.value =
+                ChromaticAbPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);
             }

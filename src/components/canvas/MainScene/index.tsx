@@ -2,13 +2,13 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Mesh } from "three";
+import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
 import { MeshPortalMaterial, Plane } from "@react-three/drei";
 import MediaScene from "@/components/canvas/MediaScene";
 
 const RotatingCube = () => {
-    const meshRef = useRef<Mesh>(null);
+    const meshRef = useRef<THREE.Mesh>(null);
 
     useFrame(() => {
         if (meshRef.current) {
@@ -42,7 +42,14 @@ const Scene = () => {
 
 export default function MainScene() {
     return (
-        <Canvas dpr={[1, 2]}>
+        <Canvas
+            dpr={[1, 2]}
+            gl={{
+                toneMapping: THREE.ACESFilmicToneMapping,
+                toneMappingExposure: 2,
+                outputColorSpace: THREE.SRGBColorSpace,
+            }}
+        >
             <color attach="background" args={["white"]} />
             <ambientLight />
             <Suspense fallback={null}>
