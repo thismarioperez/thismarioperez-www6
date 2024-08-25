@@ -1,31 +1,22 @@
 uniform float uProgress;
+uniform float uOffset;
 uniform sampler2D uDiffuse;
-uniform float uRedOffset;
-uniform float uGreenOffset;
-uniform float uBlueOffset;
-uniform float uIntensity;
-uniform float uRadius;
 varying vec2 vUv;
 
 void main() {
-    vec2 uv = vUv;
-    vec2 center = vec2(0.5, 0.5); // Center of the screen in normalized coordinates
-    float dist = distance(uv, center); // Distance from center
+    vec2 p = vUv;
+    float normalizedOffset = uOffset * 0.01;
+    vec2 offset = vec2(normalizedOffset, 0.);
 
-    // Modify scaleFactor to incorporate uRadius
-    float normalizedDist = dist / uRadius; // Normalize distance based on the radius
-    // float scaleFactor = smoothstep(0.0, 1.0, normalizedDist * uIntensity);
-    float scaleFactor = smoothstep(0.0, 1.0, normalizedDist * uIntensity);
+    if(uProgress > 0.0) {
+        offset += vec2(0.1, 0.) * uProgress;
+    }
 
-    // Apply the radial factor to the offsets
-    float rOffset = 0.001 * uRedOffset * scaleFactor;
-    float gOffset = 0.001 * uGreenOffset * scaleFactor;
-    float bOffset = 0.001 * uBlueOffset * scaleFactor;
+    float r, g, b, a = 1.;
+    r = texture2D(uDiffuse, p + offset).r;
+    g = texture2D(uDiffuse, p).g;
+    b = texture2D(uDiffuse, p - offset).b;
+    a = texture2D(uDiffuse, p).a;
 
-    float r, g, b = 1.;
-    r = texture2D(uDiffuse, uv + vec2(rOffset, 0.0)).r;
-    g = texture2D(uDiffuse, uv + vec2(gOffset, 0.0)).g;
-    b = texture2D(uDiffuse, uv + vec2(bOffset, 0.0)).b;
-
-    gl_FragColor = vec4(r, g, b, 1.0);
+    gl_FragColor = vec4(r, g, b, a);
 }

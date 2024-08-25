@@ -2,7 +2,7 @@ import * as THREE from "three";
 import fs from "./fragment.glsl";
 import vs from "./vertex.glsl";
 
-class ChromaticAberrationMaterial extends THREE.ShaderMaterial {
+class CurtainMaterial extends THREE.ShaderMaterial {
     constructor() {
         super({
             uniforms: {
@@ -11,9 +11,6 @@ class ChromaticAberrationMaterial extends THREE.ShaderMaterial {
                 },
                 uDiffuse: {
                     value: null,
-                },
-                uOffset: {
-                    value: 0.1,
                 },
             },
             vertexShader: vs,
@@ -25,4 +22,4 @@ class ChromaticAberrationMaterial extends THREE.ShaderMaterial {
     }
 }
 
-export default ChromaticAberrationMaterial;
+export default CurtainMaterial;

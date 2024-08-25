@@ -36,11 +36,8 @@ const usePostProcess = () => {
         enableCurtainPass,
         curtainProgress,
         enableChromaticAbPass,
-        uRedOffset,
-        uGreenOffset,
-        uBlueOffset,
-        uIntensity,
-        uRadius,
+        chromaticAbProgress,
+        uOffset,
         enableWarblePass,
     } = useControls({
         FX: folder({
@@ -65,35 +62,21 @@ const usePostProcess = () => {
             }),
             ChromaticAb: folder({
                 enableChromaticAbPass: {
-                    value: false,
+                    value: true,
                     label: "Enable Chromatic Aberration",
                 },
-                chromaticAbProggress: {
+                chromaticAbProgress: {
                     value: 0.0,
                     min: 0.0,
                     max: 1.0,
                     step: 0.01,
                 },
-                uRedOffset: {
-                    value: 16,
-                    min: -100.0,
-                    max: 100.0,
-                    step: 1.0,
+                uOffset: {
+                    value: 0.1,
+                    min: 0.0,
+                    max: 1.0,
+                    step: 0.01,
                 },
-                uGreenOffset: {
-                    value: -12,
-                    min: -100.0,
-                    max: 100.0,
-                    step: 1.0,
-                },
-                uBlueOffset: {
-                    value: -29.0,
-                    min: -100.0,
-                    max: 100.0,
-                    step: 1.0,
-                },
-                uIntensity: { value: 10, min: 1, max: 50.0, step: 1 },
-                uRadius: { value: 30, min: 1, max: 100, step: 5 },
             }),
             Warble: folder({
                 enableWarblePass: {
@@ -176,13 +159,9 @@ const usePostProcess = () => {
             //Chromatic Ab. Pass
             if (enableChromaticAbPass) {
                 screen.material = ChromaticAbPass.current;
-                ChromaticAbPass.current.uniforms.uRedOffset.value = uRedOffset;
-                ChromaticAbPass.current.uniforms.uGreenOffset.value =
-                    uGreenOffset;
-                ChromaticAbPass.current.uniforms.uBlueOffset.value =
-                    uBlueOffset;
-                ChromaticAbPass.current.uniforms.uIntensity.value = uIntensity;
-                ChromaticAbPass.current.uniforms.uRadius.value = uRadius;
+                ChromaticAbPass.current.uniforms.uOffset.value = uOffset;
+                ChromaticAbPass.current.uniforms.uProgress.value =
+                    chromaticAbProgress;
                 ChromaticAbPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);
