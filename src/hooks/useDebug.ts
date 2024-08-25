@@ -14,6 +14,7 @@ export default function useDebug(): TReturn {
 
     const createQueryString = useCallback(
         (name: string, value: boolean) => {
+            // @ts-expect-error
             const params = new URLSearchParams(searchParams);
             if (value) {
                 params.set(name, `${value}`);
