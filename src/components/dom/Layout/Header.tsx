@@ -5,6 +5,7 @@ export default function Header() {
         <header>
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
+            <Link href="/projects/robin-knows">Projects - Robin Knows</Link>
         </header>
     );
 }
