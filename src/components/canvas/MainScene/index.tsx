@@ -36,6 +36,13 @@ const Scene = () => {
                     <MediaScene />
                 </MeshPortalMaterial>
             </Plane>
+
+            {/* <Plane args={[width, height]}>
+                <MeshPortalMaterial>
+                    <ambientLight />
+                    <RotatingCube />
+                </MeshPortalMaterial>
+            </Plane> */}
         </>
     );
 };
