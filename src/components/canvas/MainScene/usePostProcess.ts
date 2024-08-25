@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree, RootState } from "@react-three/fiber";
 import * as THREE from "three";
-import { folder, useControls } from "leva";
+import { button, folder, useControls } from "leva";
+import { gsap } from "@/lib/gsap";
 
 import ChromaticAberrationMaterial from "../shaders/ChromaticAberrationShader";
 import CurtainMaterial from "../shaders/CurtainShader";
@@ -30,18 +31,24 @@ const usePostProcess = () => {
     const GammaCorrectionPass = useRef(new GammaCorrectionMaterial());
     const WarblePass = useRef(new WarbleShaderMaterial());
 
-    const {
-        enablePostProcessing,
-        enableGammaCorrectionPass,
-        enableCurtainPass,
-        curtainProgress,
-        enableChromaticAbPass,
-        chromaticAbProgress,
-        uOffset,
-        enableWarblePass,
-    } = useControls({
+    const [
+        {
+            enablePostProcessing,
+            enableGammaCorrectionPass,
+            enableCurtainPass,
+            curtainProgress,
+            enableChromaticAbPass,
+            chromaticAbProgress,
+            uOffset,
+            enableWarblePass,
+        },
+        set,
+    ] = useControls(() => ({
         FX: folder({
             enablePostProcessing: { value: true, label: "Enable" },
+            ["play transition"]: button(() => {
+                playTransition();
+            }),
             GammaCorrection: folder({
                 enableGammaCorrectionPass: {
                     value: false,
@@ -85,7 +92,50 @@ const usePostProcess = () => {
                 },
             }),
         }),
-    });
+    }));
+
+    const playTransition = () => {
+        const progress = {
+            value: 0,
+        };
+
+        gsap.timeline({ paused: true })
+            .fromTo(
+                progress,
+                {
+                    value: 0,
+                },
+                {
+                    value: 1,
+                    duration: 1,
+                    ease: "power1.inOut",
+                    onUpdate: () => {
+                        set({
+                            chromaticAbProgress: progress.value,
+                            curtainProgress: progress.value,
+                        });
+                    },
+                }
+            )
+            .fromTo(
+                progress,
+                {
+                    value: 1,
+                },
+                {
+                    value: 0,
+                    duration: 1,
+                    ease: "power1.inOut",
+                    onUpdate: () => {
+                        set({
+                            chromaticAbProgress: progress.value,
+                            curtainProgress: progress.value,
+                        });
+                    },
+                }
+            )
+            .play();
+    };
 
     const [screenCamera, screenScene, screen, renderTarget] = useMemo(() => {
         const screenScene = new THREE.Scene();
