@@ -11,7 +11,65 @@ const config: Config = {
         extend: {
             colors,
             fontFamily: {
-                ["source-code-pro"]: "var(--source-code-pro-font)",
+                ["source-code-pro"]: "var(--source-code-pro-font), monospace",
+            },
+            fontSize: {
+                h1: [
+                    "3.125rem",
+                    {
+                        lineHeight: "1.2em",
+                        letterSpacing: "0em",
+                        fontWeight: "300",
+                    },
+                ],
+                h2: [
+                    "2.5rem",
+                    {
+                        lineHeight: "1em",
+                        letterSpacing: "0em",
+                        fontWeight: "700",
+                    },
+                ],
+                h3: [
+                    "1.125rem",
+                    {
+                        lineHeight: "1.5em",
+                        letterSpacing: "0em",
+                        fontWeight: "700",
+                    },
+                ],
+                p: [
+                    "1rem",
+                    {
+                        lineHeight: "1.6em",
+                        letterSpacing: "0em",
+                        fontWeight: "400",
+                    },
+                ],
+                meta: [
+                    "0.9375rem",
+                    {
+                        lineHeight: "1.6em",
+                        letterSpacing: "0em",
+                        fontWeight: "400",
+                    },
+                ],
+                quote: [
+                    "1.1875rem",
+                    {
+                        lineHeight: "1.5em",
+                        letterSpacing: "0em",
+                        fontWeight: "300",
+                    },
+                ],
+                button: [
+                    "0.9375rem",
+                    {
+                        lineHeight: "1.5em",
+                        letterSpacing: "0.2em",
+                        fontWeight: "500",
+                    },
+                ],
             },
         },
     },
