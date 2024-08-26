@@ -14,6 +14,27 @@ import CubeScene from "@/components/canvas/CubeScene";
 import LogoScene from "@/components/canvas/LogoScene";
 import MediaScene from "@/components/canvas/MediaScene";
 
+export type TSceneName = "logo-scene" | "media-scene" | "cube-scene";
+export type TScene = {
+    name: TSceneName;
+    component: JSX.Element;
+};
+
+const SCENES: TScene[] = [
+    {
+        name: "logo-scene",
+        component: <LogoScene />,
+    },
+    {
+        name: "media-scene",
+        component: <MediaScene />,
+    },
+    {
+        name: "cube-scene",
+        component: <CubeScene />,
+    },
+];
+
 const CameraHandler = () => {
     const box = useRef<THREE.Box3>(new THREE.Box3());
     const { width, height } = useThree((state) => state.size);
@@ -47,32 +68,14 @@ const Scene = () => {
             <color attach="background" args={["yellow"]} />
             <ambientLight intensity={1} />
 
-            <mesh>
-                <planeGeometry args={[width, height]} />
-                <meshStandardMaterial>
-                    <RenderTexture attach="map">
-                        <LogoScene />
-                    </RenderTexture>
-                </meshStandardMaterial>
-            </mesh>
-
-            <mesh position-x={width}>
-                <planeGeometry args={[width, height]} />
-                <meshStandardMaterial>
-                    <RenderTexture attach="map">
-                        <MediaScene />
-                    </RenderTexture>
-                </meshStandardMaterial>
-            </mesh>
-
-            <mesh position-x={width * 2}>
-                <planeGeometry args={[width, height]} />
-                <meshStandardMaterial>
-                    <RenderTexture attach="map">
-                        <CubeScene />
-                    </RenderTexture>
-                </meshStandardMaterial>
-            </mesh>
+            {SCENES.map(({ name, component }, idx) => (
+                <mesh key={name} name={name} position-x={idx * width}>
+                    <planeGeometry args={[width, height]} />
+                    <meshStandardMaterial>
+                        <RenderTexture attach="map">{component}</RenderTexture>
+                    </meshStandardMaterial>
+                </mesh>
+            ))}
         </>
     );
 };
