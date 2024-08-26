@@ -19,7 +19,7 @@ export default function MediaMesh({ src, ...rest }: TProps) {
         Array.from({ length: IMAGE_COUNT }).map((_, idx) => {
             return {
                 uuid: `${uuid}-${idx}`,
-                position: new THREE.Vector3(0, 0, idx * PLANE_OFFSET),
+                position: new THREE.Vector3(0, 0, PLANE_OFFSET),
             };
         })
     );
@@ -36,12 +36,11 @@ export default function MediaMesh({ src, ...rest }: TProps) {
                 group.current.rotation,
                 [-y * 0.025, x * 0.025, 0],
                 0.5,
-                delta,
-                1
+                delta
             );
 
             // ocilation
-            ocilator.current = (Math.sin(time) + 1) / 2;
+            ocilator.current = (Math.sin(time) + 1) / 10;
             group.current.children.forEach((child, idx) => {
                 damp(
                     child.position,
