@@ -77,7 +77,7 @@ const Scene = () => {
     );
 };
 
-export default function MainScene() {
+export default function Experience() {
     return (
         <Canvas
             dpr={[1, 1]}
