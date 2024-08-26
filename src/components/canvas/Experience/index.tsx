@@ -1,28 +1,39 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
-import { MeshPortalMaterial, Plane } from "@react-three/drei";
+import {
+    CameraControls,
+    PerspectiveCamera,
+    RenderTexture,
+} from "@react-three/drei";
+
+import CubeScene from "@/components/canvas/CubeScene";
+import LogoScene from "@/components/canvas/LogoScene";
 import MediaScene from "@/components/canvas/MediaScene";
 
-const RotatingCube = () => {
-    const meshRef = useRef<THREE.Mesh>(null);
+const CameraHandler = () => {
+    const box = useRef<THREE.Box3>(new THREE.Box3());
+    const { width, height } = useThree((state) => state.size);
+    const cameraControls = useRef<CameraControls>(null);
 
-    useFrame(() => {
-        if (meshRef.current) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-        }
-    });
+    useEffect(() => {
+        // Used to reset the camera position when the viewport changes
+        box.current = new THREE.Box3(
+            new THREE.Vector3(width / -2, height / -2, 0),
+            new THREE.Vector3(width / 2, height / 2, 0)
+        );
 
-    return (
-        <mesh ref={meshRef} position={[0, 0, 0]}>
-            <boxGeometry args={[1, 1, 1]} />
-            <meshBasicMaterial color="teal" />
-        </mesh>
-    );
+        const resetTimeout = setTimeout(() => {
+            if (!cameraControls.current) return;
+            cameraControls.current.fitToBox(box.current, false);
+        }, 100);
+        return () => clearTimeout(resetTimeout);
+    }, [width, height]);
+
+    return <CameraControls makeDefault ref={cameraControls} />;
 };
 
 const Scene = () => {
@@ -31,18 +42,37 @@ const Scene = () => {
     usePostProcess();
     return (
         <>
-            <Plane name="media-scene" args={[width, height]}>
-                <MeshPortalMaterial>
-                    <MediaScene />
-                </MeshPortalMaterial>
-            </Plane>
+            <CameraHandler />
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
+            <color attach="background" args={["yellow"]} />
+            <ambientLight intensity={1} />
 
-            {/* <Plane args={[width, height]}>
-                <MeshPortalMaterial>
-                    <ambientLight />
-                    <RotatingCube />
-                </MeshPortalMaterial>
-            </Plane> */}
+            <mesh>
+                <planeGeometry args={[width, height]} />
+                <meshStandardMaterial>
+                    <RenderTexture attach="map">
+                        <LogoScene />
+                    </RenderTexture>
+                </meshStandardMaterial>
+            </mesh>
+
+            <mesh position-x={width}>
+                <planeGeometry args={[width, height]} />
+                <meshStandardMaterial>
+                    <RenderTexture attach="map">
+                        <MediaScene />
+                    </RenderTexture>
+                </meshStandardMaterial>
+            </mesh>
+
+            <mesh position-x={width * 2}>
+                <planeGeometry args={[width, height]} />
+                <meshStandardMaterial>
+                    <RenderTexture attach="map">
+                        <CubeScene />
+                    </RenderTexture>
+                </meshStandardMaterial>
+            </mesh>
         </>
     );
 };
@@ -50,15 +80,13 @@ const Scene = () => {
 export default function MainScene() {
     return (
         <Canvas
-            dpr={[1, 2]}
+            dpr={[1, 1]}
             gl={{
                 toneMapping: THREE.ACESFilmicToneMapping,
                 toneMappingExposure: 2,
                 outputColorSpace: THREE.SRGBColorSpace,
             }}
         >
-            <color attach="background" args={["white"]} />
-            <ambientLight />
             <Suspense fallback={null}>
                 <Scene />
             </Suspense>
