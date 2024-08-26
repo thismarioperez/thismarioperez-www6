@@ -29,6 +29,7 @@ const usePostProcess = () => {
         [RootState["viewport"], RootState["size"]]
     >((s) => [s.viewport, s.size]);
     const uProgress = useRef<number>(0);
+    const tl = useRef<gsap.core.Timeline>();
     const ChromaticAbPass = useRef(new ChromaticAberrationMaterial());
     const CurtainPass = useRef(new CurtainMaterial());
     const GammaCorrectionPass = useRef(new GammaCorrectionMaterial());
@@ -84,31 +85,24 @@ const usePostProcess = () => {
     }));
 
     const playTransition = () => {
-        gsap.timeline({ paused: true })
-            .fromTo(
-                uProgress,
-                {
-                    current: 0,
-                },
-                {
-                    current: 1,
-                    duration: 1,
-                    ease: "power1.inOut",
-                    onUpdate: () => {},
-                }
-            )
-            .fromTo(
-                uProgress,
-                {
-                    current: 1,
-                },
-                {
-                    current: 0,
-                    duration: 1,
-                    ease: "power1.inOut",
-                }
-            )
-            .play();
+        tl.current?.kill();
+
+        tl.current = gsap.timeline({ paused: true });
+
+        tl.current.to(uProgress, {
+            current: 1,
+            duration: 1,
+            ease: "power1.inOut",
+            onUpdate: () => {},
+        });
+
+        tl.current.to(uProgress, {
+            current: 0,
+            duration: 1,
+            ease: "power1.inOut",
+        });
+
+        tl.current.play();
     };
 
     const [screenCamera, screenScene, screen, renderTarget] = useMemo(() => {
