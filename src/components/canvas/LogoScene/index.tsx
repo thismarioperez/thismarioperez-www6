@@ -10,6 +10,8 @@ import {
     Text3D,
 } from "@react-three/drei";
 
+import colors from "@/styles/colors";
+
 export default function LogoScene() {
     return (
         <>
@@ -17,7 +19,7 @@ export default function LogoScene() {
                 <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
-                <color attach="background" args={["black"]} />
+                <color attach="background" args={[colors.black]} />
 
                 <Float floatingRange={[undefined, 0.01]} speed={2}>
                     <Center>
@@ -28,7 +30,7 @@ export default function LogoScene() {
                             scale={5}
                         >
                             M
-                            <meshPhongMaterial color={"white"} />
+                            <meshPhongMaterial color={colors.white} />
                         </Text3D>
                     </Center>
                 </Float>

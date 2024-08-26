@@ -10,6 +10,7 @@ import {
     RenderTexture,
 } from "@react-three/drei";
 
+import colors from "@/styles/colors";
 import CubeScene from "@/components/canvas/CubeScene";
 import LogoScene from "@/components/canvas/LogoScene";
 import MediaScene from "@/components/canvas/MediaScene";
@@ -65,7 +66,7 @@ const Scene = () => {
         <>
             <CameraHandler />
             <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
-            <color attach="background" args={["yellow"]} />
+            <color attach="background" args={[colors.yellow]} />
             <ambientLight intensity={1} />
 
             {SCENES.map(({ name, component }, idx) => (
