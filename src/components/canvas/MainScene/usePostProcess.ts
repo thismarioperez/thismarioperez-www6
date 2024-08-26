@@ -52,7 +52,7 @@ const usePostProcess = () => {
             }),
             GammaCorrection: folder({
                 enableGammaCorrectionPass: {
-                    value: false,
+                    value: true,
                     label: "Enable Gamma Correction",
                 },
             }),
@@ -76,7 +76,7 @@ const usePostProcess = () => {
             }),
             Warble: folder({
                 enableWarblePass: {
-                    value: false,
+                    value: true,
                     label: "Enable",
                 },
             }),
@@ -203,6 +203,7 @@ const usePostProcess = () => {
                 WarblePass.current.uniforms.diffuse.value =
                     renderTarget.texture;
                 WarblePass.current.uniforms.time.value += delta;
+                WarblePass.current.uniforms.uProgress.value = uProgress.current;
                 gl.render(screenScene, screenCamera);
             }
 

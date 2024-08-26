@@ -7,13 +7,11 @@ void main() {
 
     vec2 p = vUv;
 
-    if(p.x < 0.25) {
-    } else if(p.x < 0.5) {
-        p.x = p.x - 0.25 * uProgress;
-    } else if(p.x < 0.75) {
-        p.x = p.x - 0.5 * uProgress;
-    } else {
-        p.x = p.x - 0.75 * uProgress;
+    if(p.x < 0.3333333) {
+    } else if(p.x < 0.6666666) {
+        p.x = p.x - 0.3333333 * uProgress;
+    } else if(p.x < 1.) {
+        p.x = p.x - 0.6666666 * uProgress;
     }
 
     vec4 tex = texture2D(uDiffuse, p);
