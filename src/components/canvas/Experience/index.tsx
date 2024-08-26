@@ -15,7 +15,11 @@ import CubeScene from "@/components/canvas/CubeScene";
 import LogoScene from "@/components/canvas/LogoScene";
 import MediaScene from "@/components/canvas/MediaScene";
 
-export type TSceneName = "logo-scene" | "media-scene" | "cube-scene";
+export type TSceneName =
+    | "logo-scene"
+    | "media-scene-1"
+    | "media-scene-2"
+    | "cube-scene";
 export type TScene = {
     name: TSceneName;
     component: JSX.Element;
@@ -27,8 +31,12 @@ const SCENES: TScene[] = [
         component: <LogoScene />,
     },
     {
-        name: "media-scene",
-        component: <MediaScene />,
+        name: "media-scene-1",
+        component: <MediaScene src="/images/image-1.jpg" />,
+    },
+    {
+        name: "media-scene-2",
+        component: <MediaScene src="/images/image-2.jpg" />,
     },
     {
         name: "cube-scene",
