@@ -10,6 +10,9 @@ const config: Config = {
     theme: {
         extend: {
             colors,
+            fontFamily: {
+                ["source-code-pro"]: "var(--source-code-pro-font)",
+            },
         },
     },
     plugins: [],

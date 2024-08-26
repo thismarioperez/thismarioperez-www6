@@ -22,7 +22,10 @@ export default function Layout({ Component, pageProps }: AppProps) {
     }, [parsedPathname]);
 
     return (
-        <>
+        <div
+            id="root"
+            className="relative size-full text-base text-white font-source-code-pro"
+        >
             <TransitionProvider>
                 <div className="absolute top-0 left-0 size-full">
                     <Experience />
@@ -36,6 +39,6 @@ export default function Layout({ Component, pageProps }: AppProps) {
                 <LevaUI />
                 <DebugEvents />
             </TransitionProvider>
-        </>
+        </div>
     );
 }

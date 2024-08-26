@@ -1,9 +1,22 @@
-import Layout from "@/components/dom/Layout";
-import usePathname from "@/hooks/usePathname";
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect } from "react";
+import { Source_Code_Pro } from "next/font/google";
+
+import Layout from "@/components/dom/Layout";
+import "@/styles/globals.css";
+
+const sourceCodePro = Source_Code_Pro({
+    subsets: ["latin"],
+});
 
 export default function App(props: AppProps) {
-    return <Layout {...props} />;
+    return (
+        <>
+            <style jsx global>{`
+                :root {
+                    --source-code-pro-font: ${sourceCodePro.style.fontFamily};
+                }
+            `}</style>
+            <Layout {...props} />;
+        </>
+    );
 }
