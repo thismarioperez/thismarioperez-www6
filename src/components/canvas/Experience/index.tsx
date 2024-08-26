@@ -67,7 +67,7 @@ const Scene = () => {
             <CameraHandler />
             <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
             <color attach="background" args={[colors.yellow]} />
-            <ambientLight intensity={1} />
+            <ambientLight intensity={2} />
 
             {SCENES.map(({ name, component }, idx) => (
                 <mesh key={name} name={name} position-x={idx * width}>
@@ -86,8 +86,8 @@ export default function Experience() {
         <Canvas
             dpr={[1, 1]}
             gl={{
-                toneMapping: THREE.ACESFilmicToneMapping,
-                toneMappingExposure: 2,
+                toneMapping: THREE.NoToneMapping,
+                antialias: true,
                 outputColorSpace: THREE.SRGBColorSpace,
             }}
         >
