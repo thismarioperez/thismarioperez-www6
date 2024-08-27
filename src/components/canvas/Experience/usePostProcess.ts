@@ -9,6 +9,7 @@ import CurtainMaterial from "../shaders/CurtainShader";
 import GammaCorrectionMaterial from "../shaders/GammaCorrectionShader";
 import WarbleShaderMaterial from "../shaders/WarbleShader";
 import useParsedPathname from "@/hooks/useParsedPathname";
+import useSliderState from "@/hooks/useSliderState";
 
 function getFullscreenTriangle() {
     const geometry = new THREE.BufferGeometry();
@@ -24,7 +25,7 @@ function getFullscreenTriangle() {
 // Basic shader postprocess based on the template https://gist.github.com/RenaudRohlinger/bd5d15316a04d04380e93f10401c40e7
 // USAGE: Simply call usePostprocess hook in your r3f component to apply the shader to the canvas as a postprocess effect
 const usePostProcess = () => {
-    const parsedPathname = useParsedPathname();
+    const { slide } = useSliderState();
     const [{ dpr }, size] = useThree<
         [RootState["viewport"], RootState["size"]]
     >((s) => [s.viewport, s.size]);
@@ -91,14 +92,14 @@ const usePostProcess = () => {
 
         tl.current.to(uProgress, {
             current: 1,
-            duration: 1,
+            duration: 2,
             ease: "power1.inOut",
             onUpdate: () => {},
         });
 
         tl.current.to(uProgress, {
             current: 0,
-            duration: 1,
+            duration: 2,
             ease: "power1.inOut",
         });
 
@@ -138,9 +139,8 @@ const usePostProcess = () => {
     );
 
     useEffect(() => {
-        if (!parsedPathname) return;
         playTransition();
-    }, [parsedPathname]);
+    }, [slide]);
 
     useEffect(() => {
         if (!renderTarget) return;
