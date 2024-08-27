@@ -4,7 +4,11 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
-import { CameraControls, RenderTexture } from "@react-three/drei";
+import {
+    CameraControls,
+    PerspectiveCamera,
+    RenderTexture,
+} from "@react-three/drei";
 
 import useSliderState from "@/hooks/useSliderState";
 import colors from "@/styles/colors";
@@ -87,6 +91,10 @@ const CameraHandler = ({
 
         await cameraControls.current.fitToBox(currentSlide, true, {
             cover: true,
+            paddingTop: 16,
+            paddingRight: 16,
+            paddingBottom: 16,
+            paddingLeft: 16,
         });
     };
 
@@ -103,6 +111,10 @@ const CameraHandler = ({
             if (!currentSlide) return;
             await cameraControls.current.fitToBox(currentSlide, true, {
                 cover: true,
+                paddingTop: 16,
+                paddingRight: 16,
+                paddingBottom: 16,
+                paddingLeft: 16,
             });
         }, 200);
         return () => clearTimeout(resetTimeout);
@@ -167,6 +179,13 @@ const Scene = () => {
             <CameraHandler
                 slideDistance={slideDistance}
                 dollyDistance={dollyDistance}
+            />
+            <PerspectiveCamera
+                makeDefault
+                position={[0, 0, 5]}
+                fov={75}
+                near={0.1}
+                far={2000}
             />
             <color attach="background" args={[colors.yellow]} />
             <ambientLight intensity={2} />
