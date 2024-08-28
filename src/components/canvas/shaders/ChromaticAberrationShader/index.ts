@@ -9,6 +9,9 @@ class ChromaticAberrationMaterial extends THREE.ShaderMaterial {
                 uProgress: {
                     value: 0,
                 },
+                uProgressIntesity: {
+                    value: 0.1,
+                },
                 uDiffuse: {
                     value: null,
                 },

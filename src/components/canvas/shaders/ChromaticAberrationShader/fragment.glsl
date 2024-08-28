@@ -1,5 +1,6 @@
 uniform float uProgress;
 uniform float uOffset;
+uniform float uProgressIntesity;
 uniform sampler2D uDiffuse;
 varying vec2 vUv;
 
@@ -9,7 +10,7 @@ void main() {
     vec2 offset = vec2(normalizedOffset, 0.);
 
     if(uProgress > 0.0) {
-        offset += vec2(0.1, 0.) * uProgress;
+        offset += vec2(0.1, 0.) * uProgressIntesity * uProgress;
     }
 
     float r, g, b, a = 1.;
