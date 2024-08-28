@@ -22,23 +22,18 @@ export default function Layout({ Component, pageProps }: AppProps) {
     }, [parsedPathname]);
 
     return (
-        <div
-            id="root"
-            className="relative size-full text-base text-white font-source-code-pro"
-        >
-            <TransitionProvider>
-                <div className="absolute top-0 left-0 size-full">
-                    <Experience />
-                </div>
-                <div className="relative size-full pointer-events-none">
-                    <Header />
-                    <TransitionComponent>
-                        <Component {...pageProps} />
-                    </TransitionComponent>
-                </div>
-                <LevaUI />
-                <DebugEvents />
-            </TransitionProvider>
-        </div>
+        <TransitionProvider>
+            <div className="absolute top-0 left-0 size-full">
+                <Experience />
+            </div>
+            <div className="relative  pointer-events-none">
+                <Header />
+                <TransitionComponent>
+                    <Component {...pageProps} />
+                </TransitionComponent>
+            </div>
+            <LevaUI />
+            <DebugEvents />
+        </TransitionProvider>
     );
 }

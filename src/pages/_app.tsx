@@ -16,7 +16,7 @@ export default function App(props: AppProps) {
                     --source-code-pro-font: ${sourceCodePro.style.fontFamily};
                 }
             `}</style>
-            <Layout {...props} />;
+            <Layout {...props} />
         </>
     );
 }
