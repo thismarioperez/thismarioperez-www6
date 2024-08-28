@@ -40,6 +40,7 @@ const usePostProcess = () => {
         {
             enablePostProcessing,
             enableGammaCorrectionPass,
+            chromaticAbProgressIntesity,
             enableCurtainPass,
             enableChromaticAbPass,
             uOffset,
@@ -69,6 +70,12 @@ const usePostProcess = () => {
                     value: true,
                     label: "Enable Chromatic Aberration",
                 },
+                chromaticAbProgressIntesity: {
+                    value: 0.1,
+                    min: 0.01,
+                    max: 2,
+                    step: 0.01,
+                },
                 uOffset: {
                     value: 0.1,
                     min: 0.0,
@@ -92,14 +99,13 @@ const usePostProcess = () => {
 
         tl.current.to(uProgress, {
             current: 1,
-            duration: 2,
-            ease: "power1.inOut",
-            onUpdate: () => {},
+            duration: 2.25,
+            ease: "power1.25.inOut",
         });
 
         tl.current.to(uProgress, {
             current: 0,
-            duration: 2,
+            duration: 0.75,
             ease: "power1.inOut",
         });
 
@@ -186,6 +192,8 @@ const usePostProcess = () => {
                 ChromaticAbPass.current.uniforms.uOffset.value = uOffset;
                 ChromaticAbPass.current.uniforms.uProgress.value =
                     uProgress.current;
+                ChromaticAbPass.current.uniforms.uProgressIntesity.value =
+                    chromaticAbProgressIntesity;
                 ChromaticAbPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);

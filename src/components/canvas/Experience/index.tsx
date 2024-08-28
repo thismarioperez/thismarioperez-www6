@@ -6,6 +6,7 @@ import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
 import {
     CameraControls,
+    Grid,
     PerspectiveCamera,
     RenderTexture,
 } from "@react-three/drei";
@@ -144,7 +145,7 @@ const Scene = () => {
     const { slideDistance, dollyDistance } = useControls({
         slideshow: folder({
             dollyDistance: {
-                value: 10,
+                value: 5,
                 min: 0,
                 max: 50,
                 step: 1,
@@ -167,6 +168,7 @@ const Scene = () => {
     });
 
     usePostProcess();
+
     return (
         <>
             <CameraHandler
