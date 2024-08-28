@@ -59,7 +59,7 @@ const CameraHandler = ({
     const { scene } = useThree((state) => state);
     const { slide } = useSliderState();
     const lastSlide = useRef(0);
-    const { width, height } = useThree((state) => state.size);
+    const { width, height } = useThree((state) => state.viewport);
     const cameraControls = useRef<CameraControls>(null);
 
     const moveToSlide = async () => {
@@ -91,10 +91,6 @@ const CameraHandler = ({
 
         await cameraControls.current.fitToBox(currentSlide, true, {
             cover: true,
-            paddingTop: 16,
-            paddingRight: 16,
-            paddingBottom: 16,
-            paddingLeft: 16,
         });
     };
 
@@ -111,10 +107,6 @@ const CameraHandler = ({
             if (!currentSlide) return;
             await cameraControls.current.fitToBox(currentSlide, true, {
                 cover: true,
-                paddingTop: 16,
-                paddingRight: 16,
-                paddingBottom: 16,
-                paddingLeft: 16,
             });
         }, 200);
         return () => clearTimeout(resetTimeout);
@@ -146,20 +138,21 @@ const CameraHandler = ({
 };
 
 const Scene = () => {
-    const { width, height } = useThree((state) => state.size);
+    const { width, height } = useThree((state) => state.viewport);
     const { prevSlide, nextSlide } = useSliderState();
 
     const { slideDistance, dollyDistance } = useControls({
         slideshow: folder({
             dollyDistance: {
-                value: 50,
+                value: 10,
                 min: 0,
-                max: 100,
+                max: 50,
+                step: 1,
             },
             slideDistance: {
-                value: 500,
+                value: 20,
                 min: 0,
-                max: 1080,
+                max: 50,
                 step: 1,
             },
             nav: buttonGroup({
@@ -185,7 +178,7 @@ const Scene = () => {
                 position={[0, 0, 5]}
                 fov={75}
                 near={0.1}
-                far={2000}
+                far={1000}
             />
             <color attach="background" args={[colors.yellow]} />
             <ambientLight intensity={2} />
@@ -213,7 +206,7 @@ const Scene = () => {
 export default function Experience() {
     return (
         <Canvas
-            dpr={[1, 1]}
+            dpr={[1, 2]}
             gl={{
                 toneMapping: THREE.NoToneMapping,
                 antialias: true,

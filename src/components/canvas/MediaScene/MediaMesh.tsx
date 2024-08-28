@@ -1,8 +1,14 @@
 import * as THREE from "three";
-import { Plane, useAspect, useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import {
+    Bounds,
+    Center,
+    Plane,
+    useAspect,
+    useTexture,
+} from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import { dampE, damp } from "maath/easing";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Group } from "three";
 
 type TProps = {
