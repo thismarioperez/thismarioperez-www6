@@ -9,17 +9,17 @@ void main() {
 
     if(p.x < 0.25) {
     } else if(p.x < 0.5) {
-        p.x = p.x + 0.25 * uProgress;
+        p.x = p.x + 0.15 * uProgress;
     } else if(p.x < 0.75) {
-        p.x = p.x - 0.25 * uProgress;
+        p.x = p.x - 0.15 * uProgress;
     } else {
     }
 
     if(p.y < 0.25) {
     } else if(p.y < 0.5) {
-        p.y = p.y + 0.25 * uProgress;
+        p.y = p.y + 0.15 * uProgress;
     } else if(p.y < 0.75) {
-        p.y = p.y - 0.25 * uProgress;
+        p.y = p.y - 0.15 * uProgress;
     } else {
     }
 
