@@ -2,7 +2,23 @@ import { SetState } from "zustand";
 
 import { TStoreState } from ".";
 
-import { SCENES, TSceneName } from "@/components/canvas/Experience";
+export type TScene = {
+    name: TSceneName;
+    component: JSX.Element;
+};
+
+export type TSceneName =
+    | "logo-scene"
+    | "media-scene-1"
+    | "media-scene-2"
+    | "cube-scene";
+
+export const SCENES: TSceneName[] = [
+    "logo-scene",
+    "media-scene-1",
+    "media-scene-2",
+    "cube-scene",
+];
 
 export interface ISliderSlice {
     slide: number;
@@ -18,9 +34,9 @@ export const createSliderSlice: (set: SetState<TStoreState>) => ISliderSlice = (
     slide: 0,
     setSlide: (value: number) => set((state) => ({ ...state, slide: value })),
     setSlideByName: (value: TSceneName) => {
-        const index = SCENES.findIndex((scene) => scene.name === value);
+        const index = SCENES.findIndex((name) => name === value);
         if (index === -1) {
-            throw new Error(`Slide scene named "${value}" not found`);
+            throw new Error(`Slide scene named "${String(value)}" not found`);
         }
         set((state) => ({ ...state, slide: index }));
     },

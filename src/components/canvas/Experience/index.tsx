@@ -18,35 +18,34 @@ import LogoScene from "@/components/canvas/LogoScene";
 import MediaScene from "@/components/canvas/MediaScene";
 import { buttonGroup, folder, useControls } from "leva";
 import useDebug from "@/hooks/useDebug";
+import { SCENES, TSceneName } from "@/store/sliderSlice";
 
-export type TSceneName =
-    | "logo-scene"
-    | "media-scene-1"
-    | "media-scene-2"
-    | "cube-scene";
-export type TScene = {
+export type TSlide = {
     name: TSceneName;
     component: JSX.Element;
 };
 
-export const SCENES: TScene[] = [
-    {
-        name: "logo-scene",
-        component: <LogoScene />,
-    },
-    {
-        name: "media-scene-1",
-        component: <MediaScene src="/images/image-1.jpg" />,
-    },
-    {
-        name: "media-scene-2",
-        component: <MediaScene src="/images/image-2.jpg" />,
-    },
-    {
-        name: "cube-scene",
-        component: <CubeScene />,
-    },
-];
+const SLIDES: TSlide[] = SCENES.map((name) => {
+    let component: JSX.Element = <></>;
+    switch (name) {
+        case "logo-scene":
+            component = <LogoScene />;
+            break;
+        case "media-scene-1":
+            component = <MediaScene src="/images/image-1.jpg" />;
+            break;
+        case "media-scene-2":
+            component = <MediaScene src="/images/image-2.jpg" />;
+            break;
+        case "cube-scene":
+            component = <CubeScene />;
+            break;
+    }
+    return {
+        name,
+        component,
+    };
+});
 
 const CameraHandler = ({
     slideDistance,
@@ -184,7 +183,7 @@ const MainScene = () => {
             <color attach="background" args={[colors.yellow]} />
             <ambientLight intensity={2} />
             <group name="slides">
-                {SCENES.map(({ name, component }, idx) => (
+                {SLIDES.map(({ name, component }, idx) => (
                     <mesh
                         key={name}
                         name={name}
