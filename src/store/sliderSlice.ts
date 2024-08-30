@@ -1,6 +1,4 @@
-import { SetState } from "zustand";
-
-import { TStoreState } from ".";
+import { TStoreStateCreator } from ".";
 
 export type TScene = {
     name: TSceneName;
@@ -28,8 +26,10 @@ export interface ISliderSlice {
     prevSlide: () => void;
 }
 
-export const createSliderSlice: (set: SetState<TStoreState>) => ISliderSlice = (
-    set
+export const createSliderSlice: TStoreStateCreator<ISliderSlice> = (
+    set,
+    get,
+    api
 ) => ({
     slide: 0,
     setSlide: (value: number) => set((state) => ({ ...state, slide: value })),
