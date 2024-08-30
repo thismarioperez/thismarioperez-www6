@@ -1,12 +1,11 @@
 "use client";
 
 import { Canvas, useThree } from "@react-three/fiber";
-import { MutableRefObject, Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
 import {
     CameraControls,
-    MeshPortalMaterial,
     PerspectiveCamera,
     RenderTexture,
 } from "@react-three/drei";
