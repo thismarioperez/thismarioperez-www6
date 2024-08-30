@@ -15,7 +15,7 @@ const Experience = dynamic(() => import("@/components/canvas/Experience"), {
 export default function Layout({ Component, pageProps }: AppProps) {
     return (
         <>
-            <div className="absolute top-0 left-0 size-full">
+            <div className="fixed top-0 left-0 size-full">
                 <Experience />
             </div>
             <div className="relative  pointer-events-none">
