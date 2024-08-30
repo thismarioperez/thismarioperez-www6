@@ -85,16 +85,6 @@ const CameraHandler = ({
         isAnimating.current = true;
 
         await cameraControls.current.setLookAt(
-            lastSlide.current * (width + slideDistance),
-            0,
-            CAMERA_Z + dollyDistance,
-            lastSlide.current * (width + slideDistance),
-            0,
-            0,
-            true
-        );
-
-        await cameraControls.current.setLookAt(
             slide * (width + slideDistance),
             0,
             CAMERA_Z + dollyDistance,
@@ -176,7 +166,7 @@ const MainScene = () => {
                 step: 1,
             },
             slideDistance: {
-                value: 50,
+                value: 5,
                 min: 0,
                 max: 50,
                 step: 1,
