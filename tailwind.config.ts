@@ -47,7 +47,7 @@ const config: Config = {
                     },
                 ],
                 meta: [
-                    "0.9375rem",
+                    "1rem",
                     {
                         lineHeight: "1.6em",
                         letterSpacing: "0em",
@@ -63,7 +63,7 @@ const config: Config = {
                     },
                 ],
                 button: [
-                    "0.9375rem",
+                    "1rem",
                     {
                         lineHeight: "1.5em",
                         letterSpacing: "0.2em",
