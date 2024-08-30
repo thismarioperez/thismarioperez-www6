@@ -32,12 +32,7 @@ export default function MediaMesh({ src, ...rest }: TProps) {
     useFrame(({ pointer: { x, y }, clock: { elapsedTime: time } }, delta) => {
         if (group.current) {
             // mouse interaction
-            dampE(
-                group.current.rotation,
-                [-y * 0.025, x * 0.025, 0],
-                0.5,
-                delta
-            );
+            dampE(group.current.rotation, [y * 0.1, -x * 0.1, 0], 0.5, delta);
 
             // ocilation
             ocilator.current = (Math.sin(time) + 1) / 10;
