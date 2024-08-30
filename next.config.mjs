@@ -8,6 +8,13 @@ const nextConfig = {
             config.externals.push("sharp");
         }
 
+        // svg as components
+        // @see: https://github.com/vercel/next.js/discussions/52690
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: ["@svgr/webpack", "url-loader"],
+        });
+
         // audio support
         config.module.rules.push({
             test: /\.(ogg|mp3|wav|mpe?g)$/i,
