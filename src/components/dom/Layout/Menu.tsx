@@ -35,6 +35,21 @@ const LINKS: TLink[] = [
                 href: "/projects/robin-knows",
                 type: "link",
             },
+            {
+                name: "FBI - Safe Online Surfing",
+                href: "/projects/fbi-safe-online-surfing",
+                type: "link",
+            },
+            {
+                name: "Triptych.co",
+                href: "/projects/triptych",
+                type: "link",
+            },
+            {
+                name: "Rodda Construction",
+                href: "/projects/rodda-construction",
+                type: "link",
+            },
         ],
     },
 ];
@@ -65,7 +80,7 @@ const LinkRenderer = ({
                         ) : null}
                         {link.type === "folder" ? (
                             <div className="flex flex-col gap-y-2">
-                                <div className="js-item">
+                                <div className="js-item flex flex-col gap-y-2">
                                     <Themed.ButtonText>
                                         {link.name}
                                     </Themed.ButtonText>
@@ -97,22 +112,21 @@ export default function Menu() {
             gsap.set(".js-item", {
                 opacity: 0,
                 y: -10,
-                // x: 10,
+                x: 10,
             });
             tl.current = gsap
-                .timeline({ paused: true, duration: 1 })
+                .timeline({ paused: true })
                 .to(".js-nav", {
                     visibility: "visible",
-                    duration: 0.01,
+                    duration: 0.0001,
                 })
                 .to(".js-item", {
                     opacity: 1,
                     y: 0,
-                    // x: 0,
+                    x: 0,
                     ease: "power1.inOut",
                     stagger: 0.1,
-                })
-                .play();
+                });
         },
         {
             scope: node,
@@ -121,9 +135,9 @@ export default function Menu() {
 
     useEffect(() => {
         if (menuOpen) {
-            tl.current.play();
+            tl.current.timeScale(1).delay(0.25).play();
         } else {
-            tl.current.reverse();
+            tl.current.timeScale(2).delay(0).reverse();
         }
     }, [menuOpen]);
 

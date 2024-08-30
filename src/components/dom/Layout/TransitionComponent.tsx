@@ -28,6 +28,15 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
             case "/projects/robin-knows":
                 setSlideByName("media-scene-2");
                 break;
+            case "/projects/fbi-safe-online-surfing":
+                setSlideByName("media-scene-3");
+                break;
+            case "/projects/triptych":
+                setSlideByName("media-scene-4");
+                break;
+            case "/projects/rodda-construction":
+                setSlideByName("media-scene-5");
+                break;
             default:
                 setSlideByName("cube-scene");
                 break;
