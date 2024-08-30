@@ -6,7 +6,6 @@ import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
 import {
     CameraControls,
-    Grid,
     PerspectiveCamera,
     RenderTexture,
 } from "@react-three/drei";
