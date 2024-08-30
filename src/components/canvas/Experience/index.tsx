@@ -104,7 +104,7 @@ const CameraHandler = ({
             )[0];
 
             if (!currentSlide) return;
-            await cameraControls.current.fitToBox(currentSlide, true, {
+            await cameraControls.current.fitToBox(currentSlide, false, {
                 cover: true,
             });
         }, 200);
