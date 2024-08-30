@@ -1,18 +1,20 @@
-import { useContext, useEffect, useRef } from "react";
+"use client";
+
+import { useEffect, useRef } from "react";
 import { SwitchTransition, Transition } from "react-transition-group";
 import { useRouter } from "next/router";
 import { gsap } from "@/lib/gsap";
 
-import TransitionContext from "@/context/TransitionContext";
 import useParsedPathname from "@/hooks/useParsedPathname";
 import useSliderState from "@/hooks/useSliderState";
+import useTransitionState from "@/hooks/useTransitionState";
 
 export type TTransitionComponentProps = {} & React.PropsWithChildren;
 const TransitionComponent = ({ children }: TTransitionComponentProps) => {
     const { setSlideByName } = useSliderState();
     const router = useRouter();
     const parsedPathname = useParsedPathname();
-    const { toggleCompleted } = useContext(TransitionContext);
+    const { setTransitionCompleted } = useTransitionState();
     const node = useRef(null);
 
     useEffect(() => {
@@ -40,14 +42,18 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                 key={router.pathname}
                 timeout={500}
                 nodeRef={node}
+                mountOnEnter
+                unmountOnExit
                 onEnter={() => {
-                    toggleCompleted(false);
+                    setTransitionCompleted(false);
                     gsap.set(node.current, {
                         autoAlpha: 0,
                     });
                     gsap.timeline({
                         paused: true,
-                        onComplete: () => toggleCompleted(true),
+                        onComplete: () => {
+                            setTransitionCompleted(true);
+                        },
                     })
                         .to(node.current, {
                             autoAlpha: 1,

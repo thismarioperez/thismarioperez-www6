@@ -2,7 +2,6 @@
 
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import { TransitionProvider } from "@/context/TransitionContext";
 import TransitionComponent from "@/components/dom/Layout/TransitionComponent";
 import Header from "@/components/dom/Layout/Header";
 import DebugHandler from "@/components/dom/Layout/DebugHandler";
@@ -14,7 +13,7 @@ const Experience = dynamic(() => import("@/components/canvas/Experience"), {
 
 export default function Layout({ Component, pageProps }: AppProps) {
     return (
-        <TransitionProvider>
+        <>
             <div className="absolute top-0 left-0 size-full">
                 <Experience />
             </div>
@@ -26,6 +25,6 @@ export default function Layout({ Component, pageProps }: AppProps) {
             </div>
             <LevaUI />
             <DebugHandler />
-        </TransitionProvider>
+        </>
     );
 }
