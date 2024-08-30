@@ -1,15 +1,17 @@
 "use client";
 
 import { Canvas, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useRef } from "react";
+import { MutableRefObject, Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
 import {
     CameraControls,
+    MeshPortalMaterial,
     PerspectiveCamera,
     RenderTexture,
 } from "@react-three/drei";
 
+import { gsap } from "@/lib/gsap";
 import useSliderState from "@/hooks/useSliderState";
 import colors from "@/styles/colors";
 import { getMeshByUserDataValue } from "@/util/3d";
@@ -19,6 +21,7 @@ import MediaScene from "@/components/canvas/MediaScene";
 import { buttonGroup, folder, useControls } from "leva";
 import useDebug from "@/hooks/useDebug";
 import { SCENES, TSceneName } from "@/store/sliderSlice";
+import useMenuState from "@/hooks/useMenuState";
 
 export type TSlide = {
     name: TSceneName;
@@ -47,6 +50,8 @@ const SLIDES: TSlide[] = SCENES.map((name) => {
     };
 });
 
+const CAMERA_Z = 5;
+
 const CameraHandler = ({
     slideDistance,
     dollyDistance,
@@ -74,7 +79,7 @@ const CameraHandler = ({
         await cameraControls.current.setLookAt(
             lastSlide.current * (width + slideDistance),
             0,
-            cameraControls.current.camera.position.z + dollyDistance,
+            CAMERA_Z + dollyDistance,
             lastSlide.current * (width + slideDistance),
             0,
             0,
@@ -84,7 +89,7 @@ const CameraHandler = ({
         await cameraControls.current.setLookAt(
             slide * (width + slideDistance),
             0,
-            cameraControls.current.camera.position.z + dollyDistance,
+            CAMERA_Z + dollyDistance,
             slide * (width + slideDistance),
             0,
             0,
@@ -93,6 +98,10 @@ const CameraHandler = ({
 
         await cameraControls.current.fitToBox(currentSlide, true, {
             cover: true,
+            paddingBottom: 0,
+            paddingTop: 0,
+            paddingLeft: 0,
+            paddingRight: 0,
         });
 
         isAnimating.current = false;
@@ -110,8 +119,12 @@ const CameraHandler = ({
             )[0];
 
             if (!currentSlide) return;
-            await cameraControls.current.fitToBox(currentSlide, false, {
+            await cameraControls.current.fitToBox(currentSlide, true, {
                 cover: true,
+                paddingBottom: 0,
+                paddingTop: 0,
+                paddingLeft: 0,
+                paddingRight: 0,
             });
         }, 200);
         return () => clearTimeout(resetTimeout);
@@ -181,7 +194,7 @@ const MainScene = () => {
             />
             <PerspectiveCamera
                 makeDefault
-                position={[0, 0, 5]}
+                position={[0, 0, CAMERA_Z]}
                 fov={75}
                 near={0.1}
                 far={1000}
@@ -211,14 +224,47 @@ const MainScene = () => {
 
 const Scene = () => {
     const { width, height } = useThree((state) => state.viewport);
+    const { menuOpen } = useMenuState();
+    const material = useRef(null);
+
+    useEffect(() => {
+        if (!material.current) return;
+        if (menuOpen) {
+            gsap.to(material.current, {
+                blend: 1,
+                duration: 0.5,
+                ease: "power1.inOut",
+            });
+        } else {
+            gsap.to(material.current, {
+                blend: 0,
+                duration: 0.5,
+                ease: "power1.inOut",
+            });
+        }
+    }, [menuOpen]);
 
     return (
         <>
             <mesh>
                 <planeGeometry args={[width, height]} />
-                <RenderTexture attach="map">
-                    <MainScene />
-                </RenderTexture>
+                <meshBasicMaterial toneMapped={false}>
+                    <RenderTexture attach="map">
+                        <MainScene />
+                    </RenderTexture>
+                </meshBasicMaterial>
+            </mesh>
+            <mesh>
+                <planeGeometry args={[width, height]} />
+                <MeshPortalMaterial
+                    toneMapped={false}
+                    transparent
+                    blend={0}
+                    blur={1}
+                    ref={material}
+                >
+                    <color attach="background" args={[colors.yellow]} />
+                </MeshPortalMaterial>
             </mesh>
         </>
     );
