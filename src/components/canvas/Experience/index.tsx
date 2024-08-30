@@ -137,7 +137,7 @@ const CameraHandler = ({
     );
 };
 
-const Scene = () => {
+const MainScene = () => {
     const { width, height } = useThree((state) => state.viewport);
     const { prevSlide, nextSlide } = useSliderState();
 
@@ -200,6 +200,21 @@ const Scene = () => {
                     </mesh>
                 ))}
             </group>
+        </>
+    );
+};
+
+const Scene = () => {
+    const { width, height } = useThree((state) => state.viewport);
+
+    return (
+        <>
+            <mesh>
+                <planeGeometry args={[width, height]} />
+                <RenderTexture attach="map">
+                    <MainScene />
+                </RenderTexture>
+            </mesh>
         </>
     );
 };
