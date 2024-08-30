@@ -7,9 +7,9 @@ import usePostProcess from "./usePostProcess";
 import { RenderTexture } from "@react-three/drei";
 
 import { gsap } from "@/lib/gsap";
-import colors from "@/styles/colors";
 import useMenuState from "@/hooks/useMenuState";
 import SliderScene from "../SliderScene";
+import MenuScene from "../MenuScene";
 
 const Scene = () => {
     const { width, height } = useThree((state) => state.viewport);
@@ -54,7 +54,7 @@ const Scene = () => {
                     transparent
                 >
                     <RenderTexture attach="map">
-                        <color attach="background" args={[colors.yellow]} />
+                        <MenuScene />
                     </RenderTexture>
                 </meshBasicMaterial>
             </mesh>
