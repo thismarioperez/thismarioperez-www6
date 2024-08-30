@@ -7,20 +7,12 @@ import TransitionComponent from "@/components/dom/Layout/TransitionComponent";
 import Header from "@/components/dom/Layout/Header";
 import DebugHandler from "@/components/dom/Layout/DebugHandler";
 import LevaUI from "@/components/dom/Layout/LevaUI";
-import useParsedPathname from "@/hooks/useParsedPathname";
-import { useEffect } from "react";
 
 const Experience = dynamic(() => import("@/components/canvas/Experience"), {
     ssr: false,
 });
 
 export default function Layout({ Component, pageProps }: AppProps) {
-    const parsedPathname = useParsedPathname();
-
-    useEffect(() => {
-        console.log(`Page: ${parsedPathname}`);
-    }, [parsedPathname]);
-
     return (
         <TransitionProvider>
             <div className="absolute top-0 left-0 size-full">
