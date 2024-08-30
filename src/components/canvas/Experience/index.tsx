@@ -184,8 +184,6 @@ const MainScene = () => {
         }),
     });
 
-    usePostProcess();
-
     return (
         <>
             <CameraHandler
@@ -231,18 +229,20 @@ const Scene = () => {
         if (!material.current) return;
         if (menuOpen) {
             gsap.to(material.current, {
-                blend: 1,
+                opacity: 1,
                 duration: 0.5,
                 ease: "power1.inOut",
             });
         } else {
             gsap.to(material.current, {
-                blend: 0,
+                opacity: 0,
                 duration: 0.5,
                 ease: "power1.inOut",
             });
         }
     }, [menuOpen]);
+
+    usePostProcess();
 
     return (
         <>
@@ -254,17 +254,18 @@ const Scene = () => {
                     </RenderTexture>
                 </meshBasicMaterial>
             </mesh>
-            <mesh>
+            <mesh position={[0, 0, 0]} renderOrder={1}>
                 <planeGeometry args={[width, height]} />
-                <MeshPortalMaterial
-                    toneMapped={false}
-                    transparent
-                    blend={0}
-                    blur={1}
+                <meshBasicMaterial
                     ref={material}
+                    toneMapped={false}
+                    opacity={0}
+                    transparent
                 >
-                    <color attach="background" args={[colors.yellow]} />
-                </MeshPortalMaterial>
+                    <RenderTexture attach="map">
+                        <color attach="background" args={[colors.yellow]} />
+                    </RenderTexture>
+                </meshBasicMaterial>
             </mesh>
         </>
     );
