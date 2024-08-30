@@ -2,7 +2,7 @@ import useDebug from "@/hooks/useDebug";
 import { useCallback, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
-export default function DebugEvents() {
+export default function DebugHandler() {
     const [debug, setDebug] = useDebug();
 
     const onHotkey = useCallback(() => {
