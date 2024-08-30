@@ -161,13 +161,13 @@ const MainScene = () => {
     const { slideDistance, dollyDistance } = useControls({
         slideshow: folder({
             dollyDistance: {
-                value: 5,
+                value: 1,
                 min: 0,
                 max: 50,
                 step: 1,
             },
             slideDistance: {
-                value: 20,
+                value: 50,
                 min: 0,
                 max: 50,
                 step: 1,
@@ -196,7 +196,7 @@ const MainScene = () => {
                 near={0.1}
                 far={1000}
             />
-            <color attach="background" args={[colors.yellow]} />
+            <color attach="background" args={[colors.black]} />
             <ambientLight intensity={2} />
             <group name="slides">
                 {SLIDES.map(({ name, component }, idx) => (
