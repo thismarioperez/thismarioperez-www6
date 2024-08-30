@@ -45,7 +45,7 @@ export default function Header() {
                                 className={cx(
                                     "absolute left-0 bottom-[10px] translate-x-0 translate-y-0 block w-full h-[1px] bg-white transition-all",
                                     menuOpen &&
-                                        "-translate-y-[10px] -rotate-45 bg-black"
+                                        "translate-y-[-10px] -rotate-45 bg-black"
                                 )}
                             ></span>
                         </div>
