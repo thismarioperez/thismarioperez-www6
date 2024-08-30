@@ -60,6 +60,7 @@ const CameraHandler = ({
     const lastSlide = useRef(0);
     const { width, height } = useThree((state) => state.viewport);
     const cameraControls = useRef<CameraControls>(null);
+    const isAnimating = useRef(false);
 
     const moveToSlide = async () => {
         if (!cameraControls.current) return;
@@ -67,6 +68,8 @@ const CameraHandler = ({
         const currentSlide = getMeshByUserDataValue(scene, "slide", slide)[0];
         if (!currentSlide) return;
         if (lastSlide.current === slide) return;
+
+        isAnimating.current = true;
 
         await cameraControls.current.setLookAt(
             lastSlide.current * (width + slideDistance),
@@ -91,11 +94,14 @@ const CameraHandler = ({
         await cameraControls.current.fitToBox(currentSlide, true, {
             cover: true,
         });
+
+        isAnimating.current = false;
     };
 
     useEffect(() => {
         // Used to reset the camera position when the viewport changes
         const resetTimeout = setTimeout(async () => {
+            if (isAnimating.current) return;
             if (!cameraControls.current) return;
             const currentSlide = getMeshByUserDataValue(
                 scene,
