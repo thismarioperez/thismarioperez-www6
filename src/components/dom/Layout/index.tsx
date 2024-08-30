@@ -6,6 +6,7 @@ import TransitionComponent from "@/components/dom/Layout/TransitionComponent";
 import Header from "@/components/dom/Layout/Header";
 import DebugHandler from "@/components/dom/Layout/DebugHandler";
 import LevaUI from "@/components/dom/Layout/LevaUI";
+import Menu from "./Menu";
 
 const Experience = dynamic(() => import("@/components/canvas/Experience"), {
     ssr: false,
@@ -22,6 +23,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
                 <TransitionComponent>
                     <Component {...pageProps} />
                 </TransitionComponent>
+                <Menu />
             </div>
             <LevaUI />
             <DebugHandler />
