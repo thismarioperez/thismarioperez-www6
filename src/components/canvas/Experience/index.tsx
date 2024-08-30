@@ -39,6 +39,15 @@ const SLIDES: TSlide[] = SCENES.map((name) => {
         case "media-scene-2":
             component = <MediaScene src="/images/image-2.jpg" />;
             break;
+        case "media-scene-3":
+            component = <MediaScene src="/images/image-3.jpg" />;
+            break;
+        case "media-scene-4":
+            component = <MediaScene src="/images/image-4.jpg" />;
+            break;
+        case "media-scene-5":
+            component = <MediaScene src="/images/image-5.jpg" />;
+            break;
         case "cube-scene":
             component = <CubeScene />;
             break;
