@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/dom/common/Link";
 import cx from "classnames";
 
 import { ReactComponent as Logo } from "@/svg/logo.svg";
