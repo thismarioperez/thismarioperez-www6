@@ -49,7 +49,7 @@ const LinkRenderer = ({
     return (
         <ul
             className={cx(
-                "pointer-events-auto flex flex-col items-start gap-y-4 text-white",
+                "pointer-events-auto flex flex-col items-start gap-y-4 text-black",
                 className
             )}
         >
@@ -69,7 +69,7 @@ const LinkRenderer = ({
                                     <Themed.ButtonText>
                                         {link.name}
                                     </Themed.ButtonText>
-                                    <hr className="w-full border-white" />
+                                    <hr className="w-full border-black" />
                                 </div>
                                 <LinkRenderer
                                     className="pl-4"

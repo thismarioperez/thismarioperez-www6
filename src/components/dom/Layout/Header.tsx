@@ -30,20 +30,23 @@ export default function Header() {
                         <div className="relative block w-full h-full">
                             <span
                                 className={cx(
-                                    "absolute left-0 top-[10px] block w-full h-[1px] bg-white transition-all",
+                                    "absolute left-0 top-[10px] block w-full h-[1px] transition-all",
+                                    !menuOpen && "bg-white delay-200",
                                     menuOpen &&
-                                        " translate-y-[10px] rotate-45  bg-black"
+                                        "translate-y-[10px] rotate-45 bg-black"
                                 )}
                             ></span>
                             <span
                                 className={cx(
-                                    "absolute left-0 top-1/2 block w-full h-[1px] bg-white transition-all",
+                                    "absolute left-0 top-1/2 block w-full h-[1px] transition-all",
+                                    !menuOpen && "bg-white delay-200",
                                     menuOpen && "opacity-0"
                                 )}
                             ></span>
                             <span
                                 className={cx(
-                                    "absolute left-0 bottom-[10px] translate-x-0 translate-y-0 block w-full h-[1px] bg-white transition-all",
+                                    "absolute left-0 bottom-[10px] translate-x-0 translate-y-0 block w-full h-[1px]  transition-all",
+                                    !menuOpen && "bg-white delay-200",
                                     menuOpen &&
                                         "translate-y-[-10px] -rotate-45 bg-black"
                                 )}
