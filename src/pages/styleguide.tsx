@@ -1,6 +1,6 @@
 import * as Themed from "@/components/dom/common/Themed";
 
-export default function StyleGuide() {
+export default function StyleGuidePage() {
     return (
         <div className="size-full relative px-6 py-12">
             <div className="w-full flex flex-col items-center gap-y-4 mb-4">
