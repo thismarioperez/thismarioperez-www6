@@ -1,7 +1,7 @@
 "use client";
 
 import { useThree } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
     CameraControls,
     PerspectiveCamera,
@@ -70,7 +70,7 @@ const CameraHandler = ({
     const { width, height } = useThree((state) => state.viewport);
     const cameraControls = useRef<CameraControls>(null);
 
-    const moveToSlide = async () => {
+    const moveToSlide = useCallback(async () => {
         if (!cameraControls.current) return;
 
         const currentSlide = getMeshByUserDataValue(scene, "slide", slide)[0];
@@ -94,6 +94,7 @@ const CameraHandler = ({
             paddingLeft: 0,
             paddingRight: 0,
         });
+    }, [slide, scene]);
 
     useEffect(() => {
         // Used to reset the camera position when the viewport changes
@@ -106,6 +107,7 @@ const CameraHandler = ({
             )[0];
 
             if (!currentSlide) return;
+            console.log("focusing on", slide);
             await cameraControls.current.fitToBox(currentSlide, true, {
                 cover: true,
                 paddingBottom: 0,
