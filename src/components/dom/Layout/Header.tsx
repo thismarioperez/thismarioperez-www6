@@ -12,7 +12,7 @@ export default function Header() {
         <header className="pointer-events-auto w-full sticky top-0 left-0">
             <ul className="relative w-full flex flex-row justify-between">
                 <li>
-                    <Link href="/">
+                    <Link href="/" aria-label="Home">
                         <div className="w-72">
                             <Logo className="fill-white" />
                         </div>
