@@ -51,9 +51,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
     return (
         <>
             <Noise blendMode="overlay" opacity={noiseOpacity} />
-            <div className="fixed top-0 left-0 size-full">
-                <Experience />
-            </div>
+            <Experience />
             <div className="relative  pointer-events-none">
                 <Header />
                 <TransitionComponent>

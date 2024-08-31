@@ -64,17 +64,19 @@ const Scene = () => {
 
 export default function Experience() {
     return (
-        <Canvas
-            dpr={[1, 2]}
-            gl={{
-                toneMapping: THREE.NoToneMapping,
-                antialias: true,
-                outputColorSpace: THREE.SRGBColorSpace,
-            }}
-        >
-            <Suspense fallback={null}>
-                <Scene />
-            </Suspense>
-        </Canvas>
+        <div className="fixed top-0 left-0 size-full" aria-hidden>
+            <Canvas
+                dpr={[1, 2]}
+                gl={{
+                    toneMapping: THREE.NoToneMapping,
+                    antialias: true,
+                    outputColorSpace: THREE.SRGBColorSpace,
+                }}
+            >
+                <Suspense fallback={null}>
+                    <Scene />
+                </Suspense>
+            </Canvas>
+        </div>
     );
 }
