@@ -137,8 +137,10 @@ const CameraHandler = ({
             mouseButtons={{
                 left: 0,
                 middle: 0,
-                right: debug ? 2 : 0,
-                wheel: debug ? 8 : 0,
+                // right: debug ? 2 : 0,
+                right: 0,
+                // wheel: debug ? 8 : 0,
+                wheel: 0,
             }}
         />
     );
