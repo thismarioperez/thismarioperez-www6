@@ -24,10 +24,7 @@ export default function App(props: AppProps) {
                     href="/favicon/favicon.svg"
                 />
                 <link rel="icon" type="image/png" href="/favicon/favicon.png" />
-                <title>
-                    thismarioperez - 🤘- Personal website of creative developer
-                    Mario Perez
-                </title>
+                <title>Mario Perez - Creative Developer - 🤘</title>
             </Head>
             <Layout {...props} />
         </>
