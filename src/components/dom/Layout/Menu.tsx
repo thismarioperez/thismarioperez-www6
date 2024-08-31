@@ -108,6 +108,7 @@ export default function Menu() {
         () => {
             gsap.set(".js-nav", {
                 visibility: "hidden",
+                transformOrigin: "right top",
             });
             gsap.set(".js-item", {
                 opacity: 0,
@@ -120,6 +121,17 @@ export default function Menu() {
                     visibility: "visible",
                     duration: 0.0001,
                 })
+                .fromTo(
+                    ".js-nav",
+                    {
+                        scale: 0,
+                    },
+                    {
+                        scale: 1,
+                        ease: "power1.inOut",
+                        duration: 0.5,
+                    }
+                )
                 .to(".js-item", {
                     opacity: 1,
                     y: 0,
@@ -135,9 +147,9 @@ export default function Menu() {
 
     useEffect(() => {
         if (menuOpen) {
-            tl.current.timeScale(1).delay(0.25).play();
+            tl.current.timeScale(1).delay(0.1).play();
         } else {
-            tl.current.timeScale(2).delay(0).reverse();
+            tl.current.timeScale(6).delay(0).reverse();
         }
     }, [menuOpen]);
 
@@ -145,7 +157,7 @@ export default function Menu() {
         <div className="fixed size-full top-0 left-0" ref={node}>
             <div className="relative size-full p-16">
                 <div className="flex flex-col items-end">
-                    <nav className="js-nav w-fit">
+                    <nav className="js-nav w-fit p-8 bg-black/10">
                         <LinkRenderer links={LINKS} />
                     </nav>
                 </div>
