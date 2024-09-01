@@ -89,7 +89,7 @@ export default function Experience() {
     const GPUTier = useDetectGPU();
 
     return (
-        <div className="fixed top-0 left-0 size-full" aria-hidden>
+        <div className="fixed top-0 left-0 w-[100vw] h-[100vh]" aria-hidden>
             <Canvas
                 dpr={[1, GPUTier.tier <= 1 ? 1 : 2]}
                 gl={{
