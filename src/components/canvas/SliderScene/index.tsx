@@ -17,7 +17,6 @@ import MediaScene from "@/components/canvas/MediaScene";
 import { buttonGroup, folder, useControls } from "leva";
 import useDebug from "@/hooks/useDebug";
 import { SCENES, TSceneName } from "@/store/sliderSlice";
-import { useWindowSize } from "usehooks-ts";
 
 export type TSlide = {
     name: TSceneName;
@@ -69,7 +68,6 @@ const CameraHandler = ({
     const { slide } = useSliderState();
     const lastSlide = useRef(0);
     const { width, height } = useThree((state) => state.viewport);
-    const { width: windowWidth, height: windowHeight } = useWindowSize();
     const cameraControls = useRef<CameraControls>(null);
 
     const moveToSlide = useCallback(async () => {
@@ -119,7 +117,7 @@ const CameraHandler = ({
             });
         }, 200);
         return () => clearTimeout(resetTimeout);
-    }, [windowWidth, windowHeight]);
+    }, [width, height]);
 
     useEffect(() => {
         moveToSlide();
