@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { SwitchTransition, Transition } from "react-transition-group";
 import { useRouter } from "next/router";
 import { gsap } from "@/lib/gsap";
@@ -79,7 +79,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                         .play();
                 }}
             >
-                <main className="js-content-wrapper" ref={node}>
+                <main className="js-content-wrapper pt-8" ref={node}>
                     {children}
                 </main>
             </Transition>
