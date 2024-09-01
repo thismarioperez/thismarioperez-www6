@@ -37,9 +37,10 @@ function noise(image: ImageData): void {
 type TNoiseProps = {
     blendMode?: TCssMixBlendMode;
     opacity?: NumericRange<0, 100>;
+    animate?: boolean;
 };
 
-export default function Noise({ blendMode, opacity }: TNoiseProps) {
+export default function Noise({ blendMode, opacity, animate }: TNoiseProps) {
     const el = useRef<HTMLDivElement>(null);
     const { width, height } = useWindowSize();
     const canvas = useMemo(() => document.createElement("canvas"), []);
@@ -53,6 +54,12 @@ export default function Noise({ blendMode, opacity }: TNoiseProps) {
             opacity: (opacity !== undefined ? opacity : DEFAULT_OPACITY) * 0.01, // normalize to 0-1 value
         };
     }, [blendMode, opacity]);
+
+    const drawNoise = () => {
+        image.current = context?.createImageData(width * dpr, height * dpr);
+        noise(image.current!);
+        context?.putImageData(image.current!, 0, 0);
+    };
 
     // Mount canvas to DOM
     useEffect(() => {
@@ -70,14 +77,13 @@ export default function Noise({ blendMode, opacity }: TNoiseProps) {
         canvas.width = width;
         canvas.height = height;
 
+        drawNoise();
+
         console.log(image.current);
     }, [width, height]);
 
     useFrame(() => {
-        // if (!image.current || !context) return;
-        image.current = context?.createImageData(width * dpr, height * dpr);
-        noise(image.current!);
-        context?.putImageData(image.current!, 0, 0);
+        if (animate) drawNoise();
     });
 
     return (
