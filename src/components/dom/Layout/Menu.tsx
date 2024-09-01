@@ -169,7 +169,11 @@ export default function Menu() {
     }, [menuOpen]);
 
     return (
-        <div className="fixed size-full top-0 left-0" ref={node}>
+        <div
+            className="fixed size-full top-0 left-0 z-30"
+            ref={node}
+            role="menu"
+        >
             <div className="relative size-full p-14" style={style}>
                 <div className="flex flex-col items-end">
                     <nav className="js-nav w-fit p-8 bg-yellow">

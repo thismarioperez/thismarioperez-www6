@@ -19,20 +19,18 @@ const Experience = dynamic(() => import("@/components/canvas/Experience"), {
 
 export default function Layout({ Component, pageProps }: AppProps) {
     return (
-        <>
+        <div className="relative pointer-events-none">
+            <DebugHandler />
+            <LevaUI />
+            <Noise blendMode="overlay" opacity={30} />
+            <Header />
+            <Menu />
+            <TransitionComponent>
+                <Component {...pageProps} />
+            </TransitionComponent>
             <Suspense fallback={null}>
                 <Experience />
             </Suspense>
-            <Header />
-            <div className="relative  pointer-events-none">
-                <TransitionComponent>
-                    <Component {...pageProps} />
-                </TransitionComponent>
-                <Menu />
-            </div>
-            <Noise blendMode="overlay" opacity={30} />
-            <LevaUI />
-            <DebugHandler />
-        </>
+        </div>
     );
 }

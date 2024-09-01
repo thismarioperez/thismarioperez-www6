@@ -16,7 +16,7 @@ export default function Header() {
     }, [headerRect]);
     return (
         <header
-            className="pointer-events-auto w-full sticky top-0 left-0"
+            className="pointer-events-auto w-full sticky top-0 z-40"
             ref={header}
         >
             <div className="relative size-full">
