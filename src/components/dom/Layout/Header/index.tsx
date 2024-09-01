@@ -20,7 +20,7 @@ export default function Header() {
             ref={header}
         >
             <div className="relative size-full">
-                <div className="absolute  top-0 left-0 size-full"></div>
+                <div className="absolute  top-0 left-0 size-full backdrop-blur-3xl bg-black-pure/10"></div>
                 <ul className="relative w-full flex flex-row justify-between">
                     <li>
                         <Logo />
