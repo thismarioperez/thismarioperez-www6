@@ -109,7 +109,7 @@ const CameraHandler = ({
             )[0];
 
             if (!currentSlide) return;
-            console.log("focusing on", slide);
+
             await cameraControls.current.fitToBox(currentSlide, false, {
                 cover: true,
                 paddingBottom: 0,

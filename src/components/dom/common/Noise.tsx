@@ -78,8 +78,6 @@ export default function Noise({ blendMode, opacity, animate }: TNoiseProps) {
         canvas.height = height;
 
         drawNoise();
-
-        console.log(image.current);
     }, [width, height]);
 
     useFrame(() => {
