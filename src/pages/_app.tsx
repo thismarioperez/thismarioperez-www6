@@ -4,6 +4,7 @@ import { Source_Code_Pro } from "next/font/google";
 import Layout from "@/components/dom/Layout";
 import "@/styles/globals.css";
 import Head from "next/head";
+import "@/components/canvas/extend";
 
 const sourceCodePro = Source_Code_Pro({
     subsets: ["latin"],
