@@ -14,7 +14,6 @@ export default function MenuButton() {
                 w-14
                 p-5
                 relative
-                -mr-4
                 `
             )}
             aria-label="Open Navigation Menu"

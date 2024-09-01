@@ -170,7 +170,7 @@ export default function Menu() {
 
     return (
         <div className="fixed size-full top-0 left-0" ref={node}>
-            <div className="relative size-full p-[5rem]" style={style}>
+            <div className="relative size-full p-14" style={style}>
                 <div className="flex flex-col items-end">
                     <nav className="js-nav w-fit p-8 bg-yellow">
                         <LinkRenderer links={LINKS} />

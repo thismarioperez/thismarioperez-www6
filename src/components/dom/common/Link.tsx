@@ -1,12 +1,16 @@
 import { default as BaseLink, LinkProps as BaseLinkProps } from "next/link";
 import useMenuState from "@/hooks/useMenuState";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 
 export type TLink = BaseLinkProps & {
     className?: string;
     children?: React.ReactNode;
 };
 
-export default function Link(props: TLink) {
+export type TRef = HTMLAnchorElement;
+
+const Link = forwardRef<TRef, TLink>((props, ref) => {
+    const internalRef = useRef<TRef>(null);
     const { setMenuOpen } = useMenuState();
     const onClick: BaseLinkProps["onClick"] = (e) => {
         setMenuOpen(false);
@@ -16,5 +20,10 @@ export default function Link(props: TLink) {
         }
     };
 
-    return <BaseLink {...props} onClick={onClick} />;
-}
+    useImperativeHandle(ref, () => internalRef.current!);
+
+    return <BaseLink {...props} onClick={onClick} ref={internalRef}></BaseLink>;
+});
+Link.displayName = "Link";
+
+export default Link;

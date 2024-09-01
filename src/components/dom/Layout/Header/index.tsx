@@ -21,11 +21,11 @@ export default function Header() {
         >
             <div className="relative size-full">
                 <div className="absolute  top-0 left-0 size-full"></div>
-                <ul className="relative w-full flex flex-row justify-between py-4 px-6 md:px-8">
+                <ul className="relative w-full flex flex-row justify-between">
                     <li>
                         <Logo />
                     </li>
-                    <li className="relative">
+                    <li className="relative pr-[1px]">
                         <MenuButton />
                     </li>
                 </ul>

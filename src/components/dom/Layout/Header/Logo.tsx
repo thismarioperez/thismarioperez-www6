@@ -6,7 +6,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { useRef } from "react";
 import useMenuState from "@/hooks/useMenuState";
 export default function Logo() {
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef(null);
     const { menuOpen } = useMenuState();
 
     useGSAP(
@@ -54,17 +54,16 @@ export default function Logo() {
     );
 
     return (
-        <Link
-            href="/"
-            aria-label="Home"
-            className="flex flex-col items-start justify-center h-full -ml-4"
-        >
-            <div
-                className="flex h-fit flex-row items-center relative overflow-hidden"
-                ref={ref}
-            >
-                <LogoWithText className="fill-white js-logo-with-text w-64 md:w-80 bg-black-pure/30 backdrop-blur-3xl p-4 border border-white" />
-                <LogoMark className="js-logo-mark h-full w-auto absolute -translate-x-full opacity-0 fill-white bg-black-pure/30 backdrop-blur-3xl p-4 border border-white " />
+        <Link href="/" className="relative" aria-label="Home" ref={ref}>
+            <div className="js-logo-with-text flex flex-col items-start justify-center h-full px-4">
+                <div className="flex h-fit flex-row items-center relative overflow-hidden">
+                    <LogoWithText className="fill-white w-64 md:w-80" />
+                </div>
+            </div>
+            <div className="js-logo-mark absolute top-0 left-0 h-full w-fit -translate-x-full">
+                <div className="relative h-full py-4 px-[16.81px]">
+                    <LogoMark className="h-full w-auto fill-white" />
+                </div>
             </div>
         </Link>
     );
