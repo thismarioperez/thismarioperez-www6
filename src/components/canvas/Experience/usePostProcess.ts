@@ -30,6 +30,8 @@ const usePostProcess = () => {
         [RootState["viewport"], RootState["size"]]
     >((s) => [s.viewport, s.size]);
     const uProgress = useRef<number>(0);
+    const uProgress2 = useRef<number>(0);
+    const uProgress3 = useRef<number>(0);
     const tl = useRef<gsap.core.Timeline>();
     const ChromaticAbPass = useRef(new ChromaticAberrationMaterial());
     const CurtainPass = useRef(new CurtainMaterial());
@@ -97,17 +99,56 @@ const usePostProcess = () => {
 
         tl.current = gsap.timeline({ paused: true });
 
-        tl.current.to(uProgress, {
-            current: 1,
-            duration: 2.25,
-            ease: "power1.25.inOut",
-        });
+        // entire transition is 3 seconds
+        // chromatic aberration
+        tl.current.add(
+            gsap
+                .timeline()
+                .to(uProgress, {
+                    current: 1,
+                    duration: 1.5,
+                    ease: "power1.inOut",
+                })
+                .to(uProgress, {
+                    current: 0,
+                    duration: 1.5,
+                    ease: "power1.inOut",
+                })
+        );
 
-        tl.current.to(uProgress, {
-            current: 0,
-            duration: 0.75,
-            ease: "power1.inOut",
-        });
+        // curtain
+        tl.current.add(
+            gsap
+                .timeline()
+                .to(uProgress2, {
+                    current: 1.25,
+                    duration: 1,
+                    ease: "power1.inOut",
+                })
+                .to(uProgress2, {
+                    current: 0,
+                    duration: 1.25,
+                    ease: "power1.inOut",
+                }),
+            0
+        );
+
+        // warble
+        tl.current.add(
+            gsap
+                .timeline()
+                .to(uProgress3, {
+                    current: 0.75,
+                    duration: 1,
+                    ease: "power1.inOut",
+                })
+                .to(uProgress3, {
+                    current: 0,
+                    duration: 0.75,
+                    ease: "power1.inOut",
+                }),
+            1.75
+        );
 
         tl.current.play();
     };
@@ -180,7 +221,7 @@ const usePostProcess = () => {
             if (enableCurtainPass) {
                 screen.material = CurtainPass.current;
                 CurtainPass.current.uniforms.uProgress.value =
-                    uProgress.current;
+                    uProgress2.current;
                 CurtainPass.current.uniforms.uDiffuse.value =
                     renderTarget.texture;
                 gl.render(screenScene, screenCamera);
@@ -205,7 +246,8 @@ const usePostProcess = () => {
                 WarblePass.current.uniforms.diffuse.value =
                     renderTarget.texture;
                 WarblePass.current.uniforms.time.value += delta;
-                WarblePass.current.uniforms.uProgress.value = uProgress.current;
+                WarblePass.current.uniforms.uProgress.value =
+                    uProgress3.current;
                 gl.render(screenScene, screenCamera);
             }
 

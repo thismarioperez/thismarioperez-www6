@@ -115,7 +115,7 @@ export default function Menu() {
         () => {
             gsap.set(".js-nav", {
                 visibility: "hidden",
-                transformOrigin: "center top",
+                transformOrigin: "right top",
             });
             gsap.set(".js-item", {
                 opacity: 0,
@@ -130,9 +130,11 @@ export default function Menu() {
                     ".js-nav",
                     {
                         scaleY: 0,
+                        scaleX: 0,
                     },
                     {
                         scaleY: 1,
+                        scaleX: 1,
                         ease: "power1.inOut",
                         duration: 0.5,
                     }

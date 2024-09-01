@@ -131,6 +131,7 @@ const CameraHandler = ({
         <CameraControls
             makeDefault
             ref={cameraControls}
+            maxSpeed={500}
             touches={{
                 one: 0,
                 two: 0,
@@ -190,7 +191,7 @@ export default function SliderScene() {
                 near={0.1}
                 far={1000}
             />
-            <color attach="background" args={[colors.yellow.DEFAULT]} />
+            <color attach="background" args={[colors.black.DEFAULT]} />
             <ambientLight intensity={2} />
             <group name="slides">
                 {SLIDES.map(({ name, component }, idx) => (

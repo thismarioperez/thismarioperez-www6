@@ -6,9 +6,13 @@ import { useMemo, useRef } from "react";
 import ParticleWavesMaterial from "@/components/canvas/shaders/ParticleWavesMaterial";
 import { useFrame, useThree } from "@react-three/fiber";
 import { folder, useControls } from "leva";
+import useMenuState from "@/hooks/useMenuState";
+import { damp, damp3 } from "maath/easing";
 
 export default function MenuScene() {
     const particleWavesMaterial = useRef<ParticleWavesMaterial>(null!);
+    const camera = useRef<THREE.PerspectiveCamera>(null!);
+    const { menuOpen } = useMenuState();
     const {
         uPointSize,
         uNoiseFreq1,
@@ -76,7 +80,16 @@ export default function MenuScene() {
         [width, height, dpr]
     );
 
-    useFrame(({ clock: { elapsedTime: uTime } }) => {
+    useFrame(({ clock: { elapsedTime: uTime } }, delta) => {
+        if (camera.current) {
+            damp3(
+                camera.current.position,
+                [0, menuOpen ? 4.5 : 9, 5],
+                0.25,
+                delta
+            );
+        }
+
         if (particleWavesMaterial.current) {
             particleWavesMaterial.current.uniforms.uTime.value = uTime;
             particleWavesMaterial.current.uniforms.uResolution.value =
@@ -85,8 +98,13 @@ export default function MenuScene() {
                 uPointSize;
             particleWavesMaterial.current.uniforms.uNoiseFreq1.value =
                 uNoiseFreq1;
-            particleWavesMaterial.current.uniforms.uNoiseAmp1.value =
-                uNoiseAmp1;
+            damp(
+                particleWavesMaterial.current.uniforms.uNoiseAmp1,
+                "value",
+                uNoiseAmp1 * (menuOpen ? 0.0 : 100.0),
+                0.25,
+                delta
+            );
             particleWavesMaterial.current.uniforms.uSpdModifier1.value =
                 uSpdModifier1;
             particleWavesMaterial.current.uniforms.uNoiseFreq2.value =
@@ -99,7 +117,12 @@ export default function MenuScene() {
     });
     return (
         <>
-            <PerspectiveCamera makeDefault position={[0, 4.5, 5]} fov={75} />
+            <PerspectiveCamera
+                makeDefault
+                position={[0, 4.5, 5]}
+                fov={75}
+                ref={camera}
+            />
             <ambientLight intensity={1} />
 
             <points
