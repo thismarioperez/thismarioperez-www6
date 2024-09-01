@@ -10,6 +10,7 @@ import Menu from "./Menu";
 import { Suspense } from "react";
 import GSAP from "@/lib/gsap/components/GSAP";
 import { ReactLenis } from "@/lib/lenis";
+import ScrollHandler from "./ScrollHandler";
 
 const Noise = dynamic(() => import("@/components/dom/common/Noise"), {
     ssr: false,
@@ -32,6 +33,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
                             <Component {...pageProps} />
                         </TransitionComponent>
                     </div>
+                    <ScrollHandler />
                 </ReactLenis>
                 <Suspense fallback={null}>
                     <Experience />
