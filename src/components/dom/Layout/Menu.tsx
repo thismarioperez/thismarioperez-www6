@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import cx from "classnames";
 
 import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
 import Link from "@/components/dom/common/Link";
+import useHeaderState from "@/hooks/useHeaderState";
 
 type TBaseLink = {
     name: string;
@@ -80,11 +81,11 @@ const LinkRenderer = ({
                         ) : null}
                         {link.type === "folder" ? (
                             <div className="flex flex-col gap-y-2">
-                                <div className="js-item flex flex-col gap-y-2">
-                                    <Themed.ButtonText className="text-black">
+                                <div className="flex flex-col gap-y-2 js-item">
+                                    <Themed.ButtonText className="  text-black">
                                         {link.name}
                                     </Themed.ButtonText>
-                                    <hr className="w-full border-black" />
+                                    <hr className=" w-full border-black" />
                                 </div>
                                 <LinkRenderer
                                     className="pl-4"
@@ -103,17 +104,21 @@ export default function Menu() {
     const { menuOpen } = useMenuState();
     const node = useRef(null);
     const tl = useRef<gsap.core.Timeline>(gsap.timeline({ paused: true }));
+    const { headerHeight } = useHeaderState();
+
+    const style = useMemo(() => {
+        if (headerHeight <= 0) return undefined;
+        return { paddingTop: `${headerHeight}px` };
+    }, [headerHeight]);
 
     useGSAP(
         () => {
             gsap.set(".js-nav", {
                 visibility: "hidden",
-                transformOrigin: "right top",
+                transformOrigin: "center top",
             });
             gsap.set(".js-item", {
                 opacity: 0,
-                y: -10,
-                x: 10,
             });
             tl.current = gsap
                 .timeline({ paused: true })
@@ -124,21 +129,29 @@ export default function Menu() {
                 .fromTo(
                     ".js-nav",
                     {
-                        scale: 0,
+                        scaleY: 0,
                     },
                     {
-                        scale: 1,
+                        scaleY: 1,
                         ease: "power1.inOut",
                         duration: 0.5,
                     }
                 )
-                .to(".js-item", {
-                    opacity: 1,
-                    y: 0,
-                    x: 0,
-                    ease: "power1.inOut",
-                    stagger: 0.1,
-                });
+                .fromTo(
+                    ".js-item",
+                    {
+                        opacity: 0,
+                        y: -10,
+                    },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        y: 0,
+                        ease: "power1.inOut",
+                        stagger: 0.1,
+                    },
+                    "+=0.1"
+                );
         },
         {
             scope: node,
@@ -147,15 +160,15 @@ export default function Menu() {
 
     useEffect(() => {
         if (menuOpen) {
-            tl.current.timeScale(1).delay(0.1).play();
+            tl.current.timeScale(1).play();
         } else {
-            tl.current.timeScale(6).delay(0).reverse();
+            tl.current.timeScale(6).reverse();
         }
     }, [menuOpen]);
 
     return (
         <div className="fixed size-full top-0 left-0" ref={node}>
-            <div className="relative size-full p-16">
+            <div className="relative size-full p-[5rem]" style={style}>
                 <div className="flex flex-col items-end">
                     <nav className="js-nav w-fit p-8 bg-yellow">
                         <LinkRenderer links={LINKS} />
