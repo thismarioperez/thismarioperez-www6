@@ -25,9 +25,11 @@ export default function Layout({ Component, pageProps }: AppProps) {
             <Noise blendMode="overlay" opacity={30} />
             <Header />
             <Menu />
-            <TransitionComponent>
-                <Component {...pageProps} />
-            </TransitionComponent>
+            <div className="relative h-fit w-full z-10">
+                <TransitionComponent>
+                    <Component {...pageProps} />
+                </TransitionComponent>
+            </div>
             <Suspense fallback={null}>
                 <Experience />
             </Suspense>
