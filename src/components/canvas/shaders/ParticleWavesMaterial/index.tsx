@@ -15,6 +15,9 @@ interface IParticleWavesUniforms {
     uSpdModifier2: { value: number };
 }
 
+/**
+ * @see https://github.com/franky-adl/waves-value-noise/tree/master
+ */
 class ParticleWavesMaterial extends THREE.ShaderMaterial {
     constructor() {
         super({
