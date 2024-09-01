@@ -201,7 +201,7 @@ export default function SliderScene() {
                         userData={{ slide: idx }}
                     >
                         <planeGeometry args={[width, height]} />
-                        <meshStandardMaterial>
+                        <meshStandardMaterial toneMapped={false}>
                             <RenderTexture attach="map">
                                 {component}
                             </RenderTexture>
