@@ -20,6 +20,7 @@ export default function MenuButton() {
             aria-label="Open Navigation Menu"
             onClick={toggleMenuOpen}
         >
+            <div className="absolute top-0 left-0 size-full bg-black-pure/30 backdrop-blur-3xl"></div>
             <div className="absolute top-0 left-0 size-full">
                 <div
                     className={cx(

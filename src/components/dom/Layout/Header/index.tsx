@@ -20,12 +20,12 @@ export default function Header() {
             ref={header}
         >
             <div className="relative size-full">
-                <div className="absolute bg-black-pure/20 backdrop-blur-3xl top-0 left-0 size-full"></div>
+                <div className="absolute  top-0 left-0 size-full"></div>
                 <ul className="relative w-full flex flex-row justify-between py-4 px-6 md:px-8">
                     <li>
                         <Logo />
                     </li>
-                    <li>
+                    <li className="relative">
                         <MenuButton />
                     </li>
                 </ul>

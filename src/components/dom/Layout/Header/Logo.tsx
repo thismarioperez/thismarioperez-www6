@@ -57,14 +57,14 @@ export default function Logo() {
         <Link
             href="/"
             aria-label="Home"
-            className="flex p-4 flex-col items-start justify-center h-full -ml-4"
+            className="flex flex-col items-start justify-center h-full -ml-4"
         >
             <div
                 className="flex h-fit flex-row items-center relative overflow-hidden"
                 ref={ref}
             >
-                <LogoWithText className="fill-white js-logo-with-text w-64 md:w-80" />
-                <LogoMark className="js-logo-mark h-full w-auto absolute -translate-x-full opacity-0 fill-white" />
+                <LogoWithText className="fill-white js-logo-with-text w-64 md:w-80 bg-black-pure/30 backdrop-blur-3xl p-4 border border-white" />
+                <LogoMark className="js-logo-mark h-full w-auto absolute -translate-x-full opacity-0 fill-white bg-black-pure/30 backdrop-blur-3xl p-4 border border-white " />
             </div>
         </Link>
     );
