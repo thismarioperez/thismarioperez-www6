@@ -12,23 +12,37 @@ import SliderScene from "../SliderScene";
 import MenuScene from "../MenuScene";
 import useDebug from "@/hooks/useDebug";
 import { Perf } from "r3f-perf";
+import colors from "@/styles/colors";
 
 const Scene = () => {
     const { width, height } = useThree((state) => state.viewport);
     const { menuOpen } = useMenuState();
-    const material = useRef(null);
+    const sliderMaterial = useRef(null);
+    const menuMaterial = useRef(null);
 
     useEffect(() => {
-        if (!material.current) return;
+        if (!menuMaterial.current) return;
         if (menuOpen) {
-            gsap.to(material.current, {
+            gsap.to(menuMaterial.current, {
                 opacity: 1,
                 duration: 0.5,
                 ease: "power1.inOut",
             });
-        } else {
-            gsap.to(material.current, {
+
+            gsap.to(sliderMaterial.current, {
                 opacity: 0,
+                duration: 0.5,
+                ease: "power1.inOut",
+            });
+        } else {
+            gsap.to(menuMaterial.current, {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power1.inOut",
+            });
+
+            gsap.to(sliderMaterial.current, {
+                opacity: 1,
                 duration: 0.5,
                 ease: "power1.inOut",
             });
@@ -39,9 +53,15 @@ const Scene = () => {
 
     return (
         <>
+            <color attach="background" args={[colors.black]} />
             <mesh>
                 <planeGeometry args={[width, height]} />
-                <meshBasicMaterial toneMapped={false}>
+                <meshBasicMaterial
+                    toneMapped={false}
+                    transparent
+                    opacity={0}
+                    ref={sliderMaterial}
+                >
                     <RenderTexture attach="map">
                         <SliderScene />
                     </RenderTexture>
@@ -50,7 +70,7 @@ const Scene = () => {
             <mesh position={[0, 0, 0]} renderOrder={1}>
                 <planeGeometry args={[width, height]} />
                 <meshBasicMaterial
-                    ref={material}
+                    ref={menuMaterial}
                     toneMapped={false}
                     opacity={0}
                     transparent
