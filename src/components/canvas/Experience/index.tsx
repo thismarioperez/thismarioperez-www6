@@ -10,6 +10,8 @@ import { gsap } from "@/lib/gsap";
 import useMenuState from "@/hooks/useMenuState";
 import SliderScene from "../SliderScene";
 import MenuScene from "../MenuScene";
+import useDebug from "@/hooks/useDebug";
+import { Perf } from "r3f-perf";
 
 const Scene = () => {
     const { width, height } = useThree((state) => state.viewport);
@@ -63,6 +65,7 @@ const Scene = () => {
 };
 
 export default function Experience() {
+    const [debug] = useDebug();
     return (
         <div className="fixed top-0 left-0 size-full" aria-hidden>
             <Canvas
@@ -76,6 +79,7 @@ export default function Experience() {
                 <Suspense fallback={null}>
                     <Scene />
                 </Suspense>
+                {debug && <Perf position="bottom-left" />}
             </Canvas>
         </div>
     );
