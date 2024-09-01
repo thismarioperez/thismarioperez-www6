@@ -64,7 +64,7 @@ const LinkRenderer = ({
     return (
         <ul
             className={cx(
-                "pointer-events-auto flex flex-col items-start gap-y-4 text-black",
+                "pointer-events-auto flex flex-col items-start gap-y-4 ",
                 className
             )}
         >
@@ -73,7 +73,7 @@ const LinkRenderer = ({
                     <li key={idx}>
                         {link.type === "link" ? (
                             <Link className="js-item" href={link.href}>
-                                <Themed.ButtonText>
+                                <Themed.ButtonText className="text-black">
                                     {link.name}
                                 </Themed.ButtonText>
                             </Link>
@@ -81,7 +81,7 @@ const LinkRenderer = ({
                         {link.type === "folder" ? (
                             <div className="flex flex-col gap-y-2">
                                 <div className="js-item flex flex-col gap-y-2">
-                                    <Themed.ButtonText>
+                                    <Themed.ButtonText className="text-black">
                                         {link.name}
                                     </Themed.ButtonText>
                                     <hr className="w-full border-black" />
@@ -157,7 +157,7 @@ export default function Menu() {
         <div className="fixed size-full top-0 left-0" ref={node}>
             <div className="relative size-full p-16">
                 <div className="flex flex-col items-end">
-                    <nav className="js-nav w-fit p-8 bg-black/10">
+                    <nav className="js-nav w-fit p-8 bg-yellow">
                         <LinkRenderer links={LINKS} />
                     </nav>
                 </div>
