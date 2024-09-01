@@ -114,7 +114,11 @@ export default function MenuScene() {
                 />
             </points>
 
-            <Grid cellColor={colors.yellow} infiniteGrid fadeDistance={75} />
+            <Grid
+                cellColor={colors.yellow.DEFAULT}
+                infiniteGrid
+                fadeDistance={75}
+            />
         </>
     );
 }

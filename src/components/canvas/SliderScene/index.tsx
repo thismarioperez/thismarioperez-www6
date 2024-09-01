@@ -190,7 +190,7 @@ export default function SliderScene() {
                 near={0.1}
                 far={1000}
             />
-            <color attach="background" args={[colors.yellow]} />
+            <color attach="background" args={[colors.yellow.DEFAULT]} />
             <ambientLight intensity={2} />
             <group name="slides">
                 {SLIDES.map(({ name, component }, idx) => (

@@ -53,7 +53,7 @@ const Scene = () => {
 
     return (
         <>
-            <color attach="background" args={[colors.black]} />
+            <color attach="background" args={[colors.black.DEFAULT]} />
             <mesh>
                 <planeGeometry args={[width, height]} />
                 <meshBasicMaterial

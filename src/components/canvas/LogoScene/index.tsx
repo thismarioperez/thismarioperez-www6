@@ -46,7 +46,7 @@ export default function LogoScene() {
             <Suspense fallback={null}>
                 <ambientLight intensity={0.75} />
                 <pointLight position={[2, 0, 5]} intensity={20} />
-                <color attach="background" args={[colors.black]} />
+                <color attach="background" args={[colors.black.DEFAULT]} />
                 {debug && <axesHelper args={[10]} position={[0, 0, 0]} />}
 
                 <group ref={translationGroup}>

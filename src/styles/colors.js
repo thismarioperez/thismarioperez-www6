@@ -1,7 +1,12 @@
 const colors = {
-    black: "#1c1b22",
+    black: {
+        DEFAULT: "#1c1b22",
+        pure: "#000000",
+    },
     white: "#ffffff",
-    yellow: "#fee000",
+    yellow: {
+        DEFAULT: "#fee000",
+    },
 };
 
 export default colors;
