@@ -1,4 +1,4 @@
-import { useRect } from "@studio-freight/hamo";
+import { useRect } from "@darkroom.engineering/hamo";
 
 import Logo from "./Logo";
 import MenuButton from "./MenuButton";

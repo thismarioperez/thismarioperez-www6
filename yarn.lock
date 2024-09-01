@@ -1046,6 +1046,20 @@
   dependencies:
     commander "^2.15.1"
 
+"@darkroom.engineering/hamo@^0.6.46":
+  version "0.6.46"
+  resolved "https://registry.yarnpkg.com/@darkroom.engineering/hamo/-/hamo-0.6.46.tgz#3d19b5161e4ac6bd93806ff4ac2a3377d571182b"
+  integrity sha512-gGsgy42DBurDDe5aXmUr3Nux/PsH78VJMpS25pKpQ46vHLVOar12W59npIkPnKcBQeHrSMdaZ0xfAFWwhmIA1w==
+  dependencies:
+    "@darkroom.engineering/tempus" "^0.0.46"
+    just-debounce-it "^3.2.0"
+    nanoevents "^9.0.0"
+
+"@darkroom.engineering/tempus@^0.0.46":
+  version "0.0.46"
+  resolved "https://registry.yarnpkg.com/@darkroom.engineering/tempus/-/tempus-0.0.46.tgz#3d958807503e4055fcc4a1aeeff83ca0546c62f0"
+  integrity sha512-s5vav3KMHYezvUCl4ee5epg0oimF6M8C9gAaKxFnFaTvX2q3ywFDryIv6XLd0mRFUt3S1uHDJqKaiEcs2ZVSvw==
+
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz#a23514e8fb9af1269d5f7788aa556798d61c6b59"
@@ -1566,20 +1580,6 @@
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.8.tgz#954f8008be8d9c65c4e58efa0937f32388ce3a38"
   integrity sha512-9g9dWI4gsSVe8bNLlb+lMkBYsnIKCZTmvqvDG+Avnn69XfmHZKiaMrx7cgTaddq7aTPPmXiTsbFcUy0xgI4+wA==
-
-"@studio-freight/hamo@^0.6.33":
-  version "0.6.33"
-  resolved "https://registry.yarnpkg.com/@studio-freight/hamo/-/hamo-0.6.33.tgz#1d825288c31b1fbaf1df8fdfcf936dd654f8c164"
-  integrity sha512-U3Nvw5wDvB/jps2/ZbGL2TFL+CcZvJF/tkjL7S7ajuzDi9T5VkqCguws6tuWHttZ74Z6DfXxV1b8F1EB30AyJg==
-  dependencies:
-    "@studio-freight/tempus" "^0.0.38"
-    just-debounce-it "^3.2.0"
-    nanoevents "^9.0.0"
-
-"@studio-freight/tempus@^0.0.38":
-  version "0.0.38"
-  resolved "https://registry.yarnpkg.com/@studio-freight/tempus/-/tempus-0.0.38.tgz#170e0b3de4b123917b04943dd95e7c452ec63e39"
-  integrity sha512-AO1O2fEmfUqWGjEofmPNMQRlwgZ96eB5OFsVJjeH8/RKd1/Yf4zbPnXO+r2TD4aueA6X9JRCJU2GUprI9+m8uQ==
 
 "@svgr/babel-plugin-add-jsx-attribute@8.0.0":
   version "8.0.0"
@@ -4016,6 +4016,13 @@ language-tags@^1.0.9:
   integrity sha512-MbjN408fEndfiQXbFQ1vnd+1NoLDsnQW41410oQBXiyXDMYH5z505juWa4KUE1LqxRC7DgOgZDbKLxHIwm27hA==
   dependencies:
     language-subtag-registry "^0.3.20"
+
+lenis@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/lenis/-/lenis-1.1.13.tgz#4234c4ba302c211ddf0f0a21d73de99d5a78528b"
+  integrity sha512-iny+vWwUHcZGbJz+p2I75H1muLBRZqSG7t04jnhA+CWOQDFL1vt9bsZDwPPtYEmYVVvqAdo5MbXVFzNOlbgUkQ==
+  dependencies:
+    "@darkroom.engineering/tempus" "^0.0.46"
 
 leva@^0.9.35:
   version "0.9.35"

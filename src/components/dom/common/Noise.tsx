@@ -1,6 +1,6 @@
 "use client";
 
-import { useFrame } from "@studio-freight/hamo";
+import { useFrame } from "@darkroom.engineering/hamo";
 import { useEffect, useMemo, useRef } from "react";
 import { useWindowSize } from "usehooks-ts";
 
