@@ -4,7 +4,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import usePostProcess from "./usePostProcess";
-import { RenderTexture } from "@react-three/drei";
+import { RenderTexture, useDetectGPU } from "@react-three/drei";
 
 import { gsap } from "@/lib/gsap";
 import useMenuState from "@/hooks/useMenuState";
@@ -86,10 +86,12 @@ const Scene = () => {
 
 export default function Experience() {
     const [debug] = useDebug();
+    const GPUTier = useDetectGPU();
+
     return (
         <div className="fixed top-0 left-0 size-full" aria-hidden>
             <Canvas
-                dpr={[1, 2]}
+                dpr={[1, GPUTier.tier <= 1 ? 1 : 2]}
                 gl={{
                     toneMapping: THREE.NoToneMapping,
                     antialias: true,
