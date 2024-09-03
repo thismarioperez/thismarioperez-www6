@@ -16,11 +16,11 @@ export default function Header() {
     }, [headerRect]);
     return (
         <header
-            className="pointer-events-auto w-full sticky top-0 z-40"
+            className="pointer-events-auto w-full sticky top-0 z-9"
             ref={header}
         >
             <div className="relative size-full">
-                <div className="absolute  top-0 left-0 size-full backdrop-blur-3xl bg-black-pure/10"></div>
+                <div className="absolute  top-0 left-0 size-full bg-black"></div>
                 <ul className="relative w-full flex flex-row justify-between">
                     <li>
                         <Logo />
