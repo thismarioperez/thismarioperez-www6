@@ -11,6 +11,7 @@ import WarbleShaderMaterial from "../shaders/WarbleShader";
 import useParsedPathname from "@/hooks/useParsedPathname";
 import useSliderState from "@/hooks/useSliderState";
 import { useWindowSize } from "usehooks-ts";
+import useAppState from "@/hooks/useAppState";
 
 function getFullscreenTriangle() {
     const geometry = new THREE.BufferGeometry();
@@ -26,6 +27,7 @@ function getFullscreenTriangle() {
 // Basic shader postprocess based on the template https://gist.github.com/RenaudRohlinger/bd5d15316a04d04380e93f10401c40e7
 // USAGE: Simply call usePostprocess hook in your r3f component to apply the shader to the canvas as a postprocess effect
 const usePostProcess = () => {
+    const { isReady } = useAppState();
     const { slide } = useSliderState();
     const { width: windowWidth, height: windowHeight } = useWindowSize({
         initializeWithValue: true,
@@ -188,8 +190,19 @@ const usePostProcess = () => {
     );
 
     useEffect(() => {
-        playTransition();
-    }, [slide]);
+        if (!isReady) return;
+        const handlePlay = async () => {
+            // wait for loading overlay to swip
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    resolve();
+                }, 500);
+            });
+            playTransition();
+        };
+
+        handlePlay();
+    }, [slide, isReady]);
 
     useEffect(() => {
         if (!renderTarget) return;
