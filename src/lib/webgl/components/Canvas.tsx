@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import useAppState from "@/hooks/useAppState";
 import useDebug from "@/hooks/useDebug";
 import { RAF } from "./RAF";
+import Performance from "./Performance";
 
 const Loading = () => {
     const { setIsReady } = useAppState();
@@ -19,7 +20,6 @@ const Loading = () => {
 
 export default function Canvas({ children }: { children: React.ReactNode }) {
     const [debug] = useDebug();
-    // const GPUTier = useDetectGPU();
 
     return (
         <div className="fixed top-0 left-0 w-[100vw] h-[100vh]" aria-hidden>
@@ -36,6 +36,7 @@ export default function Canvas({ children }: { children: React.ReactNode }) {
                 eventPrefix="client"
             >
                 <RAF />
+                <Performance />
                 <Suspense fallback={<Loading />}>{children}</Suspense>
                 {debug && <Perf position="bottom-left" />}
             </R3FCanvas>
