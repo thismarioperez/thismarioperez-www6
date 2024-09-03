@@ -34,7 +34,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
             <Loading />
 
             {/* canvas */}
-            <Noise blendMode="overlay" opacity={30} animate />
+            <Noise blendMode="overlay" opacity={30} />
             <Canvas>
                 <Experience />
             </Canvas>
