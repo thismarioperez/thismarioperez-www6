@@ -16,7 +16,7 @@ export default function Loading() {
     const onEnter = () => {
         console.log("entered");
         gsap.to(node.current, {
-            x: 0,
+            y: 0,
             duration: 0.5,
             ease: "power1.inOut",
         });
@@ -26,12 +26,12 @@ export default function Loading() {
         console.log("exited start");
         await new Promise((resolve) => setTimeout(resolve, 500));
         await gsap.to(node.current, {
-            x: "-100%",
+            y: "100%",
             duration: 0.5,
             ease: "power1.inOut",
             onComplete: () => {
                 gsap.set(node.current, {
-                    x: "100%",
+                    y: "-100%",
                 });
             },
         });
