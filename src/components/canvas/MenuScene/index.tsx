@@ -101,7 +101,7 @@ export default function MenuScene() {
             damp(
                 particleWavesMaterial.current.uniforms.uNoiseAmp1,
                 "value",
-                uNoiseAmp1 * (menuOpen ? 0.0 : 100.0),
+                uNoiseAmp1 * (menuOpen ? 1.0 : 10.0),
                 0.25,
                 delta
             );
@@ -109,8 +109,13 @@ export default function MenuScene() {
                 uSpdModifier1;
             particleWavesMaterial.current.uniforms.uNoiseFreq2.value =
                 uNoiseFreq2;
-            particleWavesMaterial.current.uniforms.uNoiseAmp2.value =
-                uNoiseAmp2;
+            damp(
+                particleWavesMaterial.current.uniforms.uNoiseAmp2,
+                "value",
+                uNoiseAmp2 * (menuOpen ? 1.0 : 10.0),
+                0.25,
+                delta
+            );
             particleWavesMaterial.current.uniforms.uSpdModifier2.value =
                 uSpdModifier2;
         }
@@ -124,6 +129,7 @@ export default function MenuScene() {
                 ref={camera}
             />
             <ambientLight intensity={1} />
+            <color attach="background" args={[colors.black.DEFAULT]} />
 
             <points
                 position={[0, 0.1, -32]}
