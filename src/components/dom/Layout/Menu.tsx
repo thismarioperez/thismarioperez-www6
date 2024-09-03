@@ -170,7 +170,7 @@ export default function Menu() {
 
     return (
         <div
-            className="fixed size-full top-0 left-0 z-30"
+            className="fixed size-full top-0 left-0 z-8"
             ref={node}
             role="menu"
         >
