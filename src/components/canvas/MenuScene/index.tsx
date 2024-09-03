@@ -74,7 +74,7 @@ export default function MenuScene() {
         }),
     });
 
-    const { height, width, dpr, aspect } = useThree((state) => state.viewport);
+    const { height, width, dpr } = useThree((state) => state.viewport);
     const uResolution = useMemo(
         () => new THREE.Vector2(width * dpr, height * dpr),
         [width, height, dpr]
@@ -134,7 +134,7 @@ export default function MenuScene() {
             <points
                 position={[0, 0.1, -32]}
                 rotation={[Math.PI * -0.5, 0, 0]}
-                scale={4 * aspect}
+                scale={4}
             >
                 <planeGeometry args={[16, 16, 256, 256]} attach={"geometry"} />
                 <particleWavesMaterial
