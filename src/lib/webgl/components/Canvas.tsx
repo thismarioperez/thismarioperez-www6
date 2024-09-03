@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Canvas as R3FCanvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import { Suspense } from "react";
@@ -19,6 +19,7 @@ const Loading = () => {
 };
 
 export default function Canvas({ children }: { children: React.ReactNode }) {
+    const [dpr, setDpr] = useState(devicePixelRatio);
     const [debug] = useDebug();
 
     return (
@@ -30,13 +31,13 @@ export default function Canvas({ children }: { children: React.ReactNode }) {
                     powerPreference: "high-performance",
                     alpha: true,
                 }}
-                dpr={[1, 2]}
+                dpr={dpr}
                 frameloop="never"
                 eventSource={document.documentElement}
                 eventPrefix="client"
             >
                 <RAF />
-                <Performance />
+                <Performance dpr={dpr} setDpr={setDpr} />
                 <Suspense fallback={<Loading />}>{children}</Suspense>
                 {debug && <Perf position="bottom-left" />}
             </R3FCanvas>
