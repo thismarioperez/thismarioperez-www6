@@ -23,7 +23,7 @@ export default function Canvas({ children }: { children: React.ReactNode }) {
     const [debug] = useDebug();
 
     return (
-        <div className="fixed top-0 left-0 w-[100vw] h-[100vh]" aria-hidden>
+        <div className="fixed top-0 left-0  w-[100dvw] h-[100dvh]" aria-hidden>
             <R3FCanvas
                 gl={{
                     antialias: true,
