@@ -163,7 +163,7 @@ export default function SliderScene() {
                 step: 1,
             },
             slideDistance: {
-                value: 5,
+                value: 50,
                 min: 0,
                 max: 50,
                 step: 1,
