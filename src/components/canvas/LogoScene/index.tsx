@@ -1,14 +1,7 @@
 import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import {
-    Center,
-    Environment,
-    Lightformer,
-    OrbitControls,
-    PerspectiveCamera,
-    Text3D,
-} from "@react-three/drei";
+import { Center, Text3D } from "@react-three/drei";
 
 import colors from "@/styles/colors";
 import { damp3, dampE } from "maath/easing";
