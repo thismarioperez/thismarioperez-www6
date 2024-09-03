@@ -1,4 +1,4 @@
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Center, Text3D } from "@react-three/drei";
@@ -43,29 +43,27 @@ export default function LogoScene() {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <ambientLight intensity={0.75} />
-                <pointLight position={[2, 0, 5]} intensity={20} />
-                <color attach="background" args={[colors.black.DEFAULT]} />
-                {debug && <axesHelper args={[10]} position={[0, 0, 0]} />}
+            <ambientLight intensity={0.75} />
+            <pointLight position={[2, 0, 5]} intensity={20} />
+            <color attach="background" args={[colors.black.DEFAULT]} />
+            {debug && <axesHelper args={[10]} position={[0, 0, 0]} />}
 
-                <group ref={translationGroup}>
-                    <group ref={oscillationGroup}>
-                        <Center>
-                            <Text3D
-                                font="/fonts/PrestigeEliteStd_Bold.json"
-                                castShadow
-                                receiveShadow
-                                scale={scale}
-                                ref={mesh}
-                            >
-                                M
-                                <meshPhongMaterial color={colors.white} />
-                            </Text3D>
-                        </Center>
-                    </group>
+            <group ref={translationGroup}>
+                <group ref={oscillationGroup}>
+                    <Center>
+                        <Text3D
+                            font="/fonts/PrestigeEliteStd_Bold.json"
+                            castShadow
+                            receiveShadow
+                            scale={scale}
+                            ref={mesh}
+                        >
+                            M
+                            <meshPhongMaterial color={colors.white} />
+                        </Text3D>
+                    </Center>
                 </group>
-            </Suspense>
+            </group>
         </>
     );
 }

@@ -1,4 +1,4 @@
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
@@ -23,11 +23,9 @@ const RotatingCube = () => {
 export default function CubeScene() {
     return (
         <>
-            <Suspense fallback={null}>
-                <ambientLight />
-                <pointLight position={[10, 10, 10]} />
-                <RotatingCube />
-            </Suspense>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <RotatingCube />
         </>
     );
 }
