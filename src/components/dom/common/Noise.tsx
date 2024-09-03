@@ -87,7 +87,7 @@ export default function Noise({ blendMode, opacity, animate }: TNoiseProps) {
     return (
         <div
             ref={el}
-            className="fixed top-0 left-0 w-[100dvw] h-[100dvh] pointer-events-none z-50"
+            className="fixed top-0 left-0 w-[100dvw] h-[100dvh] pointer-events-none z-in-front"
             style={style}
             aria-hidden
         />
