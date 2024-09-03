@@ -5,7 +5,7 @@ import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
 import Link from "@/components/dom/common/Link";
-import useHeaderState from "@/hooks/useHeaderState";
+import useAppState from "@/hooks/useAppState";
 
 type TBaseLink = {
     name: string;
@@ -104,7 +104,7 @@ export default function Menu() {
     const { menuOpen } = useMenuState();
     const node = useRef(null);
     const tl = useRef<gsap.core.Timeline>(gsap.timeline({ paused: true }));
-    const { headerHeight } = useHeaderState();
+    const { headerHeight } = useAppState();
 
     const style = useMemo(() => {
         if (headerHeight <= 0) return undefined;

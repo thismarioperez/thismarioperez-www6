@@ -3,11 +3,11 @@ import { useRect } from "@darkroom.engineering/hamo";
 import Logo from "./Logo";
 import MenuButton from "./MenuButton";
 import { useEffect } from "react";
-import useHeaderState from "@/hooks/useHeaderState";
+import useAppState from "@/hooks/useAppState";
 
 export default function Header() {
     const [header, headerRect] = useRect();
-    const { setHeaderHeight } = useHeaderState();
+    const { setHeaderHeight } = useAppState();
 
     useEffect(() => {
         if (headerRect) {
