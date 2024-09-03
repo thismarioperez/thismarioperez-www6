@@ -63,7 +63,6 @@ const CameraHandler = ({
     slideDistance: number;
     dollyDistance: number;
 }) => {
-    const [debug] = useDebug();
     const { scene } = useThree((state) => state);
     const { slide } = useSliderState();
     const lastSlide = useRef(0);
@@ -77,6 +76,8 @@ const CameraHandler = ({
         if (!currentSlide) return;
         if (lastSlide.current === slide) return;
 
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
         await cameraControls.current.setLookAt(
             slide * (width + slideDistance),
             0,
@@ -84,8 +85,10 @@ const CameraHandler = ({
             slide * (width + slideDistance),
             0,
             0,
-            true
+            false
         );
+
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         await cameraControls.current.fitToBox(currentSlide, true, {
             cover: true,
@@ -154,9 +157,9 @@ export default function SliderScene() {
     const { slideDistance, dollyDistance } = useControls({
         slideshow: folder({
             dollyDistance: {
-                value: 1,
+                value: 0,
                 min: 0,
-                max: 50,
+                max: 10,
                 step: 1,
             },
             slideDistance: {
@@ -189,7 +192,7 @@ export default function SliderScene() {
                 near={0.1}
                 far={1000}
             />
-            <color attach="background" args={[colors.black.DEFAULT]} />
+            <color attach="background" args={[colors.yellow.DEFAULT]} />
             <ambientLight intensity={2} />
             <group name="slides">
                 {SLIDES.map(({ name, component }, idx) => (
