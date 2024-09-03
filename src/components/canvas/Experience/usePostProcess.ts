@@ -10,6 +10,7 @@ import GammaCorrectionMaterial from "../shaders/GammaCorrectionShader";
 import WarbleShaderMaterial from "../shaders/WarbleShader";
 import useParsedPathname from "@/hooks/useParsedPathname";
 import useSliderState from "@/hooks/useSliderState";
+import { useWindowSize } from "usehooks-ts";
 
 function getFullscreenTriangle() {
     const geometry = new THREE.BufferGeometry();
@@ -26,9 +27,10 @@ function getFullscreenTriangle() {
 // USAGE: Simply call usePostprocess hook in your r3f component to apply the shader to the canvas as a postprocess effect
 const usePostProcess = () => {
     const { slide } = useSliderState();
-    const [{ dpr }, size] = useThree<
-        [RootState["viewport"], RootState["size"]]
-    >((s) => [s.viewport, s.size]);
+    const { width: windowWidth, height: windowHeight } = useWindowSize({
+        initializeWithValue: true,
+        debounceDelay: 100,
+    });
     const uProgress = useRef<number>(0);
     const uProgress2 = useRef<number>(0);
     const uProgress3 = useRef<number>(0);
@@ -191,13 +193,8 @@ const usePostProcess = () => {
 
     useEffect(() => {
         if (!renderTarget) return;
-        const { width, height } = size;
-        const { w, h } = {
-            w: width * dpr,
-            h: height * dpr,
-        };
-        renderTarget.setSize(w, h);
-    }, [dpr, size, renderTarget]);
+        renderTarget.setSize(windowWidth, windowHeight);
+    }, [windowWidth, windowHeight, renderTarget]);
 
     useFrame(({ scene, camera, gl }, delta) => {
         // Initial Render
