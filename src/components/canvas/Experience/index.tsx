@@ -13,6 +13,7 @@ import MenuScene from "../MenuScene";
 import useDebug from "@/hooks/useDebug";
 import { Perf } from "r3f-perf";
 import colors from "@/styles/colors";
+import useAppState from "@/hooks/useAppState";
 
 const Scene = () => {
     const { width, height } = useThree((state) => state.viewport);
@@ -90,21 +91,30 @@ const Scene = () => {
     );
 };
 
+const Loading = () => {
+    const { setIsReady } = useAppState();
+
+    useEffect(() => {
+        return () => setIsReady(true);
+    }, []);
+
+    return null;
+};
+
 export default function Experience() {
     const [debug] = useDebug();
-    const GPUTier = useDetectGPU();
+    // const GPUTier = useDetectGPU();
 
     return (
         <div className="fixed top-0 left-0 w-[100vw] h-[100vh]" aria-hidden>
             <Canvas
-                dpr={[1, GPUTier.tier <= 1 ? 1 : 2]}
                 gl={{
                     toneMapping: THREE.NoToneMapping,
                     antialias: true,
                     outputColorSpace: THREE.SRGBColorSpace,
                 }}
             >
-                <Suspense fallback={null}>
+                <Suspense fallback={<Loading />}>
                     <Scene />
                 </Suspense>
                 {debug && <Perf position="bottom-left" />}
