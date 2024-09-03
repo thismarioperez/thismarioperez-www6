@@ -40,7 +40,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
             </Canvas>
 
             {/* dom */}
-            <div className="relative pointer-events-none">
+            <div className="relative ">
                 <Header />
                 <Menu />
                 <ReactLenis root>

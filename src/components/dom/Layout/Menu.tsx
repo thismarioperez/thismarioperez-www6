@@ -170,7 +170,10 @@ export default function Menu() {
 
     return (
         <div
-            className="fixed size-full top-0 left-0 z-8"
+            className={cx(
+                "fixed size-full top-0 left-0 z-8",
+                !menuOpen && "pointer-events-none"
+            )}
             ref={node}
             role="menu"
         >
