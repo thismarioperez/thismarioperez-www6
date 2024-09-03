@@ -43,7 +43,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
             <div className="relative ">
                 <Header />
                 <Menu />
-                <ReactLenis root>
+                <ReactLenis root options={{ syncTouch: true }}>
                     <div
                         className={cx(
                             "relative h-full w-full z-7 transition-all duration-1000 ease-in-out",
