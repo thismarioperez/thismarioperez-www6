@@ -15,6 +15,10 @@ import ScrollHandler from "./ScrollHandler";
 import useMenuState from "@/hooks/useMenuState";
 import Loading from "./Loading";
 
+const Canvas = dynamic(() => import("@/lib/webgl/components/Canvas"), {
+    ssr: false,
+});
+
 const GSAP = dynamic(() => import("@/lib/gsap/components/GSAP"), {
     ssr: false,
 });
@@ -31,7 +35,9 @@ export default function Layout({ Component, pageProps }: AppProps) {
 
             {/* canvas */}
             <Noise blendMode="overlay" opacity={30} />
-            <Experience />
+            <Canvas>
+                <Experience />
+            </Canvas>
 
             {/* dom */}
             <div className="relative pointer-events-none">
