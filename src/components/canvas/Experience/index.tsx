@@ -23,29 +23,35 @@ const Scene = () => {
     useEffect(() => {
         if (!menuMaterial.current) return;
         if (menuOpen) {
-            gsap.to(menuMaterial.current, {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power1.inOut",
-            });
-
-            gsap.to(sliderMaterial.current, {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power1.inOut",
-            });
+            gsap.timeline({ paused: true })
+                .to(menuMaterial.current, {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power1.inOut",
+                })
+                .to(
+                    sliderMaterial.current,
+                    {
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: "power1.inOut",
+                    },
+                    0
+                )
+                .play();
         } else {
-            gsap.to(menuMaterial.current, {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power1.inOut",
-            });
-
-            gsap.to(sliderMaterial.current, {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power1.inOut",
-            });
+            gsap.timeline({ paused: true })
+                .to(menuMaterial.current, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power1.inOut",
+                })
+                .to(sliderMaterial.current, {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power1.inOut",
+                })
+                .play();
         }
     }, [menuOpen]);
 
