@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useMemo, useRef } from "react";
 import { SwitchTransition, Transition } from "react-transition-group";
 import { useRouter } from "next/router";
