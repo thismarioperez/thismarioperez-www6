@@ -14,7 +14,7 @@ export default function Loading() {
     const visible = prevPathname !== pathname;
 
     const onEnter = () => {
-        console.log("entered");
+        // console.log("entered");
         gsap.to(node.current, {
             y: 0,
             duration: 0.5,
@@ -23,7 +23,7 @@ export default function Loading() {
     };
 
     const onExit = useCallback(async () => {
-        console.log("exited start");
+        // console.log("exited start");
         await new Promise((resolve) => setTimeout(resolve, 500));
         await gsap.to(node.current, {
             y: "100%",
