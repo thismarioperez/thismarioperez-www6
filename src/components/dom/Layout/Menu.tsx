@@ -1,3 +1,4 @@
+import { pages, projects } from "@site/content";
 import { useEffect, useMemo, useRef } from "react";
 import cx from "classnames";
 
@@ -21,37 +22,30 @@ type TFolder = {
 
 type TLink = TBaseLink | TFolder;
 
-const LINKS: TLink[] = [
-    {
-        name: "About",
-        href: "/about",
+const pageLinks: TBaseLink[] = pages
+    .filter((page) => !page.slugAsParams.includes("home"))
+    .map((page) => {
+        return {
+            name: page.title,
+            type: "link",
+            href: `${page.slugAsParams}`,
+        };
+    });
+
+const projectLinks: TBaseLink[] = projects.map((project) => {
+    return {
+        name: project.title,
         type: "link",
-    },
+        href: `/projects/${project.slugAsParams}`,
+    };
+});
+
+const LINKS: TLink[] = [
+    ...pageLinks,
     {
         name: "Projects",
         type: "folder",
-        children: [
-            {
-                name: "Robin Knows",
-                href: "/projects/robin-knows",
-                type: "link",
-            },
-            {
-                name: "FBI - Safe Online Surfing",
-                href: "/projects/fbi-safe-online-surfing",
-                type: "link",
-            },
-            {
-                name: "Triptych.co",
-                href: "/projects/triptych",
-                type: "link",
-            },
-            {
-                name: "Rodda Construction",
-                href: "/projects/rodda-construction",
-                type: "link",
-            },
-        ],
+        children: [...projectLinks],
     },
 ];
 
