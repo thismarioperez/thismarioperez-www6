@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import cx from "classnames";
 
+import MDXProvider from "@/lib/mdx/context";
 import TransitionComponent from "@/components/dom/Layout/TransitionComponent";
 import Header from "@/components/dom/Layout/Header";
 import DebugHandler from "@/components/dom/Layout/DebugHandler";
@@ -25,10 +26,14 @@ const Noise = dynamic(() => import("@/components/dom/common/Noise"), {
     ssr: false,
 });
 
+const Providers = ({ children }: { children: React.ReactNode }) => {
+    return <MDXProvider>{children}</MDXProvider>;
+};
+
 export default function Layout({ Component, pageProps }: AppProps) {
     const { menuOpen } = useMenuState();
     return (
-        <>
+        <Providers>
             <Loading />
 
             {/* canvas */}
@@ -62,6 +67,6 @@ export default function Layout({ Component, pageProps }: AppProps) {
             <DebugHandler />
             <LevaUI />
             <GSAP />
-        </>
+        </Providers>
     );
 }

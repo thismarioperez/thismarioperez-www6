@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    transpilePackages: ["gsap"],
+    transpilePackages: ["next-mdx-remote", "gsap"],
     webpack(config, { isServer }) {
         if (!isServer) {
             // We're in the browser build, so we can safely exclude the sharp module
