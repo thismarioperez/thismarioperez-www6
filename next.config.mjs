@@ -1,7 +1,19 @@
+// env checks
+const isDev = process.argv.indexOf("dev") !== -1;
+const isBuild = process.argv.indexOf("build") !== -1;
+
+// start velite
+// @see https://velite.js.org/guide/with-nextjs
+if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
+    process.env.VELITE_STARTED = "1";
+    const { build } = await import("velite");
+    await build({ watch: isDev, clean: !isDev });
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    transpilePackages: ["gsap"],
+    transpilePackages: ["next-mdx-remote", "gsap"],
     webpack(config, { isServer }) {
         if (!isServer) {
             // We're in the browser build, so we can safely exclude the sharp module

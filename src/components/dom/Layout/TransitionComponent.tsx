@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useMemo, useRef } from "react";
 import { SwitchTransition, Transition } from "react-transition-group";
 import { useRouter } from "next/router";
@@ -49,7 +47,10 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
         <SwitchTransition>
             <Transition
                 key={router.pathname}
-                timeout={500}
+                timeout={{
+                    enter: 1000,
+                    exit: 200,
+                }}
                 nodeRef={node}
                 mountOnEnter
                 unmountOnExit
@@ -66,8 +67,9 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                     })
                         .to(node.current, {
                             autoAlpha: 1,
+                            duration: 0.25,
+                            delay: 0.75,
                         })
-                        .to(node.current, { duration: 0.25 })
                         .play();
                 }}
                 onExit={() => {

@@ -1,5 +1,3 @@
-"use client";
-
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import cx from "classnames";

@@ -37,6 +37,7 @@ const BaseText = forwardRef<TBaseTextElement, TTextProps>(
         );
     }
 );
+BaseText.displayName = "BaseText";
 
 const H1Text = forwardRef<TBaseTextElement, TTextProps>(
     ({ className, ...rest }, ref) => (
