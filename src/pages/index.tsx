@@ -1,10 +1,27 @@
+import { Page, pages } from "@site/content";
+
 import Container from "@/components/dom/common/Container";
 import * as Themed from "@/components/dom/common/Themed";
+import { MDXContent } from "@/lib/mdx/mdx-components";
+import { getPageBySlug } from "@/lib/mdx";
 
-export default function HomePage() {
+export async function getStaticProps() {
+    return {
+        props: {
+            page: getPageBySlug("home"),
+        },
+    };
+}
+
+type TPageProps = {
+    page: Page;
+};
+
+export default function HomePage({ page }: TPageProps) {
     return (
         <div className="size-full relative">
             <h1>Home page</h1>
+            <MDXContent code={page.body} />
             <div className="h-[100vh]"></div>
             <Container bgColor="black" inset>
                 <Themed.H1Text as="h1">Hello world</Themed.H1Text>
