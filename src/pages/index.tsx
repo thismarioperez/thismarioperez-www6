@@ -1,4 +1,4 @@
-import { Page, pages } from "@site/content";
+import { Page } from "@site/content";
 
 import Container from "@/components/dom/common/Container";
 import * as Themed from "@/components/dom/common/Themed";

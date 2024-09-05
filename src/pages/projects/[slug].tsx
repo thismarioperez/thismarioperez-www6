@@ -1,3 +1,4 @@
+import Redirect from "@/components/dom/common/Redirect";
 import { getProjectBySlug, getProjectSlugsAsParams } from "@/lib/mdx";
 import { MDXContent } from "@/lib/mdx/mdx-components";
 import { Page } from "@site/content";
