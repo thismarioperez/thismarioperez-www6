@@ -5,7 +5,7 @@ import Container from "@/components/dom/common/Container";
 import Link from "@/components/dom/common/Link";
 import * as Themed from "@/components/dom/common/Themed";
 
-const sharedComponents = {
+const components = {
     // Add your global components here
     Container,
     Image,
@@ -19,6 +19,10 @@ const sharedComponents = {
     button: Themed.ButtonText,
 };
 
+declare global {
+    type MDXProvidedComponents = typeof components;
+}
+
 // parse the Velite generated MDX code into a React component function
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
@@ -31,7 +35,7 @@ interface MDXProps {
 }
 
 // MDXContent component
-export const MDXContent = ({ code, components }: MDXProps) => {
+export const MDXContent = ({ code, components: extraComponents }: MDXProps) => {
     const Component = useMDXComponent(code);
-    return <Component components={{ ...sharedComponents, ...components }} />;
+    return <Component components={{ ...components, ...extraComponents }} />;
 };

@@ -27,12 +27,17 @@
       ]
     }
   },
+  "mdx": {
+    // Enable strict type checking in MDX files.
+    "checkMdx": true,
+  },
   "include": [
     "next-env.d.ts",
     "global-env.d.ts",
     "global-shaders.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.mdx"
   ],
   "exclude": [
     "node_modules"
