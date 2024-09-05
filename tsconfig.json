@@ -22,8 +22,8 @@
         "./src/*",
         "./public/*"
       ],
-      "@content/*": [
-        "./src/content/*"
+      "@site/content": [
+        "./.velete"
       ]
     }
   },
