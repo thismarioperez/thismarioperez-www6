@@ -50,23 +50,25 @@ const LINKS: TLink[] = [
 const LinkRenderer = ({
     className,
     links,
+    isNested = false,
 }: {
     className?: string;
     links: TLink[];
+    isNested?: boolean;
 }) => {
     return (
         <ul
             className={cx(
-                "pointer-events-auto flex flex-col items-start gap-y-4 ",
+                "pointer-events-auto flex flex-col items-start gap-y-4",
                 className
             )}
         >
             {links.map((link, idx) => {
                 return (
-                    <li key={idx}>
+                    <li key={idx} className="js-item ">
                         {link.type === "link" ? (
-                            <Link className="js-item" href={link.href}>
-                                <Themed.ButtonText className="text-black">
+                            <Link href={link.href}>
+                                <Themed.ButtonText className="text-black underline">
                                     {link.name}
                                 </Themed.ButtonText>
                             </Link>
@@ -75,13 +77,14 @@ const LinkRenderer = ({
                             <div className="flex flex-col gap-y-2">
                                 <div className="flex flex-col gap-y-2 js-item">
                                     <Themed.ButtonText className="  text-black">
-                                        {link.name}
+                                        {link.name}:
                                     </Themed.ButtonText>
-                                    <hr className=" w-full border-black" />
+                                    {/* <hr className=" w-full border-black" /> */}
                                 </div>
                                 <LinkRenderer
                                     className="pl-4"
                                     links={link.children}
+                                    isNested
                                 />
                             </div>
                         ) : null}
