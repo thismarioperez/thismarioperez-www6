@@ -1,22 +1,21 @@
 import { defineConfig, defineCollection, s } from "velite";
 
-const baseHeroSchema = s.object({
-    title: s.string().max(99),
-    description: s.string().max(999).optional(),
+const baseSceneSchema = s.object({
+    name: s.slug(),
 });
 
-const heroHomeSchema = s.object({
-    type: s.literal("home"),
+const logoSceneSchema = s.object({
+    type: s.literal("logo"),
 });
 
-const heroImageSchema = s.object({
-    type: s.literal("image"),
+const mediaSceneSchema = s.object({
+    type: s.literal("media"),
     src: s.file({ allowNonRelativePath: true }).default("/images/image-1.jpg"),
 });
 
-const heroSchema = s
-    .discriminatedUnion("type", [heroHomeSchema, heroImageSchema])
-    .and(baseHeroSchema);
+const sceneSchema = s
+    .discriminatedUnion("type", [logoSceneSchema, mediaSceneSchema])
+    .and(baseSceneSchema);
 
 const basePageSchema = s.object({
     slug: s.path(),
@@ -24,7 +23,7 @@ const basePageSchema = s.object({
     description: s.string().max(999).optional(),
     published: s.boolean().optional().default(true),
     body: s.mdx(),
-    hero: heroSchema.optional(),
+    scene: sceneSchema.optional(),
 });
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
