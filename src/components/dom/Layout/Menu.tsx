@@ -26,7 +26,7 @@ const pageLinks: TBaseLink[] = getPagesForNav().map((page) => {
     return {
         name: page.title,
         type: "link",
-        href: `${page.slugAsParams}`,
+        href: `/${page.slugAsParams}`,
     };
 });
 
@@ -34,7 +34,7 @@ const projectLinks: TBaseLink[] = getProjectsForNav().map((project) => {
     return {
         name: project.title,
         type: "link",
-        href: `/projects/${project.slugAsParams}`,
+        href: `/${project.slug}`,
     };
 });
 
