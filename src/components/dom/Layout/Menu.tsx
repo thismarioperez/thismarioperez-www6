@@ -1,7 +1,7 @@
-import { pages, projects } from "@site/content";
 import { useEffect, useMemo, useRef } from "react";
 import cx from "classnames";
 
+import { getPagesForNav, getProjectsForNav } from "@/lib/mdx";
 import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
@@ -22,17 +22,15 @@ type TFolder = {
 
 type TLink = TBaseLink | TFolder;
 
-const pageLinks: TBaseLink[] = pages
-    .filter((page) => !page.slugAsParams.includes("home"))
-    .map((page) => {
-        return {
-            name: page.title,
-            type: "link",
-            href: `${page.slugAsParams}`,
-        };
-    });
+const pageLinks: TBaseLink[] = getPagesForNav().map((page) => {
+    return {
+        name: page.title,
+        type: "link",
+        href: `${page.slugAsParams}`,
+    };
+});
 
-const projectLinks: TBaseLink[] = projects.map((project) => {
+const projectLinks: TBaseLink[] = getProjectsForNav().map((project) => {
     return {
         name: project.title,
         type: "link",
