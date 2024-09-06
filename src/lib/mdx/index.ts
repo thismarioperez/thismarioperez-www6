@@ -4,10 +4,6 @@ import { filterByPublished } from "./util";
 export const getPageBySlug = (slug: string) =>
     pages.find((page) => page.slugAsParams === slug);
 
-export const getPageSlugs = () => pages.map((page) => page.slug);
-export const getPageSlugsAsParams = () =>
-    pages.map((page) => page.slugAsParams);
-
 export const getPagesForNav = () =>
     pages
         .filter(
