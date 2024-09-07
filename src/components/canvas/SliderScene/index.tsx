@@ -12,6 +12,7 @@ import useSliderState from "@/hooks/useSliderState";
 import colors from "@/styles/colors";
 import { getMeshByUserDataValue } from "@/util/3d";
 import CubeScene from "@/components/canvas/CubeScene";
+import LavaLampScene from "@/components/canvas/LavaLampScene";
 import LogoScene from "@/components/canvas/LogoScene";
 import MediaScene from "@/components/canvas/MediaScene";
 import { buttonGroup, folder, useControls } from "leva";
@@ -40,6 +41,9 @@ const SLIDES: TSlide[] = SCENES.map((name) => {
             break;
         case "triptych-co-scene":
             component = <MediaScene src="/images/image-4.jpg" />;
+            break;
+        case "lava-lamp-scene":
+            component = <LavaLampScene />;
             break;
         case "cube-scene":
             component = <CubeScene />;
