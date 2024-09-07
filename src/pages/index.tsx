@@ -2,8 +2,8 @@ import { Page } from "@site/content";
 
 import Container from "@/components/dom/common/Container";
 import * as Themed from "@/components/dom/common/Themed";
-import { MDXContent } from "@/lib/mdx/mdx-components";
-import { getPageBySlug } from "@/lib/mdx";
+import { MDXContent } from "@/lib/content/mdx-components";
+import { getPageBySlug } from "@/lib/content";
 
 export async function getStaticProps() {
     return {

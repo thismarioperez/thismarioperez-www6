@@ -1,6 +1,6 @@
 import { type Page } from "@site/content";
-import { getPublishedProjects, getProjectBySlug } from "@/lib/mdx";
-import { MDXContent } from "@/lib/mdx/mdx-components";
+import { getPublishedProjects, getProjectBySlug } from "@/lib/content";
+import { MDXContent } from "@/lib/content/mdx-components";
 
 // Create static paths for each project
 export async function getStaticPaths() {
