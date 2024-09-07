@@ -8,3 +8,24 @@ export const getProjectBySlug = (slug: string) =>
 
 export const getPublishedProjects = () =>
     projects.filter((project) => project.published);
+
+export const getSceneNames = () => {
+    return Array.from(
+        new Set([...pages, ...projects].map((page) => page.scene))
+    );
+};
+
+export const getSceneByPathname = (pathname: string) => {
+    // account for home page
+    let _pathname = pathname === "/" ? "/home" : pathname;
+
+    const scene = [...pages, ...projects].find((page) => {
+        return page.pathname === _pathname;
+    })?.scene;
+
+    if (!scene) {
+        throw new Error(`Scene not found for pathname: ${_pathname}`);
+    }
+
+    return scene;
+};

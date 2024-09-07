@@ -1,28 +1,8 @@
+import { getSceneNames } from "@/lib/content";
 import { TStoreStateCreator } from ".";
 
-export type TScene = {
-    name: TSceneName;
-    component: JSX.Element;
-};
-
-export type TSceneName =
-    | "logo-scene"
-    | "media-scene-1"
-    | "media-scene-2"
-    | "media-scene-3"
-    | "media-scene-4"
-    | "media-scene-5"
-    | "cube-scene";
-
-export const SCENES: TSceneName[] = [
-    "logo-scene",
-    "media-scene-1",
-    "media-scene-2",
-    "media-scene-3",
-    "media-scene-4",
-    "media-scene-5",
-    "cube-scene",
-];
+export const SCENES = getSceneNames();
+export type TSceneName = (typeof SCENES)[number];
 
 export interface ISliderSlice {
     slide: number;

@@ -1,21 +1,14 @@
 import { defineConfig, defineCollection, s } from "velite";
 
-const baseSceneSchema = s.object({
-    name: s.slug(),
-});
-
-const logoSceneSchema = s.object({
-    type: s.literal("logo"),
-});
-
-const mediaSceneSchema = s.object({
-    type: s.literal("media"),
-    src: s.file({ allowNonRelativePath: true }).default("/images/image-1.jpg"),
-});
-
-const sceneSchema = s
-    .discriminatedUnion("type", [logoSceneSchema, mediaSceneSchema])
-    .and(baseSceneSchema);
+// Scene names for each page
+const sceneSchema = s.union([
+    s.literal("logo-scene"),
+    s.literal("fbi-safe-online-surfing-scene"),
+    s.literal("robin-knows-scene"),
+    s.literal("rodda-construction-scene"),
+    s.literal("triptych-co-scene"),
+    s.literal("cube-scene"),
+]);
 
 const basePageSchema = s.object({
     filepath: s.path(),
@@ -23,7 +16,7 @@ const basePageSchema = s.object({
     description: s.string().max(999).optional(),
     published: s.boolean().optional().default(true),
     body: s.mdx(),
-    scene: sceneSchema.optional(),
+    scene: sceneSchema.optional().default("cube-scene"),
 });
 
 const computedFields = <T extends { filepath: string }>(

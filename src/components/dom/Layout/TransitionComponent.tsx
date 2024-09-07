@@ -6,6 +6,7 @@ import { gsap } from "@/lib/gsap";
 import useParsedPathname from "@/hooks/useParsedPathname";
 import useSliderState from "@/hooks/useSliderState";
 import useTransitionState from "@/hooks/useTransitionState";
+import { getSceneByPathname } from "@/lib/content";
 
 export type TTransitionComponentProps = {} & React.PropsWithChildren;
 const TransitionComponent = ({ children }: TTransitionComponentProps) => {
@@ -16,28 +17,10 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
     const node = useRef(null);
 
     useEffect(() => {
-        switch (parsedPathname) {
-            case "/":
-                setSlideByName("logo-scene");
-                break;
-            case "/about":
-                setSlideByName("media-scene-1");
-                break;
-            case "/projects/robin-knows":
-                setSlideByName("media-scene-2");
-                break;
-            case "/projects/fbi-safe-online-surfing":
-                setSlideByName("media-scene-3");
-                break;
-            case "/projects/triptych":
-                setSlideByName("media-scene-4");
-                break;
-            case "/projects/rodda-construction":
-                setSlideByName("media-scene-5");
-                break;
-            default:
-                setSlideByName("cube-scene");
-                break;
+        if (getSceneByPathname(parsedPathname)) {
+            setSlideByName(getSceneByPathname(parsedPathname));
+        } else {
+            setSlideByName("cube-scene");
         }
 
         console.log(`Page: ${parsedPathname}`);
