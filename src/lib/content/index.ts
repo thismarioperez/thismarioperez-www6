@@ -24,7 +24,7 @@ export const getSceneByPathname = (pathname: string) => {
     })?.scene;
 
     if (!scene) {
-        throw new Error(`Scene not found for pathname: ${_pathname}`);
+        return null;
     }
 
     return scene;
