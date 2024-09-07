@@ -64,9 +64,9 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                         .play();
                 }}
             >
-                <main className="js-content-wrapper pt-8" ref={node}>
+                <div className="js-content-wrapper pt-header h-full" ref={node}>
                     {children}
-                </main>
+                </div>
             </Transition>
         </SwitchTransition>
     );

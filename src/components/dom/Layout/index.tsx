@@ -38,25 +38,23 @@ export default function Layout({ Component, pageProps }: AppProps) {
             </Canvas>
 
             {/* dom */}
-            <div className="relative ">
-                <Header />
-                <Menu />
-                <ReactLenis root options={{ syncTouch: true }}>
-                    <div
-                        className={cx(
-                            "relative h-full w-full z-7 transition-all duration-1000 ease-in-out",
-                            menuOpen
-                                ? "blur-3xl opacity-0 invisible"
-                                : "blur-0 opacity-100 visible"
-                        )}
-                    >
-                        <TransitionComponent>
-                            <Component {...pageProps} />
-                        </TransitionComponent>
-                    </div>
-                    <ScrollHandler />
-                </ReactLenis>
-            </div>
+            <Header />
+            <Menu />
+            <ReactLenis root options={{ syncTouch: true }}>
+                <main
+                    className={cx(
+                        "relative h-1 w-full z-7 transition-all duration-1000 ease-in-out min-h-screen",
+                        menuOpen
+                            ? "blur-3xl opacity-0 invisible"
+                            : "blur-0 opacity-100 visible"
+                    )}
+                >
+                    <TransitionComponent>
+                        <Component {...pageProps} />
+                    </TransitionComponent>
+                </main>
+                <ScrollHandler />
+            </ReactLenis>
 
             {/* util & config */}
             <DebugHandler />
