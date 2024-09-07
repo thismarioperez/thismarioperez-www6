@@ -1,11 +1,11 @@
-import { getProjectBySlug, getProjectSlugsAsParams } from "@/lib/mdx";
+import { getProjectBySlug, getProjectSlugs } from "@/lib/mdx";
 import { MDXContent } from "@/lib/mdx/mdx-components";
 import { Page } from "@site/content";
 
 // Create static paths for each project
 export async function getStaticPaths() {
     // Get the paths we want to pre-render based on posts
-    const slugs = getProjectSlugsAsParams();
+    const slugs = getProjectSlugs();
 
     const paths = slugs.map((slug) => ({
         params: { slug },

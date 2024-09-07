@@ -2,21 +2,16 @@ import { pages, projects } from "@site/content";
 import { filterByPublished } from "./util";
 
 export const getPageBySlug = (slug: string) =>
-    pages.find((page) => page.slugAsParams === slug);
+    pages.find((page) => page.slug === slug);
 
 export const getPagesForNav = () =>
     pages
-        .filter(
-            (page) =>
-                page.slugAsParams !== "404" && page.slugAsParams !== "home"
-        )
+        .filter((page) => page.slug !== "404" && page.slug !== "home")
         .filter(filterByPublished);
 
 export const getProjectBySlug = (slug: string) =>
-    projects.find((project) => project.slugAsParams === slug);
+    projects.find((project) => project.slug === slug);
 
 export const getProjectSlugs = () => projects.map((project) => project.slug);
-export const getProjectSlugsAsParams = () =>
-    projects.map((project) => project.slugAsParams);
 
 export const getProjectsForNav = () => projects.filter(filterByPublished);
