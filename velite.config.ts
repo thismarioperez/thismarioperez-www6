@@ -52,6 +52,33 @@ const projects = defineCollection({
     ),
 });
 
+const navigationLinkSchema = s.object({
+    name: s.string(),
+    type: s.literal("link"),
+    href: s.string(),
+    external: s.boolean().optional().default(false),
+});
+
+const navigationFolderSchema = s.object({
+    name: s.string(),
+    type: s.literal("folder"),
+    children: s.array(navigationLinkSchema),
+});
+
+const navigationItemSchema = s.discriminatedUnion("type", [
+    navigationLinkSchema,
+    navigationFolderSchema,
+]);
+
+const navigation = defineCollection({
+    name: "Navigation",
+    pattern: "navigation/index.yml",
+    schema: s.object({
+        items: s.array(navigationItemSchema),
+    }),
+    single: true,
+});
+
 export default defineConfig({
     root: "src/content",
     output: {
@@ -64,6 +91,7 @@ export default defineConfig({
     collections: {
         pages,
         projects,
+        navigation,
     },
     mdx: {
         rehypePlugins: [],

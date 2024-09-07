@@ -1,0 +1,19 @@
+items:
+    - name: About
+      type: link
+      href: /about
+    - name: Projects
+      type: folder
+      children:
+          - name: FBI Safe Online Surfing
+            type: link
+            href: /projects/fbi-safe-online-surfing
+          - name: Robin Knows
+            type: link
+            href: /projects/robin-knows
+          - name: Rodda Construction
+            type: link
+            href: /projects/rodda-construction
+          - name: Triptych Co
+            type: link
+            href: /projects/triptych-co

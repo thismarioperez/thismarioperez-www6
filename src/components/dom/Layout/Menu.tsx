@@ -1,60 +1,21 @@
 import { useEffect, useMemo, useRef } from "react";
 import cx from "classnames";
 
-import { getPagesForNav, getProjectsForNav } from "@/lib/mdx";
+import { navigation, type Navigation as TNavigation } from "@site/content";
 import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
 import Link from "@/components/dom/common/Link";
 import useAppState from "@/hooks/useAppState";
 
-type TBaseLink = {
-    name: string;
-    type: "link";
-    href: string;
-};
+type TItems = TNavigation["items"];
 
-type TFolder = {
-    name: string;
-    type: "folder";
-    children: TBaseLink[];
-};
-
-type TLink = TBaseLink | TFolder;
-
-const pageLinks: TBaseLink[] = getPagesForNav().map((page) => {
-    return {
-        name: page.title,
-        type: "link",
-        href: page.url,
-    };
-});
-
-const projectLinks: TBaseLink[] = getProjectsForNav().map((project) => {
-    return {
-        name: project.title,
-        type: "link",
-        href: project.url,
-    };
-});
-
-const LINKS: TLink[] = [
-    ...pageLinks,
-    {
-        name: "Projects",
-        type: "folder",
-        children: [...projectLinks],
-    },
-];
-
-const LinkRenderer = ({
+const NavItemRenderer = ({
     className,
-    links,
-    isNested = false,
+    items,
 }: {
     className?: string;
-    links: TLink[];
-    isNested?: boolean;
+    items: TItems;
 }) => {
     return (
         <ul
@@ -63,28 +24,27 @@ const LinkRenderer = ({
                 className
             )}
         >
-            {links.map((link, idx) => {
+            {items.map((item, idx) => {
                 return (
                     <li key={idx} className="js-item ">
-                        {link.type === "link" ? (
-                            <Link href={link.href}>
+                        {item.type === "link" ? (
+                            <Link href={item.href}>
                                 <Themed.ButtonText className="text-black underline">
-                                    {link.name}
+                                    {item.name}
                                 </Themed.ButtonText>
                             </Link>
                         ) : null}
-                        {link.type === "folder" ? (
+                        {item.type === "folder" ? (
                             <div className="flex flex-col gap-y-2">
                                 <div className="flex flex-col gap-y-2 js-item">
                                     <Themed.ButtonText className="  text-black">
-                                        {link.name}:
+                                        {item.name}:
                                     </Themed.ButtonText>
                                     {/* <hr className=" w-full border-black" /> */}
                                 </div>
-                                <LinkRenderer
+                                <NavItemRenderer
                                     className="pl-4"
-                                    links={link.children}
-                                    isNested
+                                    items={item.children}
                                 />
                             </div>
                         ) : null}
@@ -175,7 +135,7 @@ export default function Menu() {
             <div className="relative size-full p-14" style={style}>
                 <div className="flex flex-col items-end">
                     <nav className="js-nav w-fit p-8 bg-yellow">
-                        <LinkRenderer links={LINKS} />
+                        <NavItemRenderer items={navigation.items} />
                     </nav>
                 </div>
             </div>
