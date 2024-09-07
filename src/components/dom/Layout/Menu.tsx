@@ -59,12 +59,6 @@ export default function Menu() {
     const { menuOpen } = useMenuState();
     const node = useRef(null);
     const tl = useRef<gsap.core.Timeline>(gsap.timeline({ paused: true }));
-    const { headerHeight } = useAppState();
-
-    const style = useMemo(() => {
-        if (headerHeight <= 0) return undefined;
-        return { paddingTop: `${headerHeight}px` };
-    }, [headerHeight]);
 
     useGSAP(
         () => {
@@ -132,7 +126,7 @@ export default function Menu() {
             ref={node}
             role="menu"
         >
-            <div className="relative size-full p-14" style={style}>
+            <div className="relative size-full p-14 pt-header">
                 <div className="flex flex-col items-end">
                     <nav className="js-nav w-fit p-8 bg-yellow">
                         <NavItemRenderer items={site.navigation} />

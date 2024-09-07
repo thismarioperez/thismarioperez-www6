@@ -84,6 +84,12 @@ const config: Config = {
                 "9": "9",
                 "in-front": "9999",
             },
+            padding: {
+                header: "var(--header-height)",
+            },
+            margin: {
+                header: "var(--header-height)",
+            },
         },
     },
     plugins: [],
