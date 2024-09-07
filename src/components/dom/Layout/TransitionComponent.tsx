@@ -64,7 +64,10 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                         .play();
                 }}
             >
-                <div className="js-content-wrapper size-full" ref={node}>
+                <div
+                    className="js-content-wrapper size-full flex-1 h-fit"
+                    ref={node}
+                >
                     {children}
                 </div>
             </Transition>

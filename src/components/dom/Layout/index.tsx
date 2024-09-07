@@ -43,7 +43,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
             <ReactLenis root options={{ syncTouch: true }}>
                 <main
                     className={cx(
-                        "relative size-full z-7 transition-all duration-1000 ease-in-out",
+                        "relative size-full z-7 transition-all duration-1000 ease-in-out pt-header flex flex-col",
                         menuOpen
                             ? "blur-3xl opacity-0 invisible"
                             : "blur-0 opacity-100 visible"
