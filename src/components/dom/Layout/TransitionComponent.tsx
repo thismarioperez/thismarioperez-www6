@@ -23,7 +23,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
             setSlideByName("cube-scene");
         }
 
-        console.log(`Page: ${parsedPathname}`);
+        // console.log(`Page: ${parsedPathname}`);
     }, [parsedPathname]);
 
     return (

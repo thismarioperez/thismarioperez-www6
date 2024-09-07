@@ -1,7 +1,5 @@
-import { PerformanceMonitor, useDetectGPU } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { PerformanceMonitor } from "@react-three/drei";
 import { useEffect } from "react";
-import round from "lodash/round";
 export default function Performance({
     dpr,
     setDpr,
@@ -10,7 +8,7 @@ export default function Performance({
     setDpr: (dpr: number) => void;
 }) {
     useEffect(() => {
-        console.log("dpr", dpr);
+        console.log(`Dpr: updated to ${dpr}`);
     }, [dpr]);
     return (
         <PerformanceMonitor
@@ -18,7 +16,7 @@ export default function Performance({
             onDecline={() => setDpr(Math.min(devicePixelRatio, 1))}
             flipflops={2}
             onFallback={() => {
-                console.log("fallback");
+                console.log("Dpr: falling back to 1");
                 setDpr(1);
             }}
         />
