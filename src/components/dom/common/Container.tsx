@@ -16,14 +16,19 @@ export type TContainerProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export default function Container({
-    children,
     bgColor = "black",
+    className,
+    children,
     inset = true,
     ...props
 }: TContainerProps) {
     return (
         <div
-            className={cx("relative", inset && "mx-8 px-8", props.className)}
+            className={cx(
+                "relative mx-8 px-8",
+                inset && "mx-8 px-8",
+                className
+            )}
             {...props}
         >
             <div
