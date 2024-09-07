@@ -18,10 +18,11 @@
     /*
     * Lenis recommended styles
     */
-    html.lenis,
-    html.lenis body {
+    /* html.lenis,
+    html.lenis body,
+    html.lenis #__next {
         height: auto;
-    }
+    } */
 
     .lenis.lenis-smooth {
         scroll-behavior: auto !important;
@@ -31,9 +32,9 @@
         overscroll-behavior: contain;
     }
 
-    .lenis.lenis-stopped {
+    /* .lenis.lenis-stopped {
         overflow: hidden;
-    }
+    } */
 
     .lenis.lenis-smooth iframe {
         pointer-events: none;
