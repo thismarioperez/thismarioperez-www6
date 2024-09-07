@@ -34,7 +34,7 @@ const computedFields = <T extends { filepath: string }>(
     return {
         ...data,
         slug,
-        url: `${basePath}${slug}`,
+        pathname: `${basePath}${slug}`,
     };
 };
 
