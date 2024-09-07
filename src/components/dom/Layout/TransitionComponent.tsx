@@ -20,7 +20,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
         if (getSceneByPathname(parsedPathname)) {
             setSlideByName(getSceneByPathname(parsedPathname)!);
         } else {
-            setSlideByName("cube-scene");
+            setSlideByName("lava-lamp-scene");
         }
 
         // console.log(`Page: ${parsedPathname}`);

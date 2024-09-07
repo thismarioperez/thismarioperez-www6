@@ -9,13 +9,12 @@ const sceneSchema = s.union([
     s.literal("rodda-construction-scene"),
     s.literal("triptych-co-scene"),
     s.literal("lava-lamp-scene"),
-    s.literal("cube-scene"),
 ]);
 
 const basePageSchema = s.object({
     title: s.string().max(99),
     body: s.mdx(),
-    scene: sceneSchema.optional().default("cube-scene"),
+    scene: sceneSchema.optional().default("lava-lamp-scene"),
     published: s.boolean().optional().default(true),
 });
 
