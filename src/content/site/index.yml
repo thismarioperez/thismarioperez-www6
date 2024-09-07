@@ -1,4 +1,10 @@
-items:
+title: thisMarioPerez
+description: Mario Perez - Creative Developer - 🤘
+author:
+    name: Mario Perez
+    email: mario@thismarioperez.com
+    phone: 555-555-5555
+navigation:
     - name: About
       type: link
       href: /about

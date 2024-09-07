@@ -1,4 +1,5 @@
 import { defineConfig, defineCollection, s } from "velite";
+import validator from "validator";
 
 // Scene names for each page
 const sceneSchema = s.union([
@@ -11,38 +12,48 @@ const sceneSchema = s.union([
 ]);
 
 const basePageSchema = s.object({
-    filepath: s.path(),
     title: s.string().max(99),
-    description: s.string().max(999).optional(),
-    published: s.boolean().optional().default(true),
     body: s.mdx(),
     scene: sceneSchema.optional().default("cube-scene"),
+    published: s.boolean().optional().default(true),
 });
 
-const computedFields = <T extends { filepath: string }>(
-    data: T,
-    basePath: string = "/"
-) => {
-    const slug = data.filepath.split("/").slice(1).join("/");
+const pageSchema = s
+    .object({
+        slug: s.slug(),
+    })
+    .and(basePageSchema);
+
+const computedPageFields = <T extends { slug: string }>(data: T) => {
     return {
         ...data,
-        slug,
-        pathname: `${basePath}${slug}`,
+        pathname: `/${data.slug}`,
     };
 };
 
 const pages = defineCollection({
     name: "Page",
     pattern: "pages/**/*.{md,mdx}",
-    schema: basePageSchema.transform((data) => computedFields(data, "/")),
+    schema: pageSchema.transform(computedPageFields),
 });
+
+const projectSchema = s
+    .object({
+        slug: s.slug("project"),
+    })
+    .and(basePageSchema);
+
+const computedProjectFields = <T extends { slug: string }>(data: T) => {
+    return {
+        ...data,
+        pathname: `/projects/${data.slug}`,
+    };
+};
 
 const projects = defineCollection({
     name: "Project",
     pattern: "projects/**/*.{md,mdx}",
-    schema: basePageSchema.transform((data) =>
-        computedFields(data, "/projects/")
-    ),
+    schema: projectSchema.transform(computedProjectFields),
 });
 
 const navigationLinkSchema = s.object({
@@ -63,12 +74,25 @@ const navigationItemSchema = s.discriminatedUnion("type", [
     navigationFolderSchema,
 ]);
 
-const navigation = defineCollection({
-    name: "Navigation",
-    pattern: "navigation/index.yml",
-    schema: s.object({
-        items: s.array(navigationItemSchema),
+const siteSchema = s.object({
+    title: s.string().max(99),
+    description: s.string().max(99),
+    author: s.object({
+        name: s.string(),
+        email: s.string().email().optional().default("lOyIz@example.com"),
+        phone: s
+            .string()
+            .refine(validator.isMobilePhone)
+            .optional()
+            .default("+1 (555) 555-5555"),
     }),
+    navigation: s.array(navigationItemSchema),
+});
+
+const site = defineCollection({
+    name: "Site",
+    pattern: "site/index.yml",
+    schema: siteSchema,
     single: true,
 });
 
@@ -84,7 +108,7 @@ export default defineConfig({
     collections: {
         pages,
         projects,
-        navigation,
+        site,
     },
     mdx: {
         rehypePlugins: [],

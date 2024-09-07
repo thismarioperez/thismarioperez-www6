@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef } from "react";
 import cx from "classnames";
 
-import { navigation, type Navigation as TNavigation } from "@site/content";
+import { site, type Site as TSite } from "@site/content";
 import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
 import Link from "@/components/dom/common/Link";
 import useAppState from "@/hooks/useAppState";
 
-type TItems = TNavigation["items"];
+type TItems = TSite["navigation"];
 
 const NavItemRenderer = ({
     className,
@@ -135,7 +135,7 @@ export default function Menu() {
             <div className="relative size-full p-14" style={style}>
                 <div className="flex flex-col items-end">
                     <nav className="js-nav w-fit p-8 bg-yellow">
-                        <NavItemRenderer items={navigation.items} />
+                        <NavItemRenderer items={site.navigation} />
                     </nav>
                 </div>
             </div>

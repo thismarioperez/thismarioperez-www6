@@ -18,7 +18,7 @@ export type TContainerProps = {
 export default function Container({
     children,
     bgColor = "black",
-    inset = false,
+    inset = true,
     ...props
 }: TContainerProps) {
     return (
