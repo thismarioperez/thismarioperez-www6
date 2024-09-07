@@ -3,6 +3,8 @@ import { pages, projects } from "@site/content";
 export const getPageBySlug = (slug: string) =>
     pages.find((page) => page.slug === slug);
 
+export const getPublishedPages = () => pages.filter((page) => page.published);
+
 export const getProjectBySlug = (slug: string) =>
     projects.find((project) => project.slug === slug);
 
