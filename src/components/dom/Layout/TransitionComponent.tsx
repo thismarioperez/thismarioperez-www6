@@ -18,7 +18,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
 
     useEffect(() => {
         if (getSceneByPathname(parsedPathname)) {
-            setSlideByName(getSceneByPathname(parsedPathname));
+            setSlideByName(getSceneByPathname(parsedPathname)!);
         } else {
             setSlideByName("cube-scene");
         }
