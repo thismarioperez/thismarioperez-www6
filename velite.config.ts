@@ -18,7 +18,7 @@ const sceneSchema = s
     .and(baseSceneSchema);
 
 const basePageSchema = s.object({
-    slug: s.path(),
+    filepath: s.path(),
     title: s.string().max(99),
     description: s.string().max(999).optional(),
     published: s.boolean().optional().default(true),
@@ -26,21 +26,30 @@ const basePageSchema = s.object({
     scene: sceneSchema.optional(),
 });
 
-const computedFields = <T extends { slug: string }>(data: T) => ({
-    ...data,
-    slugAsParams: data.slug.split("/").slice(1).join("/"),
-});
+const computedFields = <T extends { filepath: string }>(
+    data: T,
+    basePath: string = "/"
+) => {
+    const slug = data.filepath.split("/").slice(1).join("/");
+    return {
+        ...data,
+        slug,
+        url: `${basePath}${slug}`,
+    };
+};
 
 const pages = defineCollection({
     name: "Page",
     pattern: "pages/**/*.{md,mdx}",
-    schema: basePageSchema.transform(computedFields),
+    schema: basePageSchema.transform((data) => computedFields(data, "/")),
 });
 
 const projects = defineCollection({
     name: "Project",
     pattern: "projects/**/*.{md,mdx}",
-    schema: basePageSchema.transform(computedFields),
+    schema: basePageSchema.transform((data) =>
+        computedFields(data, "/projects/")
+    ),
 });
 
 export default defineConfig({
