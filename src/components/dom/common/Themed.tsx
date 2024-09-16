@@ -27,11 +27,15 @@ export type TTextProps = React.HTMLAttributes<TBaseTextElement> & {
     as?: TBaseTextAs;
 };
 const BaseText = forwardRef<TBaseTextElement, TTextProps>(
-    ({ children, as = "span", ...rest }, ref) => {
+    ({ className, children, as = "span", ...rest }, ref) => {
         const Component = as;
         // const _ref =
         return (
-            <Component ref={ref as any} {...rest}>
+            <Component
+                ref={ref as any}
+                className={cx("break-words", className)}
+                {...rest}
+            >
                 {children}
             </Component>
         );
