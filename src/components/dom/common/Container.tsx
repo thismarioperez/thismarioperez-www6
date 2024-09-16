@@ -3,9 +3,9 @@ import cx from "classnames";
 type TBackground = "white" | "black" | "yellow" | "transparent";
 
 const BACKGROUND_COLOR_CLASSNAME: Record<TBackground, string> = {
-    black: "bg-black",
-    white: "bg-white",
-    yellow: "bg-yellow",
+    black: "bg-black/90",
+    white: "bg-white/90",
+    yellow: "bg-yellow/90",
     transparent: "bg-transparent",
 };
 
