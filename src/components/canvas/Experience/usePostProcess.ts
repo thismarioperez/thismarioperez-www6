@@ -83,7 +83,7 @@ const usePostProcess = () => {
                     step: 0.01,
                 },
                 uOffset: {
-                    value: 0.1,
+                    value: 0.33,
                     min: 0.0,
                     max: 1.0,
                     step: 0.01,
@@ -103,19 +103,19 @@ const usePostProcess = () => {
 
         tl.current = gsap.timeline({ paused: true });
 
-        // entire transition is 3 seconds
+        // entire transition is 2 seconds
         // chromatic aberration
         tl.current.add(
             gsap
                 .timeline()
                 .to(uProgress, {
                     current: 1,
-                    duration: 1.5,
+                    duration: 1,
                     ease: "power1.inOut",
                 })
                 .to(uProgress, {
                     current: 0,
-                    duration: 1.5,
+                    duration: 1,
                     ease: "power1.inOut",
                 })
         );
@@ -125,13 +125,13 @@ const usePostProcess = () => {
             gsap
                 .timeline()
                 .to(uProgress2, {
-                    current: 1.25,
-                    duration: 1,
+                    current: 1,
+                    duration: 0.25,
                     ease: "power1.inOut",
                 })
                 .to(uProgress2, {
                     current: 0,
-                    duration: 1.25,
+                    duration: 0.75,
                     ease: "power1.inOut",
                 }),
             0
@@ -142,16 +142,16 @@ const usePostProcess = () => {
             gsap
                 .timeline()
                 .to(uProgress3, {
-                    current: 0.75,
-                    duration: 1,
+                    current: 1,
+                    duration: 0.5,
                     ease: "power1.inOut",
                 })
                 .to(uProgress3, {
                     current: 0,
-                    duration: 0.75,
+                    duration: 0.5,
                     ease: "power1.inOut",
                 }),
-            1.75
+            0.5
         );
 
         tl.current.play();
