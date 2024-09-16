@@ -8,9 +8,9 @@ const LavaLamp = () => {
 
     useFrame(() => {
         if (meshRef.current) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-            meshRef.current.rotation.z += 0.01;
+            meshRef.current.rotation.x += 0.001;
+            meshRef.current.rotation.y += 0.001;
+            meshRef.current.rotation.z += 0.001;
         }
     });
 
