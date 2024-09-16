@@ -40,3 +40,10 @@
         pointer-events: none;
     }
 }
+
+@layer components {
+    /* Container max width override */
+    .container {
+        @apply md:max-w-xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl;
+    }
+}
