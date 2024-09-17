@@ -16,6 +16,7 @@ export default function MenuButton() {
                 relative
                 `
             )}
+            type="button"
             aria-label="Open Navigation Menu"
             onClick={toggleMenuOpen}
         >
