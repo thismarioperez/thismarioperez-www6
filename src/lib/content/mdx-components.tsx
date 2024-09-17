@@ -4,6 +4,7 @@ import Image from "next/image";
 import Container from "@/components/dom/common/Container";
 import Link from "@/components/dom/common/Link";
 import * as Themed from "@/components/dom/common/Themed";
+import OpenMenuButton from "@/components/dom/common/OpenMenuButton";
 
 const components = {
     // Add your global components here
@@ -16,7 +17,8 @@ const components = {
     p: Themed.PText,
     Meta: Themed.MetaText,
     blockquote: Themed.QuoteText,
-    button: Themed.ButtonText,
+    ButtonText: Themed.ButtonText,
+    OpenMenuButton,
 };
 
 declare global {
