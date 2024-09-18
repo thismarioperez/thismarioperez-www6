@@ -79,6 +79,18 @@ const navigationItemSchema = s.discriminatedUnion("type", [
     navigationFolderSchema,
 ]);
 
+const footerLinkSchema = s.object({
+    name: s.string(),
+    href: s.string(),
+    icon: s.union([
+        s.literal("github"),
+        s.literal("email"),
+        s.literal("linkedin"),
+        s.literal("phone"),
+    ]),
+    external: s.boolean().optional().default(true),
+});
+
 const siteSchema = s.object({
     title: s.string().max(99),
     description: s.string().max(99),
@@ -91,7 +103,8 @@ const siteSchema = s.object({
             .optional()
             .default("+1 (555) 555-5555"),
     }),
-    navigation: s.array(navigationItemSchema),
+    navigation: s.array(navigationItemSchema).optional().default([]),
+    footerLinks: s.array(footerLinkSchema).optional().default([]),
 });
 
 const site = defineCollection({
