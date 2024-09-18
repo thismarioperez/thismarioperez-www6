@@ -50,7 +50,7 @@ export default function Layout({ Component, pageProps }: AppProps) {
                 )}
             >
                 <ReactLenis root options={{ syncTouch: true }}>
-                    <main className="flex flex-col min-h-[calc(100vh-var(--header-height))]">
+                    <main className="flex flex-col min-h-[calc(100vh-var(--header-height))] pb-32">
                         <TransitionComponent>
                             <Component {...pageProps} />
                         </TransitionComponent>
