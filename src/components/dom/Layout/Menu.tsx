@@ -93,7 +93,7 @@ export default function Menu() {
                         scaleY: 1,
                         scaleX: 1,
                         ease: "power1.inOut",
-                        duration: 0.5,
+                        duration: 0.25,
                     }
                 )
                 .fromTo(
@@ -107,9 +107,9 @@ export default function Menu() {
                         x: 0,
                         y: 0,
                         ease: "power1.inOut",
-                        stagger: 0.1,
+                        stagger: 0.05,
                     },
-                    "+=0.1"
+                    0
                 );
         },
         {
@@ -121,7 +121,7 @@ export default function Menu() {
         if (menuOpen) {
             tl.current.timeScale(1).play();
         } else {
-            tl.current.timeScale(6).reverse();
+            tl.current.timeScale(5).reverse();
         }
     }, [menuOpen]);
 
