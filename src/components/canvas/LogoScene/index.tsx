@@ -6,6 +6,7 @@ import { Center, Text3D } from "@react-three/drei";
 import colors from "@/styles/colors";
 import { damp3, dampE } from "maath/easing";
 import useDebug from "@/hooks/useDebug";
+import LavaLampScene from "../LavaLampScene";
 
 const SPEED = 0.75;
 const ROTATION_X_FACTOR = 0.05;
@@ -43,6 +44,7 @@ export default function LogoScene() {
 
     return (
         <>
+            <LavaLampScene disableLights />
             <ambientLight intensity={0.75} />
             <pointLight position={[2, 0, 5]} intensity={20} />
             <color attach="background" args={[colors.black.DEFAULT]} />

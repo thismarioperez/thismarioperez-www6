@@ -22,11 +22,15 @@ const LavaLamp = () => {
     );
 };
 
-export default function LavaLampScene() {
+export default function LavaLampScene({ disableLights = false }) {
     return (
         <>
-            <ambientLight intensity={1} />
-            <directionalLight position={[2, 2, 1]} intensity={1} />
+            {!disableLights && (
+                <>
+                    <ambientLight intensity={1} />
+                    <directionalLight position={[2, 2, 1]} intensity={1} />
+                </>
+            )}
             <color attach="background" args={[colors.black.DEFAULT]} />
             <LavaLamp />
         </>
