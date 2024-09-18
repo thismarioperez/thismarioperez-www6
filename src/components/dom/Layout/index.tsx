@@ -12,6 +12,7 @@ import { ReactLenis } from "@/lib/lenis";
 import ScrollHandler from "./ScrollHandler";
 import useMenuState from "@/hooks/useMenuState";
 import Loading from "./Loading";
+import Footer from "./Footer";
 
 const Canvas = dynamic(() => import("@/lib/webgl/components/Canvas"), {
     ssr: false,
@@ -40,21 +41,24 @@ export default function Layout({ Component, pageProps }: AppProps) {
             {/* dom */}
             <Header />
             <Menu />
-            <ReactLenis root options={{ syncTouch: true }}>
-                <main
-                    className={cx(
-                        "relative size-full z-7 transition-all duration-500 ease-in-out flex flex-col",
-                        menuOpen
-                            ? "blur-3xl opacity-0 invisible"
-                            : "blur-0 opacity-100 visible"
-                    )}
-                >
-                    <TransitionComponent>
-                        <Component {...pageProps} />
-                    </TransitionComponent>
-                </main>
-                <ScrollHandler />
-            </ReactLenis>
+            <div
+                className={cx(
+                    "relative w-full h-fit z-7 transition-all duration-500 ease-in-out pt-header",
+                    menuOpen
+                        ? "blur-3xl opacity-0 invisible"
+                        : "blur-0 opacity-100 visible"
+                )}
+            >
+                <ReactLenis root options={{ syncTouch: true }}>
+                    <main className="flex flex-col min-h-[calc(100vh-var(--header-height))]">
+                        <TransitionComponent>
+                            <Component {...pageProps} />
+                        </TransitionComponent>
+                    </main>
+                    <Footer />
+                    <ScrollHandler />
+                </ReactLenis>
+            </div>
 
             {/* util & config */}
             <DebugHandler />
