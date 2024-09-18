@@ -48,6 +48,6 @@
     }
 
     .link {
-        @apply border-b  border-inherit;
+        @apply border-b border-yellow;
     }
 }
