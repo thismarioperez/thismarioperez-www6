@@ -11,7 +11,7 @@ const sceneSchema = s.union([
     s.literal("lava-lamp-scene"),
     s.literal("cube-scene"),
     s.literal("lloyd-goldstein-scene"),
-    s.literal("meta-your-personal-mainstreet-scene"),
+    s.literal("meta-your-personal-main-street-scene"),
     s.literal("qgiv-scene"),
     s.literal("wind-river-scene"),
 ]);
