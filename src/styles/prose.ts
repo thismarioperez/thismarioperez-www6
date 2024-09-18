@@ -1,7 +1,7 @@
 import cx from "classnames";
 
 const base =
-    "prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-white";
+    "prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl";
 const headings =
     "prose-headings:font-source-code-pro prose-h1:font-normal prose-h2:font-normal prose-h3:font-normal";
 const body = "prose-p:font-source-code-pro";
