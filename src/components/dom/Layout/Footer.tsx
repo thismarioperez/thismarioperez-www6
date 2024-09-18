@@ -18,18 +18,17 @@ export default function Footer() {
                     {site.footerLinks.map((item, idx) => {
                         return (
                             <li key={idx} className="w-fit">
-                                <a
+                                <Themed.ButtonText
+                                    className="text-black  flex flex-row gap-x-2 justify-center items-center"
+                                    as="a"
+                                    // @ts-expect-error
                                     href={item.href}
                                     target={item.external ? "_blank" : "_self"}
                                     rel="noreferrer nofollow"
                                 >
-                                    <Themed.ButtonText className="text-black underline">
-                                        <span className="flex flex-row gap-x-2 justify-center items-center">
-                                            {ICON[item.icon]}
-                                            <span>{item.name}</span>
-                                        </span>
-                                    </Themed.ButtonText>
-                                </a>
+                                    {ICON[item.icon]}
+                                    <span>{item.name}</span>
+                                </Themed.ButtonText>
                             </li>
                         );
                     })}
