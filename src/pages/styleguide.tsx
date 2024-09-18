@@ -4,7 +4,7 @@ import * as Themed from "@/components/dom/common/Themed";
 export default function StyleGuidePage() {
     return (
         <div className="size-full relative">
-            <Container bgColor="transparent">
+            <Container bgColor="transparent" prose={false}>
                 <div className="w-full flex flex-col items-center gap-y-4 mb-4">
                     <Themed.H1Text as="h1">Style Guide</Themed.H1Text>
                     <hr className="w-full border-yellow" />
