@@ -9,6 +9,11 @@ const sceneSchema = s.union([
     s.literal("rodda-construction-scene"),
     s.literal("triptych-co-scene"),
     s.literal("lava-lamp-scene"),
+    s.literal("cube-scene"),
+    s.literal("lloyd-goldstein-scene"),
+    s.literal("meta-your-personal-mainstreet-scene"),
+    s.literal("qgiv-scene"),
+    s.literal("wind-river-scene"),
 ]);
 
 const basePageSchema = s.object({

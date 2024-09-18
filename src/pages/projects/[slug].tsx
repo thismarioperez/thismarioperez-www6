@@ -33,17 +33,8 @@ export type TPageProps = {
 
 export default function ProjectPage({ page }: TPageProps) {
     return (
-        <div>
-            <h1>Project page</h1>
+        <div className="size-full relative">
             <MDXContent code={page.body} />
-            <div className="h-[100vh]"></div>
-            <div className="w-full h-[50vh] bg-yellow"></div>
-            <div className="w-full h-[50vh]"></div>
-            <div className="w-full h-[50vh] bg-black"></div>
-            <div className="w-full h-[50vh]"></div>
-            <div className="w-full h-[50vh] bg-white"></div>
-            <div className="w-full h-[50vh]"></div>
-            <div className="w-full h-[50vh] bg-black"></div>
         </div>
     );
 }

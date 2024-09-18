@@ -31,16 +31,32 @@ const SLIDES: TSlide[] = SCENES.map((name) => {
             component = <LogoScene />;
             break;
         case "fbi-safe-online-surfing-scene":
-            component = <MediaScene src="/images/image-1.jpg" />;
+            component = (
+                <MediaScene src="/images/fbi-safe-online-surfing.jpg" />
+            );
             break;
         case "robin-knows-scene":
-            component = <MediaScene src="/images/image-2.jpg" />;
+            component = <MediaScene src="/images/robin-knows.jpg" />;
             break;
         case "rodda-construction-scene":
-            component = <MediaScene src="/images/image-3.jpg" />;
+            component = <MediaScene src="/images/rodda-construction.jpg" />;
             break;
         case "triptych-co-scene":
-            component = <MediaScene src="/images/image-4.jpg" />;
+            component = <MediaScene src="/images/triptych.jpg" />;
+            break;
+        case "lloyd-goldstein-scene":
+            component = <MediaScene src="/images/lloyd-goldstein.jpg" />;
+            break;
+        case "meta-your-personal-mainstreet-scene":
+            component = (
+                <MediaScene src="/images/meta-your-personal-mainstreet.jpg" />
+            );
+            break;
+        case "qgiv-scene":
+            component = <MediaScene src="/images/qgiv-donation-forms.jpg" />;
+            break;
+        case "wind-river-scene":
+            component = <MediaScene src="/images/wind-river.jpg" />;
             break;
         case "lava-lamp-scene":
             component = <LavaLampScene />;
