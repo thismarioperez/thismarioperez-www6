@@ -21,6 +21,7 @@ export default function Footer() {
                                 <a
                                     href={item.href}
                                     target={item.external ? "_blank" : "_self"}
+                                    rel="noreferrer nofollow"
                                 >
                                     <Themed.ButtonText className="text-black underline">
                                         <span className="flex flex-row gap-x-2 justify-center items-center">
