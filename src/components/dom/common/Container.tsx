@@ -44,7 +44,7 @@ export default function Container({
             <div className={cx("container mx-auto")}>
                 <div
                     className={cx(
-                        "w-full min-w-full min-h-full py-12 px-16",
+                        "w-full min-w-full min-h-full py-12 px-16 [text-shadow:_1px_1px_1px_rgb(0_0_0_/_90%)]",
                         !fullWidth && BACKGROUND_COLOR_CLASSNAME[bgColor],
                         prose && getProseClassnames(PROSE_THEME[bgColor]),
                         className
