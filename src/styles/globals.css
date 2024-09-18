@@ -62,4 +62,10 @@
     a[data-external]:hover:after {
         transform: rotate(-90deg) translate(0.2em);
     }
+
+    a[data-active]:after {
+        display: inline-block;
+        content: " \21F1";
+        transform: rotate(-45deg) translateY(0.1em);
+    }
 }
