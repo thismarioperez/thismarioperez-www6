@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import cx from "classnames";
 
 import { site, type Site as TSite } from "@site/content";
@@ -6,7 +6,6 @@ import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
 import Link from "@/components/dom/common/Link";
-import useAppState from "@/hooks/useAppState";
 
 type TItems = TSite["navigation"];
 
