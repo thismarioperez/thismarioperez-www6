@@ -5,6 +5,7 @@ import Container from "@/components/dom/common/Container";
 import Link from "@/components/dom/common/Link";
 import * as Themed from "@/components/dom/common/Themed";
 import OpenMenuButton from "@/components/dom/common/OpenMenuButton";
+import AnchorLink from "@/components/dom/common/AnchorLink";
 
 const components = {
     // Add your global components here
@@ -12,6 +13,7 @@ const components = {
     Image,
     Link,
     OpenMenuButton,
+    AnchorLink,
 };
 
 declare global {
