@@ -24,12 +24,13 @@ export default function Container({
     ...props
 }: TContainerProps) {
     return (
-        <div className={cx("w-full h-fit", className)} {...props}>
+        <div className={cx("w-full h-fit")} {...props}>
             <div className={cx("container mx-auto", fullWidth && "max-w-full")}>
                 <div
                     className={cx(
-                        "w-full min-h-full py-12 px-16",
-                        BACKGROUND_COLOR_CLASSNAME[bgColor]
+                        "w-full min-w-full min-h-full py-12 px-16",
+                        BACKGROUND_COLOR_CLASSNAME[bgColor],
+                        className
                     )}
                 >
                     {children}

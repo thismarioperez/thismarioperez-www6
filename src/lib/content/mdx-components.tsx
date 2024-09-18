@@ -11,13 +11,6 @@ const components = {
     Container,
     Image,
     Link,
-    h1: Themed.H1Text,
-    h2: Themed.H2Text,
-    h3: Themed.H3Text,
-    p: Themed.PText,
-    Meta: Themed.MetaText,
-    blockquote: Themed.QuoteText,
-    ButtonText: Themed.ButtonText,
     OpenMenuButton,
 };
 
