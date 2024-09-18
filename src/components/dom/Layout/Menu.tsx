@@ -12,23 +12,32 @@ type TItems = TSite["navigation"];
 const NavItemRenderer = ({
     className,
     items,
+    nested,
 }: {
     className?: string;
+    nested?: boolean;
     items: TItems;
 }) => {
     return (
         <ul
             className={cx(
                 "pointer-events-auto flex flex-col items-start gap-y-4",
+                nested && "pl-8",
                 className
             )}
         >
             {items.map((item, idx) => {
                 return (
-                    <li key={idx} className="js-item ">
+                    <li
+                        key={idx}
+                        className={cx(
+                            "js-item text-black",
+                            nested && "list-item list-disc"
+                        )}
+                    >
                         {item.type === "link" ? (
                             <Link href={item.href}>
-                                <Themed.ButtonText className="text-black underline">
+                                <Themed.ButtonText className=" underline">
                                     {item.name}
                                 </Themed.ButtonText>
                             </Link>
@@ -36,13 +45,13 @@ const NavItemRenderer = ({
                         {item.type === "folder" ? (
                             <div className="flex flex-col gap-y-2">
                                 <div className="flex flex-col gap-y-2 js-item">
-                                    <Themed.ButtonText className="  text-black">
+                                    <Themed.ButtonText>
                                         {item.name}:
                                     </Themed.ButtonText>
                                     {/* <hr className=" w-full border-black" /> */}
                                 </div>
                                 <NavItemRenderer
-                                    className="pl-4"
+                                    nested={true}
                                     items={item.children}
                                 />
                             </div>
