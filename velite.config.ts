@@ -1,5 +1,6 @@
 import { defineConfig, defineCollection, s } from "velite";
 import validator from "validator";
+import rehypeExternalLinks from "rehype-external-links";
 
 // Scene names for each page
 const sceneSchema = s.union([
@@ -129,7 +130,18 @@ export default defineConfig({
         site,
     },
     mdx: {
-        rehypePlugins: [],
+        rehypePlugins: [
+            [
+                rehypeExternalLinks,
+                {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    properties: {
+                        "data-external": "",
+                    },
+                },
+            ],
+        ],
         remarkPlugins: [],
     },
 });
