@@ -7,7 +7,7 @@ const sceneSchema = s.union([
     s.literal("fbi-safe-online-surfing-scene"),
     s.literal("robin-knows-scene"),
     s.literal("rodda-construction-scene"),
-    s.literal("triptych-co-scene"),
+    s.literal("triptych-scene"),
     s.literal("lava-lamp-scene"),
     s.literal("cube-scene"),
     s.literal("lloyd-goldstein-scene"),

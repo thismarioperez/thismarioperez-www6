@@ -14,9 +14,9 @@ navigation:
           - name: Robin Knows
             type: link
             href: /projects/robin-knows
-          - name: Triptych Co
+          - name: Triptych
             type: link
-            href: /projects/triptych-co
+            href: /projects/triptych
           - name: Wind River
             type: link
             href: /projects/wind-river
@@ -26,6 +26,9 @@ navigation:
           - name: Qgiv Donation Forms
             type: link
             href: /projects/qgiv
+          - name: Your Personal Mainstreet
+            type: link
+            href: /projects/meta-your-personal-mainstreet
           - name: Rodda Construction
             type: link
             href: /projects/rodda-construction
