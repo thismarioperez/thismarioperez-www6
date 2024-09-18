@@ -38,3 +38,18 @@ navigation:
     - name: Extras
       type: link
       href: /extras
+footerLinks:
+    - name: LinkedIn
+      icon: linkedin
+      href: https://www.linkedin.com/in/thismarioperez/
+    - name: GitHub
+      icon: github
+      href: https://github.com/thismarioperez
+    - name: hello@thismarioperez
+      icon: email
+      href: mailto:hello@thismarioperez
+      external: false
+    - name: 863-797-4829
+      icon: phone
+      href: tel:18637974829
+      external: false
