@@ -6,6 +6,8 @@ import useMenuState from "@/hooks/useMenuState";
 import { gsap, useGSAP } from "@/lib/gsap";
 import * as Themed from "@/components/dom/common/Themed";
 import Link from "@/components/dom/common/Link";
+import useParsedPathname from "@/hooks/useParsedPathname";
+import { link } from "fs";
 
 type TItems = TSite["navigation"];
 
@@ -18,6 +20,7 @@ const NavItemRenderer = ({
     nested?: boolean;
     items: TItems;
 }) => {
+    const pathname = useParsedPathname();
     return (
         <ul
             className={cx(
@@ -36,7 +39,12 @@ const NavItemRenderer = ({
                         )}
                     >
                         {item.type === "link" ? (
-                            <Link href={item.href}>
+                            <Link
+                                href={item.href}
+                                data-active={
+                                    item.href === pathname ? "" : undefined
+                                }
+                            >
                                 <Themed.ButtonText className=" underline">
                                     {item.name}
                                 </Themed.ButtonText>
