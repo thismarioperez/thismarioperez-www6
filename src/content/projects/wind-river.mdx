@@ -5,11 +5,21 @@ scene: wind-river-scene
 published: true
 ---
 
-<div className="relative size-full pt-header">
-<div className="flex flex-col size-full justify-center">
+<div className="flex flex-col w-full h-fit gap-y-16">
+<div className="flex flex-col w-full min-h-[calc(75vh-var(--header-height))] justify-center">
 <Container>
 
 # Wind River
+
+---
+
+### Tech Stack
+
+Webflow, React, React Three Fiber, PixiJs, Three.js, Sass, Vite, AWS S3, AWS Route 53, Github Actions
+
+</Container>
+</div>
+<Container>
 
 ### Summary
 
@@ -29,14 +39,9 @@ To consume Webflow cms data, I set up a Webflow embeddable script component that
 
 Lastly, to create a 2d canvas map, I leveraged the PixiJS library. A depth effect was then created by using 2 images stacked on top of each other: the main image, and a depth map. Clicking elements on the map would “zoom” into an interior page with a “street view” of various tiny home models. The experience on these interior pages was created using React Three Fiber. I used a sphere geometry with a backside rendered environment image to create the “street view” scene.
 
-### Tech Stack
-
-Webflow, React, React Three Fiber, PixiJs, Three.js, Sass, Vite, AWS S3, AWS Route 53, Github Actions
-
 ### Links
 
 [https://www.windriverbuilt.com/experience/map](https://www.windriverbuilt.com/experience/map)
 
 </Container>
-</div>
 </div>

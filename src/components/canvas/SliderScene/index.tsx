@@ -41,7 +41,7 @@ const SLIDES: TSlide[] = SCENES.map((name) => {
         case "rodda-construction-scene":
             component = <MediaScene src="/images/rodda-construction.jpg" />;
             break;
-        case "triptych-co-scene":
+        case "triptych-scene":
             component = <MediaScene src="/images/triptych.jpg" />;
             break;
         case "lloyd-goldstein-scene":
