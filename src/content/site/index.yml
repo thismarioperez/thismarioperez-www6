@@ -14,9 +14,6 @@ navigation:
           - name: Robin Knows
             type: link
             href: /projects/robin-knows
-          - name: Rodda Construction
-            type: link
-            href: /projects/rodda-construction
           - name: Triptych Co
             type: link
             href: /projects/triptych-co
@@ -26,9 +23,12 @@ navigation:
           - name: FBI Safe Online Surfing
             type: link
             href: /projects/fbi-safe-online-surfing
-          - name: Robin Knows
+          - name: Qgiv Donation Forms
             type: link
-            href: /projects/robin-knows
+            href: /projects/qgiv
           - name: Rodda Construction
             type: link
             href: /projects/rodda-construction
+          - name: Lloyd Goldstein
+            type: link
+            href: /projects/lloyd-goldstein

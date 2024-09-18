@@ -12,6 +12,32 @@ published: true
 
 # Wind River
 
+### Summary
+
+Triptych created a high-fidelity 3D interactive map for Wind River Built, a modular home builder, to showcase their capabilities to developers, architects, realtors, and designers. The map features a sweeping landscape with various structure types, allowing users to explore specific neighborhoods, view site plans, and experience immersive 3D house models. With intuitive navigation and multiple zoom levels, users can easily visualize the potential of Wind River's offerings. This interactive experience not only highlights Wind River's versatility but also inspires and motivates prospective clients to engage with the company.
+
+### My Role
+
+This project had 3 main challenges that I had to navigate:
+
+1. Project dependencies required custom Javascript that needed a CI/CD pipeline for deployment to a webflow website
+2. Must consume data from webflow's cms
+3. Must use WebGL in 2D and 3D contexts
+
+The pipeline I created leveraged Github actions. Custom javascript lived in a git repo. Pushes to the main branch triggered a build using vite. The compiled static assets were then uploaded to an AWS S3 bucket. Finally, a cache was invalidated for a domain managed by AWS Route 53 that pointed to these static assets.
+
+To consume Webflow cms data, I set up a Webflow embeddable script component that looped through cms entries, and stored them in the global Javascript window context. Our custom javascript could then consume that data on client side render, and initialize a frontend “store” with Zustand using that data.
+
+Lastly, to create a 2d canvas map, I leveraged the PixiJS library. A depth effect was then created by using 2 images stacked on top of each other: the main image, and a depth map. Clicking elements on the map would “zoom” into an interior page with a “street view” of various tiny home models. The experience on these interior pages was created using React Three Fiber. I used a sphere geometry with a backside rendered environment image to create the “street view” scene.
+
+### Tech Stack
+
+Webflow, React, React Three Fiber, PixiJs, Three.js, Sass, Vite, AWS S3, AWS Route 53, Github Actions
+
+### Links
+
+[https://www.windriverbuilt.com/experience/map](https://www.windriverbuilt.com/experience/map)
+
 </div>
 
 </Container>
