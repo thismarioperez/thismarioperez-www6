@@ -50,4 +50,16 @@
     .link {
         @apply border-b border-yellow;
     }
+
+    a[data-external]:after {
+        display: inline-block;
+        content: " \21f2";
+        transform: rotate(-90deg) translateY(0.1em);
+        transition: all 0.1s;
+    }
+
+    a[data-external]:focus-visible:after,
+    a[data-external]:hover:after {
+        transform: rotate(-90deg) translate(0.2em);
+    }
 }
