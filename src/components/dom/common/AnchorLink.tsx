@@ -3,7 +3,10 @@
 import { useLenis } from "@/lib/lenis";
 import React from "react";
 
-export type TAnchorLinkProps = React.HTMLAttributes<HTMLAnchorElement>;
+export type TAnchorLinkProps = React.HTMLAttributes<HTMLAnchorElement> & {
+    children: React.ReactNode;
+    href: string;
+};
 const AnchorLink = ({ children, ...rest }: TAnchorLinkProps) => {
     const lenis = useLenis();
 
