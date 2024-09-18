@@ -128,7 +128,7 @@ export default function Menu() {
         >
             <div className="relative size-full p-14 pt-header">
                 <div className="flex flex-col items-end">
-                    <nav className="js-nav w-fit p-8 bg-yellow">
+                    <nav className="js-nav w-fit p-8 bg-yellow/80">
                         <NavItemRenderer items={site.navigation} />
                     </nav>
                 </div>
