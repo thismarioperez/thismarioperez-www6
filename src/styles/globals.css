@@ -18,11 +18,11 @@
     /*
     * Lenis recommended styles
     */
-    /* html.lenis,
+    html.lenis,
     html.lenis body,
     html.lenis #__next {
         height: auto;
-    } */
+    }
 
     .lenis.lenis-smooth {
         scroll-behavior: auto !important;
