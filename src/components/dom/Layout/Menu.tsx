@@ -64,7 +64,7 @@ const NavItemRenderer = ({
 };
 
 export default function Menu() {
-    const { menuOpen } = useMenuState();
+    const { menuOpen, setMenuOpen } = useMenuState();
     const node = useRef(null);
     const tl = useRef<gsap.core.Timeline>(gsap.timeline({ paused: true }));
 
@@ -135,8 +135,14 @@ export default function Menu() {
             role="menu"
         >
             <div className="relative size-full p-14 pt-header">
+                <div
+                    className="absolute top-0 left-0 size-full cursor-crosshair"
+                    onClick={(e) => {
+                        setMenuOpen(false);
+                    }}
+                ></div>
                 <div className="flex flex-col items-end">
-                    <nav className="js-nav w-fit p-8 bg-yellow/80 [text-shadow:_1px_1px_1px_rgb(0_0_0_/_40%)]">
+                    <nav className="js-nav w-fit p-8 bg-yellow/80 [text-shadow:_1px_1px_1px_rgb(0_0_0_/_40%)] cursor-auto relative">
                         <NavItemRenderer items={site.navigation} />
                     </nav>
                 </div>
