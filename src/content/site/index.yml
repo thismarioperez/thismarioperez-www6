@@ -5,9 +5,6 @@ author:
     email: mario@thismarioperez.com
     phone: 555-555-5555
 navigation:
-    - name: About
-      type: link
-      href: /about
     - name: Projects
       type: folder
       children:
@@ -35,3 +32,9 @@ navigation:
           - name: Lloyd Goldstein
             type: link
             href: /projects/lloyd-goldstein
+    - name: About
+      type: link
+      href: /about
+    - name: Extras
+      type: link
+      href: /extras
