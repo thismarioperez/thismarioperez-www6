@@ -1,0 +1,52 @@
+title: thisMarioPerez
+description: Mario Perez - Creative Developer - 🤘
+author:
+    name: Mario Perez
+    email: mario@thismarioperez.com
+    phone: 555-555-5555
+navigation:
+    - name: Projects
+      type: folder
+      children:
+          - name: Robin Knows
+            type: link
+            href: /projects/robin-knows
+          - name: Triptych
+            type: link
+            href: /projects/triptych
+          - name: Wind River
+            type: link
+            href: /projects/wind-river
+          - name: FBI Safe Online Surfing
+            type: link
+            href: /projects/fbi-safe-online-surfing
+          - name: Qgiv Donation Forms
+            type: link
+            href: /projects/qgiv
+          - name: Your Personal Main Street
+            type: link
+            href: /projects/meta-your-personal-main-street
+          - name: Rodda Construction
+            type: link
+            href: /projects/rodda-construction
+          - name: Lloyd Goldstein
+            type: link
+            href: /projects/lloyd-goldstein
+    - name: Extras
+      type: link
+      href: /extras
+footerLinks:
+    - name: LinkedIn
+      icon: linkedin
+      href: https://www.linkedin.com/in/thismarioperez/
+    - name: GitHub
+      icon: github
+      href: https://github.com/thismarioperez
+    - name: hello@thismarioperez
+      icon: email
+      href: mailto:hello@thismarioperez
+      external: false
+    - name: 863-797-4829
+      icon: phone
+      href: tel:18637974829
+      external: false

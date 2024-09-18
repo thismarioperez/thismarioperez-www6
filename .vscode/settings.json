@@ -1,0 +1,17 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "files.eol": "\n",
+    "eslint.validate": [
+        "javascript"
+    ],
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+}

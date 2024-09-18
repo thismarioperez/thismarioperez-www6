@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": ".",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -13,9 +18,28 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*",
+        "./public/*"
+      ],
+      "@site/content": [
+        "./.velete"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "mdx": {
+    // Enable strict type checking in MDX files.
+    "checkMdx": true,
+  },
+  "include": [
+    "next-env.d.ts",
+    "global-env.d.ts",
+    "global-shaders.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mdx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
