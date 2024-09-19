@@ -35,7 +35,7 @@ const NavItemRenderer = ({
                         key={idx}
                         className={cx(
                             "js-item text-black",
-                            nested && "list-item list-disc"
+                            nested && "list-item"
                         )}
                     >
                         {item.type === "link" ? (

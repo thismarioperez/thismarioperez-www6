@@ -63,9 +63,11 @@
         transform: rotate(-90deg) translate(0.2em);
     }
 
-    a[data-active]:after {
-        display: inline-block;
-        content: " \21F1";
-        transform: rotate(-45deg) translateY(0.1em);
+    a[data-active] {
+        @apply relative;
+    }
+    a[data-active]:before {
+        content: "\21A0";
+        @apply absolute left-0 top-0 -translate-x-full px-2;
     }
 }
