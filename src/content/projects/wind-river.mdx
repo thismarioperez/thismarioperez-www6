@@ -15,7 +15,7 @@ published: true
 
 ### Tech Stack
 
-Webflow, React, React Three Fiber, PixiJs, Three.js, Sass, Vite, AWS S3, AWS Route 53, Github Actions
+Webflow, React, React Three Fiber, PixiJS, Three.js, Sass, Vite, AWS S3, AWS Route 53, Github Actions
 
 </Container>
 </div>
@@ -27,21 +27,21 @@ Triptych created a high-fidelity 3D interactive map for Wind River Built, a modu
 
 ### My Role
 
-This project had 3 main challenges that I had to navigate:
+This project presented three main challenges:
 
-1. Project dependencies required custom Javascript that needed a CI/CD pipeline for deployment to a webflow website
-2. Must consume data from webflow's cms
-3. Must use WebGL in 2D and 3D contexts
+1. Integrating custom JavaScript into a CI/CD pipeline for deployment to a Webflow website
+2. Consuming data from Webflow's CMS
+3. Utilizing WebGL for 2D and 3D contexts
 
-The pipeline I created leveraged Github actions. Custom javascript lived in a git repo. Pushes to the main branch triggered a build using vite. The compiled static assets were then uploaded to an AWS S3 bucket. Finally, a cache was invalidated for a domain managed by AWS Route 53 that pointed to these static assets.
+To address these, I created a CI/CD pipeline using GitHub Actions. The custom JavaScript resides in a Git repository, and pushes to the main branch triggered a build using Vite. The compiled static assets were then uploaded to an AWS S3 bucket, and a cache was invalidated for a domain managed by AWS Route 53, which pointed to these assets.
 
-To consume Webflow cms data, I set up a Webflow embeddable script component that looped through cms entries, and stored them in the global Javascript window context. Our custom javascript could then consume that data on client side render, and initialize a frontend “store” with Zustand using that data.
+For Webflow CMS data consumption, I implemented a Webflow embeddable script component that iterated through CMS entries and stored them in the global JavaScript window object. This allowed our custom JavaScript to consume the data on client-side render and initialize a frontend store with Zustand using the CMS data.
 
-Lastly, to create a 2d canvas map, I leveraged the PixiJS library. A depth effect was then created by using 2 images stacked on top of each other: the main image, and a depth map. Clicking elements on the map would “zoom” into an interior page with a “street view” of various tiny home models. The experience on these interior pages was created using React Three Fiber. I used a sphere geometry with a backside rendered environment image to create the “street view” scene.
+To create a 2D canvas map, I used the PixiJS library. A depth effect was achieved by stacking two images: the main image and a corresponding depth map. Clicking elements on the map zoomed into an interior page with a “street view” of various tiny home models. The experience on these interior pages was created using React Three Fiber, with a sphere geometry and a backside-rendered environment image to generate the “street view” scene.
 
 ### Links
 
-[https://www.windriverbuilt.com/experience/map](https://www.windriverbuilt.com/experience/map)
+[Live Project](https://www.windriverbuilt.com/experience/map)
 
 </Container>
 </div>

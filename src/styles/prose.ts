@@ -7,6 +7,7 @@ const headings =
 const body = "prose-p:font-source-code-pro";
 const blockquote = "prose-blockquote:font-source-code-pro";
 const code = "prose-code:font-source-code-pro";
+const li = "prose-li:font-source-code-pro";
 
 export type TProseTheme = "black" | "white";
 const PROSE_THEMES: Record<TProseTheme, string> = {
@@ -15,5 +16,5 @@ const PROSE_THEMES: Record<TProseTheme, string> = {
 };
 
 export const getProseClassnames = (theme: TProseTheme) => {
-    return cx(base, PROSE_THEMES[theme], headings, body, blockquote, code);
+    return cx(base, PROSE_THEMES[theme], headings, body, blockquote, code, li);
 };

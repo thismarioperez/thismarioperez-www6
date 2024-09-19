@@ -12,6 +12,7 @@ export default function MenuButton() {
                 group
                 aspect-square
                 w-14
+                h-14
                 p-5
                 relative
                 `

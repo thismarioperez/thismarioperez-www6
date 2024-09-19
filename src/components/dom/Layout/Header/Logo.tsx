@@ -54,15 +54,20 @@ export default function Logo() {
     );
 
     return (
-        <Link href="/" className="relative" aria-label="Home" ref={ref}>
+        <Link
+            href="/"
+            className="relative block h-full"
+            aria-label="Home"
+            ref={ref}
+        >
             <div className="js-logo-with-text flex flex-col items-start justify-center h-full px-4">
                 <div className="flex h-fit flex-row items-center relative overflow-hidden">
                     <LogoWithText className="fill-white w-64 md:w-80" />
                 </div>
             </div>
-            <div className="js-logo-mark absolute top-0 left-0 h-full w-fit -translate-x-full">
-                <div className="relative h-full py-4 px-[16.81px]">
-                    <LogoMark className="h-full w-auto fill-white" />
+            <div className="js-logo-mark absolute top-0 left-0 -translate-x-full">
+                <div className="relative h-14 w-14 p-4">
+                    <LogoMark className="w-full h-auto fill-white" />
                 </div>
             </div>
         </Link>
