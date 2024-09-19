@@ -4,13 +4,13 @@ import { GoogleAnalytics as BaseGoogleAnalytics } from "@next/third-parties/goog
 
 export default function GoogleAnalytics() {
     if (
-        !process.env.NEXT_PUBLIC_GTM_ID ||
-        process.env.NEXT_PUBLIC_GTM_ID === ""
+        !process.env.NEXT_PUBLIC_GA_ID ||
+        process.env.NEXT_PUBLIC_GA_ID === ""
     ) {
         return null;
     }
 
     return (
-        <BaseGoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID as string} />
+        <BaseGoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
     );
 }
