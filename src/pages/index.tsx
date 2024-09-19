@@ -1,9 +1,8 @@
 import { Page } from "@site/content";
-import Head from "next/head";
 
 import { MDXContent } from "@/lib/content/mdx-components";
 import { getPageBySlug } from "@/lib/content";
-import * as constants from "@/core/constants";
+import MetaPageTitle from "@/components/dom/common/MetaPageTitle";
 
 export async function getStaticProps() {
     return {
@@ -20,9 +19,7 @@ type TPageProps = {
 export default function HomePage({ page }: TPageProps) {
     return (
         <>
-            <Head>
-                <title>{`${constants.SITE_NAME} | Create Developer`}</title>
-            </Head>
+            <MetaPageTitle title={page.title} />
             <div className="size-full relative">
                 <MDXContent code={page.body} />
             </div>

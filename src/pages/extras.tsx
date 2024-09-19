@@ -1,10 +1,10 @@
-import { MDXContent } from "@/lib/content/mdx-components";
-import { getProjectBySlug } from "@/lib/content";
 import MetaPageTitle from "@/components/dom/common/MetaPageTitle";
+import { getPageBySlug } from "@/lib/content";
+import { MDXContent } from "@/lib/content/mdx-components";
 
-const page = getProjectBySlug("robin-knows");
+const page = getPageBySlug("extras");
 
-export default function ProjectPage() {
+export default function Page() {
     return (
         <>
             <MetaPageTitle title={page!.title} />
