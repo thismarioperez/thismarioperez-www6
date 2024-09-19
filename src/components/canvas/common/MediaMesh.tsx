@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import randomUUID from "crypto-randomuuid";
 import { Plane, useAspect, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { dampE, damp } from "maath/easing";
@@ -14,7 +15,7 @@ const IMAGE_COUNT = 3;
 const PLANE_OFFSET = 0.75;
 
 export default function MediaMesh({ src, ...rest }: TProps) {
-    const [uuid] = useState(crypto.randomUUID());
+    const [uuid] = useState(randomUUID());
     const [media] = useState(
         Array.from({ length: IMAGE_COUNT }).map((_, idx) => {
             return {
