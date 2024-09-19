@@ -1,6 +1,7 @@
 import { type Page } from "@site/content";
 import { getPublishedPages, getPageBySlug } from "@/lib/content";
 import { MDXContent } from "@/lib/content/mdx-components";
+import MetaPageTitle from "@/components/dom/common/MetaPageTitle";
 
 // Create static paths for each page
 export async function getStaticPaths() {
@@ -33,8 +34,11 @@ export type TPageProps = {
 
 export default function Page({ page }: TPageProps) {
     return (
-        <div className="size-full relative">
-            <MDXContent code={page.body} />
-        </div>
+        <>
+            <MetaPageTitle title={page.title} />
+            <div className="size-full relative">
+                <MDXContent code={page.body} />
+            </div>
+        </>
     );
 }
