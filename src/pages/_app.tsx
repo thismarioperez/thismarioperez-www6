@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import "@/components/canvas/extend";
 import useAppState from "@/hooks/useAppState";
+import MetaPageTitle from "@/components/dom/common/MetaPageTitle";
 
 const sourceCodePro = Source_Code_Pro({
     subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function App(props: AppProps) {
                     href="/favicon/favicon.svg"
                 />
                 <link rel="icon" type="image/png" href="/favicon/favicon.png" />
-                <title>Mario Perez - Creative Developer - 🤘</title>
+                <MetaPageTitle title={"Creative Developer - 🤘"} />
             </Head>
             <Layout {...props} />
         </>

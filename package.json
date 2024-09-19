@@ -21,6 +21,7 @@
         "@types/three": "^0.167.2",
         "@types/validator": "^13.12.1",
         "classnames": "^2.5.1",
+        "crypto-randomuuid": "^1.0.0",
         "gsap": "^3.12.5",
         "lenis": "^1.1.13",
         "leva": "^0.9.35",
