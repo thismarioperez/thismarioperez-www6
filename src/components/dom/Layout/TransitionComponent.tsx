@@ -31,7 +31,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
             <Transition
                 key={router.pathname}
                 timeout={{
-                    enter: 1000,
+                    enter: 1250,
                     exit: 200,
                 }}
                 nodeRef={node}
@@ -41,6 +41,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                     setTransitionCompleted(false);
                     gsap.set(node.current, {
                         autoAlpha: 0,
+                        y: 200,
                     });
                     gsap.timeline({
                         paused: true,
@@ -50,8 +51,9 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                     })
                         .to(node.current, {
                             autoAlpha: 1,
+                            y: 0,
                             duration: 0.25,
-                            delay: 0.75,
+                            delay: 1,
                         })
                         .play();
                 }}
@@ -59,6 +61,7 @@ const TransitionComponent = ({ children }: TTransitionComponentProps) => {
                     gsap.timeline({ paused: true })
                         .to(node.current, {
                             autoAlpha: 0,
+                            y: 200,
                             duration: 0.2,
                         })
                         .play();

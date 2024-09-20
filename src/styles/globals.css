@@ -51,22 +51,25 @@
         @apply border-b border-yellow;
     }
 
-    a[data-external]:after {
+    [data-external]:after {
         display: inline-block;
         content: " \21f2";
+        font-size: 0.75em;
+        line-height: 0.75em;
+        vertical-align: middle;
         transform: rotate(-90deg) translateY(0.1em);
         transition: all 0.1s;
     }
 
-    a[data-external]:focus-visible:after,
-    a[data-external]:hover:after {
+    [data-external]:focus-visible:after,
+    [data-external]:hover:after {
         transform: rotate(-90deg) translate(0.2em);
     }
 
-    a[data-active] {
+    [data-active] {
         @apply relative;
     }
-    a[data-active]:before {
+    [data-active]:before {
         content: "\21A0";
         @apply absolute left-0 top-0 -translate-x-full px-2;
     }

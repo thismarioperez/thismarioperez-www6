@@ -11,7 +11,7 @@ const li = "prose-li:font-source-code-pro";
 
 export type TProseTheme = "black" | "white";
 const PROSE_THEMES: Record<TProseTheme, string> = {
-    black: "prose-black",
+    black: "prose-black prose-a:decoration-yellow prose-hr:border-black",
     white: "prose-white prose-a:decoration-yellow",
 };
 
