@@ -3,7 +3,7 @@ description: Mario Perez - Creative Developer - 🤘
 author:
     name: Mario Perez
     email: mario@thismarioperez.com
-    phone: 555-555-5555
+    phone: 706-450-9123
 navigation:
     - name: Projects
       type: folder
@@ -42,11 +42,11 @@ footerLinks:
     - name: GitHub
       icon: github
       href: https://github.com/thismarioperez
-    - name: hello@thismarioperez
+    - name: hello@thismarioperez.com
       icon: email
-      href: mailto:hello@thismarioperez
+      href: mailto:hello@thismarioperez.com
       external: false
-    - name: 863-797-4829
+    - name: 706-450-9123
       icon: phone
-      href: tel:18637974829
+      href: tel:7064509123
       external: false
